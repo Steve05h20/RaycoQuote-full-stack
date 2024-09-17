@@ -1,0 +1,87 @@
+{
+  "header": {
+    "quoteForm": "FORMULARIO DE COTIZACIÓN",
+    "companyName": "RAYCO ELECTRONIC SYSTEM LTD",
+    "address": {
+      "full": "2440, Avenida Dalton\nCiudad de Quebec, QC G1P 3X1\nCANADÁ",
+      "street": "2440, Avenida Dalton",
+      "city": "Ciudad de Quebec",
+      "province": "(QC) G1P 3X1",
+      "country": "CANADÁ"
+    }
+  },
+  "form": {
+    "page": "Página {{page}} / 4",
+    "quotation": "COTIZACIÓN #:",
+    "dateIssued": "FECHA DE EMISIÓN:",
+    "paymentTerms": "CONDICIONES DE PAGO:",
+    "paymentBeforeShipment": "Pago antes del envío",
+    "shippingTerms": "CONDICIONES DE ENVÍO:",
+    "exWorks": "EXW (En fábrica)",
+    "expiration": "VENCIMIENTO:",
+    "expirationDays": "10 días después de la fecha de emisión",
+    "customer": {
+      "title": "CLIENTE",
+      "fullName": "NOMBRE COMPLETO:",
+      "address": "DIRECCIÓN:",
+      "contactPerson": "PERSONA DE CONTACTO:",
+      "telephone": "TELÉFONO:"
+    },
+    "rayco": {
+      "title": "RAYCO",
+      "officeAddress": "DIRECCIÓN DE LA OFICINA:",
+      "contactPerson": "PERSONA DE CONTACTO:",
+      "phone": "Teléfono:",
+      "email": "CORREO ELECTRÓNICO:"
+    },
+    "shippingInfo": {
+      "title": "INFORMACIÓN DE ENVÍO",
+      "shippingAddress": "DIRECCIÓN DE ENVÍO:",
+      "contact": "CONTACTO:"
+    },
+    "quoteDescription": "DESCRIPCIÓN DE LA COTIZACIÓN:",
+    "currency": "MONEDA",
+    "totalPrice": "PRECIO TOTAL",
+    "priceRange": "RANGO DE PRECIOS"
+  },
+  "options": {
+    "title": "OPCIONES / EXTRAS OPCIONALES",
+    "selectOption": "Seleccionar una opción",
+    "otherOptions": "Otras opciones / comentarios",
+    "tpms": {
+      "title": "T1 TPMS",
+      "description": "Báscula para camión, TI\nSensores de presión inalámbricos (2)\nOpción TPMS\nInstalación y calibración incluidas"
+    },
+    "maxiload": {
+      "title": "66GBALANCEKZ 11UZP0018 33V9009",
+      "description": "Báscula a bordo, Maxiload EVO\nSensores de presión (2) - sensores de proximidad (2)\nInstalación y calibración incluidas"
+    }
+  },
+  "installation": {
+    "title": "INSTALACIÓN",
+    "selectInstallation": "Seleccionar una opción de instalación",
+    "additionalDetails": "Detalles adicionales sobre la instalación",
+    "option": {
+      "title": "55INSTALACIÓN",
+      "description": "Instalación + calibración\n+ capacitación\nViaje a"
+    }
+  },
+  "additionalOffer": {
+    "title": "OFERTA ADICIONAL",
+    "selectOffer": "Seleccionar una oferta adicional",
+    "additionalDetails": "Detalles adicionales sobre la oferta"
+  },
+  "shippingTerms": {
+    "title": "CONDICIONES DE ENVÍO",
+    "description": "EXW (En fábrica) Los arreglos y costos de transporte serán responsabilidad del cliente. Si el cliente no puede organizar el transporte, RaycoWylie o RaycoSyscomak (eliminar según corresponda para el formulario correcto) hará los arreglos necesarios y cobrará en consecuencia. La responsabilidad seguirá siendo del cliente como si fuera EXW."
+  },
+  "notes": {
+    "title": "NOTAS",
+    "placeholder": "Notas adicionales"
+  },
+  "buttons": {
+    "download": "Descargar PDF combinado (Formato Carta)"
+  }
+
+}
+

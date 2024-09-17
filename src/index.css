@@ -1,0 +1,24 @@
+label {
+    position: relative;
+    z-index: 10; /* S'assurer que le label est au-dessus des inputs */
+    display: block;
+    margin-bottom: 5px; /* Espace entre le label et l'input */
+}
+
+input, textarea {
+    display: block;
+    width: 100%;  /* Prendre toute la largeur disponible */
+    padding: 10px;
+    margin-bottom: 15px;  /* Espace entre chaque input */
+    z-index: 1;  /* Assurer que l'input n'est pas au-dessus du label */
+    box-sizing: border-box;  /* S'assurer que le padding est pris en compte dans la largeur */
+}
+
+form {
+    max-width: 800px;
+    margin: 0 auto; /* Centrer le formulaire */
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
