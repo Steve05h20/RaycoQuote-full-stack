@@ -8,13 +8,13 @@ const RaycoQuote1 = () => {
         {/* Header */}
         <div className="bg-gradient-to-r from-gray-800 via-gray-700 to-red-900 p-2 flex justify-between items-center">
           <div className="flex items-center">
-            <img src="public/rayco-uni.png" alt="Rayco logo" className="h-16 mr-2"/>
+            <img src="./rayco-uni.png" alt="Rayco logo" className="h-16 mr-2"/>
             <span className="text-white text-base font-bold">{t('header.quoteForm')}</span>
           </div>
           <div className="text-right text-white">
             <div className="flex justify-end space-x-1 mb-1 items-center">
-              <img src="public/rayco-logo@300x.png" alt="RaycoWylie logo" className="h-4"/>
-              <img src="public/sysco-logo@300x.png" alt="RaycoSyscomak logo" className="h-8"/>
+              <img src="./rayco-logo@300x.png" alt="RaycoWylie logo" className="h-4"/>
+              <img src="./sysco-logo@300x.png" alt="RaycoSyscomak logo" className="h-8"/>
             </div>
             <p className="text-[7pt]">{t('header.companyName')}</p>
             <p className="text-[7pt]">{t('header.address.street')}</p>
