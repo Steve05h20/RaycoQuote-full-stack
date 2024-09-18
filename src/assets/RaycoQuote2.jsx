@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
-import { X } from "lucide-react";
+import { X, ChevronDown, ChevronUp } from "lucide-react";
+import { optionsData, installationOptions, additionalOfferOptions } from './quoteData';
 
-import tpms from '../option/TPMS.png'
-import maxiLoad from '../option/66GBALANCEK2 11UZP0018 33V9009.png'
-import installation from '../option/55INSTALLATION.png'
- 
 const RaycoQuote2 = () => {
     const { t } = useTranslation();
     const [selectedOptions, setSelectedOptions] = useState([]);
@@ -13,51 +10,40 @@ const RaycoQuote2 = () => {
     const [selectedAdditionalOption, setSelectedAdditionalOption] = useState(null);
     const [installationDetails, setInstallationDetails] = useState("");
     const [additionalOfferDetails, setAdditionalOfferDetails] = useState("");
+    const [otherOptions, setOtherOptions] = useState("");
+    const [notes, setNotes] = useState("");
+    const [isOptionDropdownOpen, setIsOptionDropdownOpen] = useState(false);
+    const [isInstallationDropdownOpen, setIsInstallationDropdownOpen] = useState(false);
+    const [isAdditionalOfferDropdownOpen, setIsAdditionalOfferDropdownOpen] = useState(false);
 
-    // Définition des options avec internationalisation
-    const optionsData = [
-        {
-            id: 1,
-            title: t('options.tpms.title'),
-            description: t('options.tpms.description'),
-            image: tpms
-        },
-        {
-            id: 2,
-            title: t('options.maxiload.title'),
-            description: t('options.maxiload.description'),
-            image: maxiLoad
-        },
-    ];
-
-    const installationOptions = [
-        {
-            id: 1,
-            title: t('installation.option.title'),
-            description: t('installation.option.description'),
-            image: installation
-        },
-    ];
-
-    const additionalOfferOptions = [...optionsData];
-
-    const handleOptionSelect = (e) => {
-        const selectedId = parseInt(e.target.value);
-        if (selectedOptions.length < 3 && !selectedOptions.includes(selectedId)) {
-            setSelectedOptions([...selectedOptions, selectedId]);
+    const handleOptionSelect = (option) => {
+        if (selectedOptions.length < 3 && !selectedOptions.includes(option.id)) {
+            setSelectedOptions([...selectedOptions, option.id]);
         }
+        setIsOptionDropdownOpen(false);
+    };
+
+    const handleInstallationSelect = (option) => {
+        setSelectedInstallationOption(option);
+        setIsInstallationDropdownOpen(false);
+    };
+
+    const handleAdditionalOfferSelect = (option) => {
+        setSelectedAdditionalOption(option);
+        setIsAdditionalOfferDropdownOpen(false);
     };
 
     const removeOption = (optionId) => {
         setSelectedOptions(selectedOptions.filter(id => id !== optionId));
     };
 
+
     const OptionCard = ({ option, onRemove }) => (
         <div className="border p-2 flex items-start relative text-[10pt]">
-            <img src={option.image} alt={option.title} className="w-16 object-cover object-left h-16 mr-2" />
+            <img src={option.image} alt={t(option.title)} className="w-16 object-cover object-left h-16 mr-2" />
             <div>
-                <h3 className="font-bold text-[11pt]">{option.title}</h3>
-                <p>{option.description}</p>
+                <h3 className="font-bold text-[11pt]">{t(option.title)}</h3>
+                <p>{t(option.description)}</p>
             </div>
             {onRemove && (
                 <button onClick={onRemove} className="absolute top-1 right-1 text-red-600">
@@ -67,6 +53,31 @@ const RaycoQuote2 = () => {
         </div>
     );
 
+    const Dropdown = ({ isOpen, toggle, options, onSelect, placeholder }) => (
+        <div className="relative">
+            <button 
+                onClick={toggle} 
+                className="w-full p-2 border flex justify-between items-center text-[10pt]"
+            >
+                {placeholder}
+                {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            </button>
+            {isOpen && (
+                <div className="absolute z-10 w-full bg-white border mt-1">
+                    {options.map(option => (
+                        <div 
+                            key={option.id} 
+                            className="p-2 hover:bg-gray-100 cursor-pointer flex items-center"
+                            onClick={() => onSelect(option)}
+                        >
+                            <img src={option.image} alt={t(option.title)} className="w-12 object-cover object-left h-12 mr-2" />
+                            {t(option.title)}
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
     return (
         <div className="bg-white w-[215.9mm] min-h-[279.4mm] mx-auto shadow-lg relative p-3 text-[10pt] leading-tight">
             <div className="absolute top-3 right-3 text-[8pt]">{t('form.page', { page: 2 })}</div>
@@ -86,12 +97,13 @@ const RaycoQuote2 = () => {
                 })}
                 {selectedOptions.length < 3 && (
                     <div className="border p-2">
-                        <select onChange={handleOptionSelect} className="w-full p-1 border text-[10pt]">
-                            <option value="">{t('options.selectOption')}</option>
-                            {optionsData.map((option) => (
-                                <option key={option.id} value={option.id}>{option.title}</option>
-                            ))}
-                        </select>
+                        <Dropdown 
+                            isOpen={isOptionDropdownOpen}
+                            toggle={() => setIsOptionDropdownOpen(!isOptionDropdownOpen)}
+                            options={optionsData}
+                            onSelect={handleOptionSelect}
+                            placeholder={t('options.selectOption')}
+                        />
                     </div>
                 )}
                 <div className="border p-2 col-span-2">
@@ -99,6 +111,8 @@ const RaycoQuote2 = () => {
                         className="w-full p-1 border text-[10pt]"
                         rows="2"
                         placeholder={t('options.otherOptions')}
+                        value={otherOptions}
+                        onChange={(e) => setOtherOptions(e.target.value)}
                     ></textarea>
                 </div>
             </div>
@@ -107,16 +121,13 @@ const RaycoQuote2 = () => {
             <h2 className="text-red-600 font-bold text-lg mb-3">{t('installation.title')}</h2>
             <div className="grid grid-cols-2 gap-3 mb-3">
                 <div>
-                    <select
-                        value={selectedInstallationOption ? selectedInstallationOption.id : ""}
-                        onChange={(e) => setSelectedInstallationOption(installationOptions.find(o => o.id === parseInt(e.target.value)))}
-                        className="w-full p-1 border mb-2 text-[10pt]"
-                    >
-                        <option value="">{t('installation.selectInstallation')}</option>
-                        {installationOptions.map((option) => (
-                            <option key={option.id} value={option.id}>{option.title}</option>
-                        ))}
-                    </select>
+                    <Dropdown 
+                        isOpen={isInstallationDropdownOpen}
+                        toggle={() => setIsInstallationDropdownOpen(!isInstallationDropdownOpen)}
+                        options={installationOptions}
+                        onSelect={handleInstallationSelect}
+                        placeholder={t('installation.selectInstallation')}
+                    />
                     {selectedInstallationOption && (
                         <OptionCard
                             option={selectedInstallationOption}
@@ -138,16 +149,13 @@ const RaycoQuote2 = () => {
             <h2 className="text-red-600 font-bold text-lg mb-3">{t('additionalOffer.title')}</h2>
             <div className="grid grid-cols-2 gap-3 mb-3">
                 <div>
-                    <select
-                        value={selectedAdditionalOption ? selectedAdditionalOption.id : ""}
-                        onChange={(e) => setSelectedAdditionalOption(additionalOfferOptions.find(o => o.id === parseInt(e.target.value)))}
-                        className="w-full p-1 border mb-2 text-[10pt]"
-                    >
-                        <option value="">{t('additionalOffer.selectOffer')}</option>
-                        {additionalOfferOptions.map((option) => (
-                            <option key={option.id} value={option.id}>{option.title}</option>
-                        ))}
-                    </select>
+                    <Dropdown 
+                        isOpen={isAdditionalOfferDropdownOpen}
+                        toggle={() => setIsAdditionalOfferDropdownOpen(!isAdditionalOfferDropdownOpen)}
+                        options={additionalOfferOptions}
+                        onSelect={handleAdditionalOfferSelect}
+                        placeholder={t('additionalOffer.selectOffer')}
+                    />
                     {selectedAdditionalOption && (
                         <OptionCard
                             option={selectedAdditionalOption}
@@ -177,6 +185,8 @@ const RaycoQuote2 = () => {
                 className="w-full p-1 border text-[10pt]"
                 rows="3"
                 placeholder={t('notes.placeholder')}
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
             ></textarea>
 
             {/* Pied de page */}
