@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { X } from "lucide-react";
 
+import tpms from '../option/TPMS.png'
+import maxiLoad from '../option/66GBALANCEK2 11UZP0018 33V9009.png'
+import installation from '../option/55INSTALLATION.png'
+ 
 const RaycoQuote2 = () => {
     const { t } = useTranslation();
     const [selectedOptions, setSelectedOptions] = useState([]);
@@ -16,13 +20,13 @@ const RaycoQuote2 = () => {
             id: 1,
             title: t('options.tpms.title'),
             description: t('options.tpms.description'),
-            image: "/src/option/11 TPMS.png"
+            image: tpms
         },
         {
             id: 2,
             title: t('options.maxiload.title'),
             description: t('options.maxiload.description'),
-            image: "/src/option/66GBALANCEK2 11UZP0018 33V9009.png"
+            image: maxiLoad
         },
     ];
 
@@ -31,7 +35,7 @@ const RaycoQuote2 = () => {
             id: 1,
             title: t('installation.option.title'),
             description: t('installation.option.description'),
-            image: "/src/option/55INSTALLATION.png"
+            image: installation
         },
     ];
 
