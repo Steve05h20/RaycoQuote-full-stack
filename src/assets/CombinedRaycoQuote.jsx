@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useReactToPrint } from 'react-to-print';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -6,16 +6,72 @@ import RaycoQuote1 from './RaycoQuote1';
 import RaycoQuote2 from './RaycoQuote2';
 import RaycoQuote3 from './RaycoQuote3';
 import RaycoQuote4 from './RaycoQuote4';
+import { gsap } from 'gsap';
+
+const LoadingScreen = ({ onComplete }) => {
+  const greetingRef = useRef(null);
+  const greetings = ['Bonjour', 'Good morning', 'Buenos días'];
+
+  useEffect(() => {
+    let currentIndex = 0;
+
+    const animateGreeting = () => {
+      if (currentIndex >= greetings.length) {
+        onComplete();
+        return;
+      }
+
+      const greeting = greetings[currentIndex];
+
+      gsap.timeline()
+        .to(greetingRef.current, {
+          duration: 0.3,
+          opacity: 0,
+          y: -20,
+          ease: 'power2.in',
+          onComplete: () => {
+            greetingRef.current.textContent = greeting;
+          }
+        })
+        .to(greetingRef.current, {
+          duration: 0.3,
+          opacity: 1,
+          y: 0,
+          ease: 'power2.out',
+          onComplete: () => {
+            setTimeout(() => {
+              currentIndex++;
+              animateGreeting();
+            }, 500);
+          }
+        });
+    };
+
+    animateGreeting();
+  }, [onComplete]);
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+      <h1 ref={greetingRef} className="text-5xl font-bold text-red-600">
+        {greetings[0]}
+      </h1>
+    </div>
+  );
+};
 
 const CombinedRaycoQuote = () => {
     const { t } = useTranslation();
     const componentRef = useRef();
+    const [loading, setLoading] = useState(true);
+
+    const handleLoadingComplete = () => {
+        setLoading(false);
+    };
 
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
         documentTitle: 'rayco_quote',
         onBeforeGetContent: () => {
-            // You can update component state here if needed
             return new Promise((resolve) => {
                 resolve();
             });
@@ -24,6 +80,10 @@ const CombinedRaycoQuote = () => {
             // You can perform actions after printing here
         },
     });
+
+    if (loading) {
+        return <LoadingScreen onComplete={handleLoadingComplete} />;
+    }
 
     return (
         <div className="relative">
