@@ -8,7 +8,6 @@ import RaycoQuote3 from './RaycoQuote3';
 import RaycoQuote4 from './RaycoQuote4';
 import { gsap } from 'gsap';
 import logo from './rayco-uni.png';
-import logoRayco from './rayco-logo@300x.png';
 import duoLogo from './duo-logo.svg';
 
 const LoadingScreen = ({ onComplete }) => {
@@ -56,12 +55,9 @@ const LoadingScreen = ({ onComplete }) => {
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
     <img src={logo} alt="alt logo" class="w-72 m-20" />
-      <h1 ref={greetingRef} className="text-6xl font-bold text-red-600">
+      <h1 ref={greetingRef} className="text-6xl mx-auto font-bold text-red-600">
         {greetings[0]}
       </h1>
-      <div className="flex justify-end space-x-1 m-20 items-center">
-            <img src={duoLogo} alt="duo-logo" className="h-10" />
-          </div>
     </div>
   );
 };
