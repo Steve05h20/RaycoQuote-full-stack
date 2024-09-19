@@ -55,7 +55,7 @@ const LoadingScreen = ({ onComplete }) => {
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
     <img src={logo} alt="alt logo" class="w-72 m-20" />
-      <h1 ref={greetingRef} className="text-6xl mx-auto font-bold text-red-600">
+      <h1 ref={greetingRef} className="text-5xl mx-auto font-bold text-red-600">
         {greetings[0]}
       </h1>
     </div>
