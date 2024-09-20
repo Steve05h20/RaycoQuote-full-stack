@@ -32,27 +32,20 @@ function OptionsComponent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = editingId ? `/api/options?id=${editingId}` : '/api/options';
-      const method = editingId ? 'PUT' : 'POST';
-      
-      const response = await fetch(url, {
-        method: method,
+      console.log('Données du formulaire à envoyer:', formData);
+      const response = await fetch('/api/options', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-
+      console.log('Statut de la réponse:', response.status);
       if (!response.ok) throw new Error('Erreur lors de l\'enregistrement de l\'option');
-      
-      if (editingId) {
-        setOptions(options.map(opt => opt.id === editingId ? { ...formData, id: editingId } : opt));
-      } else {
-        const newOption = await response.json();
-        setOptions([...options, newOption]);
-      }
-
+      const newOption = await response.json();
+      console.log('Nouvelle option reçue:', newOption);
+      setOptions([...options, newOption]);
       setFormData({ title: '', description: '', image: '' });
-      setEditingId(null);
     } catch (err) {
+      console.error('Erreur lors de la soumission:', err);
       setError(err.message);
     }
   };
