@@ -32,20 +32,28 @@ function OptionsComponent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('Données du formulaire à envoyer:', formData);
-      const response = await fetch('/api/options', {
-        method: 'POST',
+      const url = editingId ? `/api/options?id=${editingId}` : '/api/options';
+      const method = editingId ? 'PUT' : 'POST';
+      
+      const response = await fetch(url, {
+        method: method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      console.log('Statut de la réponse:', response.status);
+
       if (!response.ok) throw new Error('Erreur lors de l\'enregistrement de l\'option');
-      const newOption = await response.json();
-      console.log('Nouvelle option reçue:', newOption);
-      setOptions([...options, newOption]);
+      
+      const savedOption = await response.json();
+      
+      if (editingId) {
+        setOptions(options.map(opt => opt.id === editingId ? savedOption : opt));
+      } else {
+        setOptions([...options, savedOption]);
+      }
+
       setFormData({ title: '', description: '', image: '' });
+      setEditingId(null);
     } catch (err) {
-      console.error('Erreur lors de la soumission:', err);
       setError(err.message);
     }
   };
@@ -65,51 +73,83 @@ function OptionsComponent() {
     }
   };
 
-  if (loading) return <div>Chargement...</div>;
-  if (error) return <div>Erreur : {error}</div>;
+  if (loading) return <div className="text-center py-4">Chargement...</div>;
+  if (error) return <div className="text-center py-4 text-red-500">Erreur : {error}</div>;
 
   return (
-    <div>
-      <h1>Gestion des Options</h1>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Gestion des Options</h1>
       
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleInputChange}
-          placeholder="Titre"
-          required
-          className='border-2'
-        />
-        <input
-          type="text"
-          name="description"
-          value={formData.description}
-          onChange={handleInputChange}
-          placeholder="Description"
-          className='border-2'
-        />
-        <input
-          type="text"
-          name="image"
-          value={formData.image}
-          onChange={handleInputChange}
-          placeholder="URL de l'image"
-          className='border-2'
-        />
-        <button className='bg-blue-500 p-5 m-5' type="submit">{editingId ? 'Mettre à jour' : 'Ajouter'}</button>
-        {editingId && <button onClick={() => setEditingId(null)}>Annuler</button>}
+      <form onSubmit={handleSubmit} className="mb-8 bg-gray-100 p-4 rounded-lg">
+        <div className="mb-4">
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleInputChange}
+            placeholder="Titre"
+            required
+            className="w-full p-2 border rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <input
+            type="text"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            placeholder="Description"
+            className="w-full p-2 border rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <input
+            type="text"
+            name="image"
+            value={formData.image}
+            onChange={handleInputChange}
+            placeholder="URL de l'image"
+            className="w-full p-2 border rounded"
+          />
+        </div>
+        <div className="flex justify-between">
+          <button 
+            type="submit" 
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
+            {editingId ? 'Mettre à jour' : 'Ajouter'}
+          </button>
+          {editingId && (
+            <button 
+              onClick={() => {setEditingId(null); setFormData({ title: '', description: '', image: '' });}}
+              className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+            >
+              Annuler
+            </button>
+          )}
+        </div>
       </form>
 
-      <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {options.map(option => (
-          <div key={option.id}>
-            <h3>{option.title}</h3>
-            <p>{option.description}</p>
-            {option.image && <img src={option.image} alt={option.title} style={{maxWidth: '200px'}} />}
-            <button onClick={() => handleEdit(option)}>Modifier</button>
-            <button onClick={() => handleDelete(option.id)}>Supprimer</button>
+          <div key={option.id} className="border p-4 rounded-lg">
+            <h3 className="text-xl font-semibold mb-2">{option.title}</h3>
+            <p className="mb-2">{option.description}</p>
+            {option.image && <img src={option.image} alt={option.title} className="w-full h-40 object-cover mb-2 rounded" />}
+            <div className="flex justify-between">
+              <button 
+                onClick={() => handleEdit(option)}
+                className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+              >
+                Modifier
+              </button>
+              <button 
+                onClick={() => handleDelete(option.id)}
+                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+              >
+                Supprimer
+              </button>
+            </div>
           </div>
         ))}
       </div>
