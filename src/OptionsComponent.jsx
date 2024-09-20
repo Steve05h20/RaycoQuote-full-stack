@@ -87,6 +87,7 @@ function OptionsComponent() {
           onChange={handleInputChange}
           placeholder="Titre"
           required
+          className='border-2'
         />
         <input
           type="text"
@@ -94,6 +95,7 @@ function OptionsComponent() {
           value={formData.description}
           onChange={handleInputChange}
           placeholder="Description"
+          className='border-2'
         />
         <input
           type="text"
@@ -101,8 +103,9 @@ function OptionsComponent() {
           value={formData.image}
           onChange={handleInputChange}
           placeholder="URL de l'image"
+          className='border-2'
         />
-        <button type="submit">{editingId ? 'Mettre à jour' : 'Ajouter'}</button>
+        <button className='bg-blue-500 p-5 m-5' type="submit">{editingId ? 'Mettre à jour' : 'Ajouter'}</button>
         {editingId && <button onClick={() => setEditingId(null)}>Annuler</button>}
       </form>
 
