@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import { IncomingForm } from 'formidable';
+import formidable from 'formidable';
 import { promises as fs } from 'fs';
 import path from 'path';
 
@@ -10,16 +10,20 @@ export const config = {
 };
 
 export default async function handler(req, res) {
-  const form = new IncomingForm();
+  console.log('Requête reçue:', req.method, req.url);
+
+  const form = new formidable.IncomingForm();
 
   form.parse(req, async (err, fields, files) => {
     if (err) {
       console.error('Erreur lors du parsing du formulaire:', err);
-      return res.status(500).json({ error: 'Erreur lors du traitement du formulaire' });
+      return res.status(500).json({ error: 'Erreur lors du traitement du formulaire', details: err.message });
     }
 
     const { method } = req;
-    console.log('Méthode reçue:', method);
+    console.log('Méthode:', method);
+    console.log('Champs:', fields);
+    console.log('Fichiers:', files);
 
     switch (method) {
       case 'GET':
@@ -41,16 +45,25 @@ export default async function handler(req, res) {
 
           if (files.image) {
             const file = files.image;
-            const fileName = `${Date.now()}-${file.name}`;
+            console.log('Fichier image reçu:', file);
+
+            const fileName = `${Date.now()}-${file.originalFilename}`;
             const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+            
+            console.log('Création du dossier uploads...');
             await fs.mkdir(uploadDir, { recursive: true });
+
             const newPath = path.join(uploadDir, fileName);
-            await fs.rename(file.path, newPath);
+            console.log('Déplacement du fichier vers:', newPath);
+            await fs.rename(file.filepath, newPath);
+
             imagePath = `/uploads/${fileName}`;
+            console.log('Chemin de l\'image enregistré:', imagePath);
           }
 
           let result;
           if (method === 'POST') {
+            console.log('Insertion dans la base de données...');
             result = await sql`
               INSERT INTO options (title, description, image)
               VALUES (${title}, ${description}, ${imagePath})
@@ -58,15 +71,17 @@ export default async function handler(req, res) {
             `;
           } else {
             const { id } = req.query;
+            console.log('Mise à jour dans la base de données pour l\'ID:', id);
             result = await sql`
               UPDATE options
-              SET title = ${title}, description = ${description}, image = ${imagePath}
+              SET title = ${title}, description = ${description}, 
+                  image = COALESCE(${imagePath}, image)
               WHERE id = ${id}
               RETURNING *
             `;
           }
 
-          console.log('Option enregistrée:', result.rows[0]);
+          console.log('Résultat de l\'opération en base de données:', result.rows[0]);
           res.status(method === 'POST' ? 201 : 200).json(result.rows[0]);
         } catch (error) {
           console.error('Erreur lors de l\'enregistrement de l\'option:', error);
@@ -77,10 +92,13 @@ export default async function handler(req, res) {
       case 'DELETE':
         try {
           const { id } = req.query;
+          console.log('Tentative de suppression de l\'option avec l\'ID:', id);
           const { rowCount } = await sql`DELETE FROM options WHERE id = ${id}`;
           if (rowCount === 0) {
+            console.log('Aucune option trouvée avec l\'ID:', id);
             res.status(404).json({ error: 'Option non trouvée' });
           } else {
+            console.log('Option supprimée avec succès');
             res.status(200).json({ message: 'Option supprimée avec succès' });
           }
         } catch (error) {
@@ -90,6 +108,7 @@ export default async function handler(req, res) {
         break;
 
       default:
+        console.log('Méthode non autorisée:', method);
         res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
         res.status(405).end(`Méthode ${method} non autorisée`);
     }
