@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-pdf/renderer": "^3.4.4",
     "@vercel/postgres": "^0.10.0",
+    "formidable": "^3.5.1",
     "gsap": "^3.12.5",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.2",
