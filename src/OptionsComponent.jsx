@@ -41,7 +41,10 @@ function OptionsComponent() {
         body: JSON.stringify(formData)
       });
 
-      if (!response.ok) throw new Error('Erreur lors de l\'enregistrement de l\'option');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Erreur lors de l\'enregistrement de l\'option');
+      }
       
       const savedOption = await response.json();
       
@@ -66,7 +69,10 @@ function OptionsComponent() {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`/api/options?id=${id}`, { method: 'DELETE' });
-      if (!response.ok) throw new Error('Erreur lors de la suppression de l\'option');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Erreur lors de la suppression de l\'option');
+      }
       setOptions(options.filter(opt => opt.id !== id));
     } catch (err) {
       setError(err.message);
