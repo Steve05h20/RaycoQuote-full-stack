@@ -148,29 +148,35 @@ function ImprovedOptionsInstallationsComponent() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {items.map(item => (
-          <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
-            {item.image && (
-              <div className="h-48 overflow-hidden">
-                <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-              </div>
-            )}
-            <div className="p-4 flex-grow">
-              <h3 className="text-xl font-semibold mb-2 text-gray-800">{item.title}</h3>
-              <p className="text-gray-600 mb-4">{item.description}</p>
+          <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden flex">
+            <div className="w-1/3 bg-gray-200 flex items-center justify-center p-4">
+              {item.image ? (
+                <img src={item.image} alt={item.title} className="w-full h-auto object-contain" />
+              ) : (
+                <div className="w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center text-gray-500">
+                  <span className="text-3xl">?</span>
+                </div>
+              )}
             </div>
-            <div className="p-4 bg-gray-50 flex justify-between">
-              <button
-                onClick={() => handleEdit(item)}
-                className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 transition duration-300"
-              >
-                Modifier
-              </button>
-              <button
-                onClick={() => handleDelete(item.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition duration-300"
-              >
-                Supprimer
-              </button>
+            <div className="w-2/3 p-4 flex flex-col justify-between">
+              <div>
+                <h3 className="text-lg font-bold text-gray-800 mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-600">{item.description}</p>
+              </div>
+              <div className="mt-4 flex justify-end space-x-2">
+                <button
+                  onClick={() => handleEdit(item)}
+                  className="bg-blue-500 text-white text-xs px-2 py-1 rounded hover:bg-blue-600 transition duration-300"
+                >
+                  Modifier
+                </button>
+                <button
+                  onClick={() => handleDelete(item.id)}
+                  className="bg-red-500 text-white text-xs px-2 py-1 rounded hover:bg-red-600 transition duration-300"
+                >
+                  Supprimer
+                </button>
+              </div>
             </div>
           </div>
         ))}
