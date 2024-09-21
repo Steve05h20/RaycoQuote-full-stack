@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { X, ChevronDown, ChevronUp } from "lucide-react";
-import { staticOptionsData as optionsData, staticInstallationOptions as installationOptions, additionalOfferOptions } from './quoteData';
+import { optionsData, installationOptions, additionalOfferOptions } from './quoteData';
 
 const RaycoQuote2 = () => {
     const { t } = useTranslation();

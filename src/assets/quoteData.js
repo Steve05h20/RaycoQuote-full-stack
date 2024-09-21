@@ -2,7 +2,7 @@ import tpms from '../option/TPMS.png';
 import maxiLoad from '../option/66GBALANCEK2 11UZP0018 33V9009.png';
 import installation from '../option/55INSTALLATION.png';
 
-export const staticOptionsData = [
+const staticOptionsData = [
     {
         id: 1,
         title: 'options.tpms.title',
@@ -17,7 +17,7 @@ export const staticOptionsData = [
     },
 ];
 
-export const staticInstallationOptions = [
+const staticInstallationOptions = [
     {
         id: 1,
         title: 'installation.option.title',
@@ -26,18 +26,20 @@ export const staticInstallationOptions = [
     },
 ];
 
-const fetchDataFromApi = async (endpoint) => {
-    try {
-        const response = await fetch(`/api/${endpoint}`);
-        if (!response.ok) throw new Error(`Erreur lors de la récupération des données de ${endpoint}`);
-        return await response.json();
-    } catch (error) {
-        console.error(`Erreur de récupération des données de ${endpoint}:`, error);
+function fetchDataFromApiSync(endpoint) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `/api/${endpoint}`, false);  // false makes the request synchronous
+    xhr.send(null);
+
+    if (xhr.status === 200) {
+        return JSON.parse(xhr.responseText);
+    } else {
+        console.error(`Erreur de récupération des données de ${endpoint}: ${xhr.status}`);
         return [];
     }
-};
+}
 
-const mergeData = (staticData, apiData) => {
+function mergeData(staticData, apiData) {
     const mergedData = [...staticData];
     apiData.forEach(apiItem => {
         const existingIndex = mergedData.findIndex(item => item.id === apiItem.id);
@@ -48,16 +50,13 @@ const mergeData = (staticData, apiData) => {
         }
     });
     return mergedData;
-};
+}
 
-export const getOptionsData = async () => {
-    const apiOptionsData = await fetchDataFromApi('options');
-    return mergeData(staticOptionsData, apiOptionsData);
-};
+// Récupération et fusion synchrone des données
+const apiOptionsData = fetchDataFromApiSync('options');
+const apiInstallationData = fetchDataFromApiSync('installations');
 
-export const getInstallationOptions = async () => {
-    const apiInstallationData = await fetchDataFromApi('installations');
-    return mergeData(staticInstallationOptions, apiInstallationData);
-};
+export const optionsData = mergeData(staticOptionsData, apiOptionsData);
+export const installationOptions = mergeData(staticInstallationOptions, apiInstallationData);
 
-export const additionalOfferOptions = staticOptionsData;
+export const additionalOfferOptions = optionsData;
