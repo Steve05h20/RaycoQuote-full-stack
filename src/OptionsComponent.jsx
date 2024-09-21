@@ -4,7 +4,8 @@ function OptionsComponent() {
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({ title: '', description: '', image: '' });
+  const [formData, setFormData] = useState({ title: '', description: '' });
+  const [file, setFile] = useState(null);
   const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
@@ -29,16 +30,26 @@ function OptionsComponent() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formDataToSend = new FormData();
+    formDataToSend.append('title', formData.title);
+    formDataToSend.append('description', formData.description);
+    if (file) {
+      formDataToSend.append('image', file);
+    }
+
     try {
       const url = editingId ? `/api/options?id=${editingId}` : '/api/options';
       const method = editingId ? 'PUT' : 'POST';
       
       const response = await fetch(url, {
         method: method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: formDataToSend
       });
 
       if (!response.ok) {
@@ -54,7 +65,8 @@ function OptionsComponent() {
         setOptions([...options, savedOption]);
       }
 
-      setFormData({ title: '', description: '', image: '' });
+      setFormData({ title: '', description: '' });
+      setFile(null);
       setEditingId(null);
     } catch (err) {
       setError(err.message);
@@ -62,8 +74,9 @@ function OptionsComponent() {
   };
 
   const handleEdit = (option) => {
-    setFormData(option);
+    setFormData({ title: option.title, description: option.description });
     setEditingId(option.id);
+    setFile(null); // Reset file when editing
   };
 
   const handleDelete = async (id) => {
@@ -110,11 +123,8 @@ function OptionsComponent() {
         </div>
         <div className="mb-4">
           <input
-            type="text"
-            name="image"
-            value={formData.image}
-            onChange={handleInputChange}
-            placeholder="URL de l'image"
+            type="file"
+            onChange={handleFileChange}
             className="w-full p-2 border rounded"
           />
         </div>
@@ -127,7 +137,7 @@ function OptionsComponent() {
           </button>
           {editingId && (
             <button 
-              onClick={() => {setEditingId(null); setFormData({ title: '', description: '', image: '' });}}
+              onClick={() => {setEditingId(null); setFormData({ title: '', description: '' }); setFile(null);}}
               className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
             >
               Annuler
