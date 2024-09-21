@@ -182,7 +182,7 @@ function ImprovedOptionsInstallationsComponent() {
           </div>
         ))}
       </div>
-      <Link to={"/"}>retour au formulaire</Link>
+      <Link className='bg-zinc-700 text-white' to={"/"}>retour au formulaire</Link>
     </div>
   );
 }
