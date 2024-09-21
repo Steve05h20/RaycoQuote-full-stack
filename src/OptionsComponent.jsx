@@ -4,8 +4,7 @@ function OptionsComponent() {
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({ title: '', description: '' });
-  const [imageFile, setImageFile] = useState(null);
+  const [formData, setFormData] = useState({ title: '', description: '', image: '' });
   const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
@@ -14,22 +13,12 @@ function OptionsComponent() {
 
   const fetchOptions = async () => {
     try {
-      console.log('Tentative de récupération des options...');
       const response = await fetch('/api/options');
-      console.log('Statut de la réponse:', response.status);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Texte de la réponse d\'erreur:', errorText);
-        throw new Error(`Erreur HTTP: ${response.status}`);
-      }
-      
+      if (!response.ok) throw new Error('Erreur lors de la récupération des options');
       const data = await response.json();
-      console.log('Données récupérées:', data);
       setOptions(data);
       setLoading(false);
     } catch (err) {
-      console.error('Erreur lors de la récupération des options:', err);
       setError(err.message);
       setLoading(false);
     }
@@ -40,26 +29,16 @@ function OptionsComponent() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleImageChange = (e) => {
-    setImageFile(e.target.files[0]);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('title', formData.title);
-      formDataToSend.append('description', formData.description);
-      if (imageFile) {
-        formDataToSend.append('image', imageFile);
-      }
-
       const url = editingId ? `/api/options?id=${editingId}` : '/api/options';
       const method = editingId ? 'PUT' : 'POST';
       
       const response = await fetch(url, {
         method: method,
-        body: formDataToSend,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
       });
 
       if (!response.ok) {
@@ -75,8 +54,7 @@ function OptionsComponent() {
         setOptions([...options, savedOption]);
       }
 
-      setFormData({ title: '', description: '' });
-      setImageFile(null);
+      setFormData({ title: '', description: '', image: '' });
       setEditingId(null);
     } catch (err) {
       setError(err.message);
@@ -84,9 +62,8 @@ function OptionsComponent() {
   };
 
   const handleEdit = (option) => {
-    setFormData({ title: option.title, description: option.description });
+    setFormData(option);
     setEditingId(option.id);
-    // Notez que nous ne pouvons pas pré-remplir le champ de fichier pour des raisons de sécurité
   };
 
   const handleDelete = async (id) => {
@@ -133,9 +110,11 @@ function OptionsComponent() {
         </div>
         <div className="mb-4">
           <input
-            type="file"
-            onChange={handleImageChange}
-            accept="image/*"
+            type="text"
+            name="image"
+            value={formData.image}
+            onChange={handleInputChange}
+            placeholder="URL de l'image"
             className="w-full p-2 border rounded"
           />
         </div>
@@ -148,7 +127,7 @@ function OptionsComponent() {
           </button>
           {editingId && (
             <button 
-              onClick={() => {setEditingId(null); setFormData({ title: '', description: '' }); setImageFile(null);}}
+              onClick={() => {setEditingId(null); setFormData({ title: '', description: '', image: '' });}}
               className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
             >
               Annuler
