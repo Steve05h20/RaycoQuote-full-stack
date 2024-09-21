@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function OptionsInstallationsComponent() {
+function ImprovedOptionsInstallationsComponent() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -84,20 +84,24 @@ function OptionsInstallationsComponent() {
   if (error) return <div className="text-center py-4 text-red-500">Erreur : {error}</div>;
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Gestion des {selectedType === 'options' ? 'Options' : 'Installations'}</h1>
+    <div className="container mx-auto p-4 bg-gray-100 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+        Gestion des {selectedType === 'options' ? 'Options' : 'Installations'}
+      </h1>
 
-      <select
-        value={selectedType}
-        onChange={(e) => setSelectedType(e.target.value)}
-        className="mb-4 p-2 border rounded"
-      >
-        <option value="options">Options</option>
-        <option value="installations">Installations</option>
-      </select>
+      <div className="mb-6 flex justify-center">
+        <select
+          value={selectedType}
+          onChange={(e) => setSelectedType(e.target.value)}
+          className="p-2 border rounded-md shadow-sm bg-white text-gray-700"
+        >
+          <option value="options">Options</option>
+          <option value="installations">Installations</option>
+        </select>
+      </div>
 
-      <form onSubmit={handleSubmit} className="mb-8 bg-gray-100 p-4 rounded-lg">
-        <div className="mb-4">
+      <form onSubmit={handleSubmit} className="mb-8 bg-white p-6 rounded-lg shadow-md">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <input
             type="text"
             name="title"
@@ -105,40 +109,36 @@ function OptionsInstallationsComponent() {
             onChange={handleInputChange}
             placeholder="Titre"
             required
-            className="w-full p-2 border rounded"
+            className="p-2 border rounded-md"
           />
-        </div>
-        <div className="mb-4">
           <input
             type="text"
             name="description"
             value={formData.description}
             onChange={handleInputChange}
             placeholder="Description"
-            className="w-full p-2 border rounded"
+            className="p-2 border rounded-md"
           />
-        </div>
-        <div className="mb-4">
           <input
             type="text"
             name="image"
             value={formData.image}
             onChange={handleInputChange}
             placeholder="URL de l'image"
-            className="w-full p-2 border rounded"
+            className="p-2 border rounded-md"
           />
         </div>
-        <div className="flex justify-between">
+        <div className="mt-4 flex justify-end">
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
           >
             {editingId ? 'Mettre à jour' : 'Ajouter'}
           </button>
           {editingId && (
             <button
               onClick={() => { setEditingId(null); setFormData({ title: '', description: '', image: '' }); }}
-              className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+              className="ml-2 bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400 transition duration-300"
             >
               Annuler
             </button>
@@ -146,34 +146,37 @@ function OptionsInstallationsComponent() {
         </div>
       </form>
 
-
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {items.map(item => (
-          <div className="border p-2 flex items-start relative text-[10pt]">
-            <img src={item.image} alt={t(item.title)} className="w-16 object-cover object-left h-16 mr-2" />
-            <div>
-              <h3 className="font-bold text-[11pt]">{t(item.title)}</h3>
-              <p>{t(item.description)}</p>
+          <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+            {item.image && (
+              <div className="h-48 overflow-hidden">
+                <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+              </div>
+            )}
+            <div className="p-4 flex-grow">
+              <h3 className="text-xl font-semibold mb-2 text-gray-800">{item.title}</h3>
+              <p className="text-gray-600 mb-4">{item.description}</p>
             </div>
-            <div className="flex justify-between">
+            <div className="p-4 bg-gray-50 flex justify-between">
               <button
                 onClick={() => handleEdit(item)}
-                className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 transition duration-300"
               >
                 Modifier
               </button>
               <button
                 onClick={() => handleDelete(item.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition duration-300"
               >
                 Supprimer
               </button>
             </div>
-          </div>))}
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-export default OptionsInstallationsComponent;
+export default ImprovedOptionsInstallationsComponent;
