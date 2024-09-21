@@ -91,6 +91,7 @@ function ImprovedOptionsInstallationsComponent() {
       </h1>
 
       <div className="mb-6 flex justify-center">
+      <Link className='bg-zinc-700 text-white mx-5 my-10 px-5 py-2' to={"/"}>retour au formulaire</Link>
         <select
           value={selectedType}
           onChange={(e) => setSelectedType(e.target.value)}
@@ -182,7 +183,7 @@ function ImprovedOptionsInstallationsComponent() {
           </div>
         ))}
       </div>
-      <Link className='bg-zinc-700 text-white mx-auto my-10 px-5 py-2' to={"/"}>retour au formulaire</Link>
+     
     </div>
   );
 }
