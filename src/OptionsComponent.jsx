@@ -141,7 +141,7 @@ function OptionsComponent() {
           <div key={option.id} className="border p-4 rounded-lg">
             <h3 className="text-xl font-semibold mb-2">{option.title}</h3>
             <p className="mb-2">{option.description}</p>
-            {option.image && <img src={option.image} alt={option.title} className="w-full h-40 object-cover mb-2 rounded" />}
+            {option.image && <img src={option.image} className="w-full h-40 object-cover mb-2 rounded" />}
             <div className="flex justify-between">
               <button 
                 onClick={() => handleEdit(option)}
