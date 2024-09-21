@@ -146,12 +146,43 @@ function OptionsInstallationsComponent() {
         </div>
       </form>
 
+
+
+      <div className="border p-2 flex items-start relative text-[10pt]">
+        <img src={item.image} alt={t(item.title)} className="w-16 object-cover object-left h-16 mr-2" />
+        <div>
+          <h3 className="font-bold text-[11pt]">{t(item.title)}</h3>
+          <p>{t(item.description)}</p>
+        </div>
+        <div className="flex justify-between">
+          <button
+            onClick={() => handleEdit(item)}
+            className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+          >
+            Modifier
+          </button>
+          <button
+            onClick={() => handleDelete(item.id)}
+            className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+          >
+            Supprimer
+          </button>
+        </div>
+      </div>
+
+
+
+
+
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map(item => (
-          <div key={item.id} className="border p-4 rounded-lg">
-            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-            <p className="mb-2">{item.description}</p>
-            {item.image && <img src={item.image} alt={item.title} className="w-full h-40 object-cover mb-2 rounded" />}
+          <div className="border p-2 flex items-start relative text-[10pt]">
+            <img src={item.image} alt={t(item.title)} className="w-16 object-cover object-left h-16 mr-2" />
+            <div>
+              <h3 className="font-bold text-[11pt]">{t(item.title)}</h3>
+              <p>{t(item.description)}</p>
+            </div>
             <div className="flex justify-between">
               <button
                 onClick={() => handleEdit(item)}
@@ -166,8 +197,7 @@ function OptionsInstallationsComponent() {
                 Supprimer
               </button>
             </div>
-          </div>
-        ))}
+          </div>))}
       </div>
     </div>
   );
