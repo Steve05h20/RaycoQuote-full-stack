@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function ImprovedOptionsInstallationsComponent() {
   const [items, setItems] = useState([]);
@@ -181,6 +182,7 @@ function ImprovedOptionsInstallationsComponent() {
           </div>
         ))}
       </div>
+      <Link to={"/"}>retour au formulaire</Link>
     </div>
   );
 }
