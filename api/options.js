@@ -12,105 +12,114 @@ export const config = {
 export default async function handler(req, res) {
   console.log('Requête reçue:', req.method, req.url);
 
-  const form = new formidable.IncomingForm();
+  // Utilisation de formidable uniquement pour POST et PUT
+  if (req.method === 'POST' || req.method === 'PUT') {
+    const form = new formidable.IncomingForm();
 
-  form.parse(req, async (err, fields, files) => {
-    if (err) {
-      console.error('Erreur lors du parsing du formulaire:', err);
-      return res.status(500).json({ error: 'Erreur lors du traitement du formulaire', details: err.message });
-    }
+    form.parse(req, async (err, fields, files) => {
+      if (err) {
+        console.error('Erreur lors du parsing du formulaire:', err);
+        return res.status(500).json({ error: 'Erreur lors du traitement du formulaire', details: err.message });
+      }
 
-    const { method } = req;
-    console.log('Méthode:', method);
-    console.log('Champs:', fields);
-    console.log('Fichiers:', files);
+      await handleRequest(req, res, fields, files);
+    });
+  } else {
+    await handleRequest(req, res);
+  }
+}
 
+async function handleRequest(req, res, fields = {}, files = {}) {
+  const { method } = req;
+  console.log('Méthode:', method);
+
+  try {
     switch (method) {
       case 'GET':
-        try {
-          const { rows } = await sql`SELECT * FROM options`;
-          console.log('Options récupérées:', rows);
-          res.status(200).json(rows);
-        } catch (error) {
-          console.error('Erreur lors de la récupération des options:', error);
-          res.status(500).json({ error: 'Erreur lors de la récupération des options', details: error.message });
-        }
+        await handleGet(res);
         break;
-
       case 'POST':
+        await handlePost(res, fields, files);
+        break;
       case 'PUT':
-        try {
-          const { title, description } = fields;
-          let imagePath = null;
-
-          if (files.image) {
-            const file = files.image;
-            console.log('Fichier image reçu:', file);
-
-            const fileName = `${Date.now()}-${file.originalFilename}`;
-            const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-            
-            console.log('Création du dossier uploads...');
-            await fs.mkdir(uploadDir, { recursive: true });
-
-            const newPath = path.join(uploadDir, fileName);
-            console.log('Déplacement du fichier vers:', newPath);
-            await fs.rename(file.filepath, newPath);
-
-            imagePath = `/uploads/${fileName}`;
-            console.log('Chemin de l\'image enregistré:', imagePath);
-          }
-
-          let result;
-          if (method === 'POST') {
-            console.log('Insertion dans la base de données...');
-            result = await sql`
-              INSERT INTO options (title, description, image)
-              VALUES (${title}, ${description}, ${imagePath})
-              RETURNING *
-            `;
-          } else {
-            const { id } = req.query;
-            console.log('Mise à jour dans la base de données pour l\'ID:', id);
-            result = await sql`
-              UPDATE options
-              SET title = ${title}, description = ${description}, 
-                  image = COALESCE(${imagePath}, image)
-              WHERE id = ${id}
-              RETURNING *
-            `;
-          }
-
-          console.log('Résultat de l\'opération en base de données:', result.rows[0]);
-          res.status(method === 'POST' ? 201 : 200).json(result.rows[0]);
-        } catch (error) {
-          console.error('Erreur lors de l\'enregistrement de l\'option:', error);
-          res.status(500).json({ error: 'Erreur lors de l\'enregistrement de l\'option', details: error.message });
-        }
+        await handlePut(req, res, fields, files);
         break;
-
       case 'DELETE':
-        try {
-          const { id } = req.query;
-          console.log('Tentative de suppression de l\'option avec l\'ID:', id);
-          const { rowCount } = await sql`DELETE FROM options WHERE id = ${id}`;
-          if (rowCount === 0) {
-            console.log('Aucune option trouvée avec l\'ID:', id);
-            res.status(404).json({ error: 'Option non trouvée' });
-          } else {
-            console.log('Option supprimée avec succès');
-            res.status(200).json({ message: 'Option supprimée avec succès' });
-          }
-        } catch (error) {
-          console.error('Erreur lors de la suppression de l\'option:', error);
-          res.status(500).json({ error: 'Erreur lors de la suppression de l\'option', details: error.message });
-        }
+        await handleDelete(req, res);
         break;
-
       default:
         console.log('Méthode non autorisée:', method);
         res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
         res.status(405).end(`Méthode ${method} non autorisée`);
     }
-  });
+  } catch (error) {
+    console.error(`Erreur lors du traitement de la requête ${method}:`, error);
+    res.status(500).json({ error: `Erreur lors du traitement de la requête ${method}`, details: error.message });
+  }
+}
+
+async function handleGet(res) {
+  const { rows } = await sql`SELECT * FROM options`;
+  console.log('Options récupérées:', rows);
+  res.status(200).json(rows);
+}
+
+async function handlePost(res, fields, files) {
+  const { title, description } = fields;
+  const imagePath = await handleImageUpload(files.image);
+
+  const result = await sql`
+    INSERT INTO options (title, description, image)
+    VALUES (${title}, ${description}, ${imagePath})
+    RETURNING *
+  `;
+
+  console.log('Option créée:', result.rows[0]);
+  res.status(201).json(result.rows[0]);
+}
+
+async function handlePut(req, res, fields, files) {
+  const { id } = req.query;
+  const { title, description } = fields;
+  const imagePath = await handleImageUpload(files.image);
+
+  const result = await sql`
+    UPDATE options
+    SET title = ${title}, description = ${description}, 
+        image = COALESCE(${imagePath}, image)
+    WHERE id = ${id}
+    RETURNING *
+  `;
+
+  if (result.rows.length === 0) {
+    res.status(404).json({ error: 'Option non trouvée' });
+  } else {
+    console.log('Option mise à jour:', result.rows[0]);
+    res.status(200).json(result.rows[0]);
+  }
+}
+
+async function handleDelete(req, res) {
+  const { id } = req.query;
+  const { rowCount } = await sql`DELETE FROM options WHERE id = ${id}`;
+  
+  if (rowCount === 0) {
+    res.status(404).json({ error: 'Option non trouvée' });
+  } else {
+    res.status(200).json({ message: 'Option supprimée avec succès' });
+  }
+}
+
+async function handleImageUpload(file) {
+  if (!file) return null;
+
+  const fileName = `${Date.now()}-${file.originalFilename}`;
+  const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+  
+  await fs.mkdir(uploadDir, { recursive: true });
+
+  const newPath = path.join(uploadDir, fileName);
+  await fs.rename(file.filepath, newPath);
+
+  return `/uploads/${fileName}`;
 }
