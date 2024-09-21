@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-export default function OptionsComponent() {
+function OptionsComponent() {
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({ title: '', description: '' });
-  const [file, setFile] = useState(null);
+  const [formData, setFormData] = useState({ title: '', description: '', image: '' });
   const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
@@ -30,26 +29,16 @@ export default function OptionsComponent() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formDataToSend = new FormData();
-    formDataToSend.append('title', formData.title);
-    formDataToSend.append('description', formData.description);
-    if (file) {
-      formDataToSend.append('image', file);
-    }
-
     try {
       const url = editingId ? `/api/options?id=${editingId}` : '/api/options';
       const method = editingId ? 'PUT' : 'POST';
       
       const response = await fetch(url, {
         method: method,
-        body: formDataToSend
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
       });
 
       if (!response.ok) {
@@ -65,8 +54,7 @@ export default function OptionsComponent() {
         setOptions([...options, savedOption]);
       }
 
-      setFormData({ title: '', description: '' });
-      setFile(null);
+      setFormData({ title: '', description: '', image: '' });
       setEditingId(null);
     } catch (err) {
       setError(err.message);
@@ -74,9 +62,8 @@ export default function OptionsComponent() {
   };
 
   const handleEdit = (option) => {
-    setFormData({ title: option.title, description: option.description });
+    setFormData(option);
     setEditingId(option.id);
-    setFile(null);
   };
 
   const handleDelete = async (id) => {
@@ -112,7 +99,8 @@ export default function OptionsComponent() {
           />
         </div>
         <div className="mb-4">
-          <textarea
+          <input
+            type="text"
             name="description"
             value={formData.description}
             onChange={handleInputChange}
@@ -122,9 +110,11 @@ export default function OptionsComponent() {
         </div>
         <div className="mb-4">
           <input
-            type="file"
-            onChange={handleFileChange}
-            accept="image/*"
+            type="text"
+            name="image"
+            value={formData.image}
+            onChange={handleInputChange}
+            placeholder="URL de l'image"
             className="w-full p-2 border rounded"
           />
         </div>
@@ -137,7 +127,7 @@ export default function OptionsComponent() {
           </button>
           {editingId && (
             <button 
-              onClick={() => {setEditingId(null); setFormData({ title: '', description: '' }); setFile(null);}}
+              onClick={() => {setEditingId(null); setFormData({ title: '', description: '', image: '' });}}
               className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
             >
               Annuler
@@ -151,12 +141,7 @@ export default function OptionsComponent() {
           <div key={option.id} className="border p-4 rounded-lg">
             <h3 className="text-xl font-semibold mb-2">{option.title}</h3>
             <p className="mb-2">{option.description}</p>
-            <img 
-              src={`/api/options?id=${option.id}`} 
-              alt={option.title} 
-              className="w-full h-40 object-cover mb-2 rounded"
-              onError={(e) => e.target.style.display = 'none'}
-            />
+            {option.image && <img src={option.image} alt={option.title} className="w-full h-40 object-cover mb-2 rounded" />}
             <div className="flex justify-between">
               <button 
                 onClick={() => handleEdit(option)}
@@ -177,3 +162,5 @@ export default function OptionsComponent() {
     </div>
   );
 }
+
+export default OptionsComponent;
