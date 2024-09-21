@@ -182,7 +182,7 @@ function ImprovedOptionsInstallationsComponent() {
           </div>
         ))}
       </div>
-      <Link className='bg-zinc-700 text-white' to={"/"}>retour au formulaire</Link>
+      <Link className='bg-zinc-700 text-white mx-auto my-10' to={"/"}>retour au formulaire</Link>
     </div>
   );
 }
