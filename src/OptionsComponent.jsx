@@ -14,12 +14,22 @@ function OptionsComponent() {
 
   const fetchOptions = async () => {
     try {
+      console.log('Tentative de récupération des options...');
       const response = await fetch('/api/options');
-      if (!response.ok) throw new Error('Erreur lors de la récupération des options');
+      console.log('Statut de la réponse:', response.status);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Texte de la réponse d\'erreur:', errorText);
+        throw new Error(`Erreur HTTP: ${response.status}`);
+      }
+      
       const data = await response.json();
+      console.log('Données récupérées:', data);
       setOptions(data);
       setLoading(false);
     } catch (err) {
+      console.error('Erreur lors de la récupération des options:', err);
       setError(err.message);
       setLoading(false);
     }
