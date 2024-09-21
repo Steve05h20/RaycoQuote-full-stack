@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
-function OptionsComponent() {
-  const [options, setOptions] = useState([]);
+function OptionsInstallationsComponent() {
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({ title: '', description: '', image: '' });
   const [editingId, setEditingId] = useState(null);
+  const [selectedType, setSelectedType] = useState('options');
 
   useEffect(() => {
-    fetchOptions();
-  }, []);
+    fetchItems();
+  }, [selectedType]);
 
-  const fetchOptions = async () => {
+  const fetchItems = async () => {
     try {
-      const response = await fetch('/api/options');
-      if (!response.ok) throw new Error('Erreur lors de la récupération des options');
+      const response = await fetch(`/api/${selectedType}`);
+      if (!response.ok) throw new Error(`Erreur lors de la récupération des ${selectedType}`);
       const data = await response.json();
-      setOptions(data);
+      setItems(data);
       setLoading(false);
     } catch (err) {
       setError(err.message);
@@ -32,9 +33,9 @@ function OptionsComponent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = editingId ? `/api/options?id=${editingId}` : '/api/options';
+      const url = editingId ? `/api/${selectedType}?id=${editingId}` : `/api/${selectedType}`;
       const method = editingId ? 'PUT' : 'POST';
-      
+
       const response = await fetch(url, {
         method: method,
         headers: { 'Content-Type': 'application/json' },
@@ -43,15 +44,15 @@ function OptionsComponent() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Erreur lors de l\'enregistrement de l\'option');
+        throw new Error(errorData.error || `Erreur lors de l'enregistrement de l'${selectedType}`);
       }
-      
-      const savedOption = await response.json();
-      
+
+      const savedItem = await response.json();
+
       if (editingId) {
-        setOptions(options.map(opt => opt.id === editingId ? savedOption : opt));
+        setItems(items.map(item => item.id === editingId ? savedItem : item));
       } else {
-        setOptions([...options, savedOption]);
+        setItems([...items, savedItem]);
       }
 
       setFormData({ title: '', description: '', image: '' });
@@ -61,19 +62,19 @@ function OptionsComponent() {
     }
   };
 
-  const handleEdit = (option) => {
-    setFormData(option);
-    setEditingId(option.id);
+  const handleEdit = (item) => {
+    setFormData(item);
+    setEditingId(item.id);
   };
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`/api/options?id=${id}`, { method: 'DELETE' });
+      const response = await fetch(`/api/${selectedType}?id=${id}`, { method: 'DELETE' });
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Erreur lors de la suppression de l\'option');
+        throw new Error(errorData.error || `Erreur lors de la suppression de l'${selectedType}`);
       }
-      setOptions(options.filter(opt => opt.id !== id));
+      setItems(items.filter(item => item.id !== id));
     } catch (err) {
       setError(err.message);
     }
@@ -84,8 +85,17 @@ function OptionsComponent() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Gestion des Options</h1>
-      
+      <h1 className="text-2xl font-bold mb-4">Gestion des {selectedType === 'options' ? 'Options' : 'Installations'}</h1>
+
+      <select
+        value={selectedType}
+        onChange={(e) => setSelectedType(e.target.value)}
+        className="mb-4 p-2 border rounded"
+      >
+        <option value="options">Options</option>
+        <option value="installations">Installations</option>
+      </select>
+
       <form onSubmit={handleSubmit} className="mb-8 bg-gray-100 p-4 rounded-lg">
         <div className="mb-4">
           <input
@@ -119,15 +129,15 @@ function OptionsComponent() {
           />
         </div>
         <div className="flex justify-between">
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           >
             {editingId ? 'Mettre à jour' : 'Ajouter'}
           </button>
           {editingId && (
-            <button 
-              onClick={() => {setEditingId(null); setFormData({ title: '', description: '', image: '' });}}
+            <button
+              onClick={() => { setEditingId(null); setFormData({ title: '', description: '', image: '' }); }}
               className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
             >
               Annuler
@@ -137,20 +147,20 @@ function OptionsComponent() {
       </form>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {options.map(option => (
-          <div key={option.id} className="border p-4 rounded-lg">
-            <h3 className="text-xl font-semibold mb-2">{option.title}</h3>
-            <p className="mb-2">{option.description}</p>
-            {option.image && <img src={option.image} className="w-full h-40 object-cover mb-2 rounded" />}
+        {items.map(item => (
+          <div key={item.id} className="border p-4 rounded-lg">
+            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+            <p className="mb-2">{item.description}</p>
+            {item.image && <img src={item.image} alt={item.title} className="w-full h-40 object-cover mb-2 rounded" />}
             <div className="flex justify-between">
-              <button 
-                onClick={() => handleEdit(option)}
+              <button
+                onClick={() => handleEdit(item)}
                 className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
               >
                 Modifier
               </button>
-              <button 
-                onClick={() => handleDelete(option.id)}
+              <button
+                onClick={() => handleDelete(item.id)}
                 className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
               >
                 Supprimer
@@ -163,4 +173,4 @@ function OptionsComponent() {
   );
 }
 
-export default OptionsComponent;
+export default OptionsInstallationsComponent;
