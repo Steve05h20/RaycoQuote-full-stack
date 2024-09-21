@@ -151,7 +151,7 @@ function ImprovedOptionsInstallationsComponent() {
           <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden flex">
             <div className="w-1/3 bg-gray-200 flex items-center justify-center p-4">
               {item.image ? (
-                <img src={item.image} alt={item.title} className="w-full h-auto object-cover object-left" />
+                <img src={item.image} alt={item.title} className="w-32 h-32 object-cover object-left" />
               ) : (
                 <div className="w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center text-gray-500">
                   <span className="text-3xl">?</span>
