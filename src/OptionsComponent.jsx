@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function OptionsComponent() {
+export default function OptionsComponent() {
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -76,7 +76,7 @@ function OptionsComponent() {
   const handleEdit = (option) => {
     setFormData({ title: option.title, description: option.description });
     setEditingId(option.id);
-    setFile(null); // Reset file when editing
+    setFile(null);
   };
 
   const handleDelete = async (id) => {
@@ -112,8 +112,7 @@ function OptionsComponent() {
           />
         </div>
         <div className="mb-4">
-          <input
-            type="text"
+          <textarea
             name="description"
             value={formData.description}
             onChange={handleInputChange}
@@ -125,6 +124,7 @@ function OptionsComponent() {
           <input
             type="file"
             onChange={handleFileChange}
+            accept="image/*"
             className="w-full p-2 border rounded"
           />
         </div>
@@ -151,7 +151,12 @@ function OptionsComponent() {
           <div key={option.id} className="border p-4 rounded-lg">
             <h3 className="text-xl font-semibold mb-2">{option.title}</h3>
             <p className="mb-2">{option.description}</p>
-            {option.image && <img src={option.image} alt={option.title} className="w-full h-40 object-cover mb-2 rounded" />}
+            <img 
+              src={`/api/options?id=${option.id}`} 
+              alt={option.title} 
+              className="w-full h-40 object-cover mb-2 rounded"
+              onError={(e) => e.target.style.display = 'none'}
+            />
             <div className="flex justify-between">
               <button 
                 onClick={() => handleEdit(option)}
@@ -172,5 +177,3 @@ function OptionsComponent() {
     </div>
   );
 }
-
-export default OptionsComponent;
