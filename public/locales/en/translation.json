@@ -85,7 +85,6 @@
   },
   "termsAndConditions": {
     "title": "Terms and Conditions",
-    "raycoGroupTitle": "RAYCO GROUP OF COMPANIES",
     "raycoGroup": "The terms and conditions here under are set for the purpose of ruling all transactions between Rayco Electronic System Ltd (\"The Company\") and its customers (\"The Customer\" or \"The Buyer\"). The Rayco Group of Companies include the Company and its subsidiaries actual and future. On this date the subsidiaries are The B&A Engineering Company Ltd, Rayco Wylie Weighload Electronic Systems, Inc, Rayco Wylie Engineering Singapore PTE Ltd and Degla Engineering Company.",
     "salesTerms": "It is explicitly agreed that the following clauses are an integral part of any order, agreement and/or purchase made by a customer of the Company or any of its subsidiaries. The Buyer, through his purchase order, acknowledges having read these clauses and confirms his acceptance.",
     "acceptance": "The acceptance of a quotation issued by the Company or of any goods supplied, advice given or service rendered includes the acceptance of the following terms and conditions and no variation of or addition to the same shall be binding upon the Company unless expressly agreed by the Company upon writing by a duly authorized representative.",
@@ -118,6 +117,33 @@
     "agreedToQuote": "I agree with this quotation and its terms and conditions.",
     "signedBy": "Signed by",
     "signature": "Signature",
-    "date": "Date"
+    "date": "Date",
+    
+    "raycoGroupTitle": "1. RAYCO GROUP OF COMPANIES:",
+    "salesTermsTitle": "2. SALES TERMS:",
+    "acceptanceTitle": "3. ACCEPTANCE:",
+    "amendmentTitle": "4. AMENDMENT:",
+    "quotationsTitle": "5. QUOTATIONS:",
+    "pricesTitle": "6. PRICES:",
+    "electionOfDomicileTitle": "7. ELECTION OF DOMICILE:",
+    "judicialProceedingsTitle": "8. JUDICIAL PROCEEDINGS:",
+    "paymentTitle": "9. PAYMENT:",
+    "returnAndCancellationTitle": "10. RETURN AND CANCELLATION OF AN ORDER:",
+    "deliveryTitle": "11. DELIVERY:",
+    "deliveryDelaysTitle": "12. DELIVERY DELAYS DUE TO THE BUYER OR FINAL CUSTOMER:",
+    "shippingTitle": "13. SHIPPING, DAMAGE OR LOSS IN TRANSIT:",
+    "defectsTitle": "14. DEFECTS:",
+    "claimsTitle": "15. CLAIMS:",
+    "companyLiabilityTitle": "16. COMPANY'S LIABILITY:",
+    "ownershipOfGoodsTitle": "17. OWNERSHIP OF GOODS SOLD:",
+    "mortgageTitle": "18. MORTGAGE ON MOVEABLE & IMMOVEABLE GOODS:",
+    "buyerDefaultTitle": "19. BUYER'S DEFAULT:",
+    "newPartsWarrantyTitle": "20. NEW PARTS LIMITED WARRANTY:",
+    "refurbishedPartsWarrantyTitle": "21. REFURBISHED PART LIMITED WARRANTY:",
+    "feesNotCoveredTitle": "22. FEES NOT COVERED BY THE WARRANTY:",
+    "warrantyImplementationTitle": "23. WARRANTY'S IMPLEMENTATION:",
+    "invalidityTitle": "24. INVALIDITY:",
+    "installationRepairsTitle": "25. INSTALLATION / REPAIRS:",
+    "nationalStandardsTitle": "26. NATIONAL STANDARDS:"
   }
 }

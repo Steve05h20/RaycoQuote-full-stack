@@ -85,7 +85,6 @@
   },
   "termsAndConditions": {
     "title": "Términos y Condiciones",
-    "raycoGroupTitle": "GRUPO DE EMPRESAS RAYCO",
     "raycoGroup": "Los términos y condiciones aquí establecidos tienen el propósito de regir todas las transacciones entre Rayco Electronic System Ltd (\"La Compañía\") y sus clientes (\"El Cliente\" o \"El Comprador\"). El Grupo de Empresas Rayco incluye a la Compañía y sus subsidiarias actuales y futuras. En esta fecha, las subsidiarias son The B&A Engineering Company Ltd, Rayco Wylie Weighload Electronic Systems, Inc, Rayco Wylie Engineering Singapore PTE Ltd y Degla Engineering Company.",
     "salesTerms": "Se acuerda explícitamente que las siguientes cláusulas son parte integral de cualquier pedido, acuerdo y/o compra realizada por un cliente de la Compañía o cualquiera de sus subsidiarias. El Comprador, a través de su orden de compra, reconoce haber leído estas cláusulas y confirma su aceptación.",
     "acceptance": "La aceptación de una cotización emitida por la Compañía o de cualquier mercancía suministrada, asesoramiento dado o servicio prestado incluye la aceptación de los siguientes términos y condiciones, y ninguna variación o adición a los mismos será vinculante para la Compañía a menos que sea expresamente acordada por la Compañía por escrito por un representante debidamente autorizado.",
@@ -118,6 +117,33 @@
     "agreedToQuote": "Estoy de acuerdo con esta cotización y sus términos y condiciones.",
     "signedBy": "Firmado por",
     "signature": "Firma",
-    "date": "Fecha"
+    "date": "Fecha",
+
+    "raycoGroupTitle": "1. GRUPO DE EMPRESAS RAYCO:",
+    "salesTermsTitle": "2. TÉRMINOS DE VENTA:",
+    "acceptanceTitle": "3. ACEPTACIÓN:",
+    "amendmentTitle": "4. ENMIENDA:",
+    "quotationsTitle": "5. COTIZACIONES:",
+    "pricesTitle": "6. PRECIOS:",
+    "electionOfDomicileTitle": "7. ELECCIÓN DE DOMICILIO:",
+    "judicialProceedingsTitle": "8. PROCEDIMIENTOS JUDICIALES:",
+    "paymentTitle": "9. PAGO:",
+    "returnAndCancellationTitle": "10. DEVOLUCIÓN Y CANCELACIÓN DE UN PEDIDO:",
+    "deliveryTitle": "11. ENTREGA:",
+    "deliveryDelaysTitle": "12. RETRASOS EN LA ENTREGA DEBIDOS AL COMPRADOR O AL CLIENTE FINAL:",
+    "shippingTitle": "13. ENVÍO, DAÑOS O PÉRDIDAS EN TRÁNSITO:",
+    "defectsTitle": "14. DEFECTOS:",
+    "claimsTitle": "15. RECLAMACIONES:",
+    "companyLiabilityTitle": "16. RESPONSABILIDAD DE LA EMPRESA:",
+    "ownershipOfGoodsTitle": "17. PROPIEDAD DE LOS BIENES VENDIDOS:",
+    "mortgageTitle": "18. HIPOTECA SOBRE BIENES MUEBLES E INMUEBLES:",
+    "buyerDefaultTitle": "19. INCUMPLIMIENTO DEL COMPRADOR:",
+    "newPartsWarrantyTitle": "20. GARANTÍA LIMITADA DE PIEZAS NUEVAS:",
+    "refurbishedPartsWarrantyTitle": "21. GARANTÍA LIMITADA DE PIEZAS REACONDICIONADAS:",
+    "feesNotCoveredTitle": "22. TARIFAS NO CUBIERTAS POR LA GARANTÍA:",
+    "warrantyImplementationTitle": "23. IMPLEMENTACIÓN DE LA GARANTÍA:",
+    "invalidityTitle": "24. INVALIDEZ:",
+    "installationRepairsTitle": "25. INSTALACIÓN / REPARACIONES:",
+    "nationalStandardsTitle": "26. NORMAS NACIONALES:"
   }
 }

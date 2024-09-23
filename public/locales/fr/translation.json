@@ -85,7 +85,6 @@
   },
   "termsAndConditions": {
     "title": "Termes et Conditions",
-    "raycoGroupTitle": "GROUPE DE SOCIÉTÉS RAYCO",
     "raycoGroup": "Les termes et conditions ci-dessous sont établis dans le but de régir toutes les transactions entre Rayco Electronic System Ltd (\"La Société\") et ses clients (\"Le Client\" ou \"L'Acheteur\"). Le Groupe de Sociétés Rayco comprend la Société et ses filiales actuelles et futures. À ce jour, les filiales sont The B&A Engineering Company Ltd, Rayco Wylie Weighload Electronic Systems, Inc, Rayco Wylie Engineering Singapore PTE Ltd et Degla Engineering Company.",
     "salesTerms": "Il est explicitement convenu que les clauses suivantes font partie intégrante de toute commande, accord et/ou achat effectué par un client de la Société ou de l'une de ses filiales. L'Acheteur, par son bon de commande, reconnaît avoir lu ces clauses et confirme son acceptation.",
     "acceptance": "L'acceptation d'un devis émis par la Société ou de tout bien fourni, conseil donné ou service rendu inclut l'acceptation des termes et conditions suivants et aucune variation ou ajout à ceux-ci ne sera opposable à la Société sauf accord exprès écrit de la Société par un représentant dûment autorisé.",
@@ -118,6 +117,33 @@
     "agreedToQuote": "J'accepte ce devis et ses termes et conditions.",
     "signedBy": "Signé par",
     "signature": "Signature",
-    "date": "Date"
+    "date": "Date",
+
+    "raycoGroupTitle": "1. GROUPE DE SOCIÉTÉS RAYCO :",
+    "salesTermsTitle": "2. CONDITIONS DE VENTE :",
+    "acceptanceTitle": "3. ACCEPTATION :",
+    "amendmentTitle": "4. MODIFICATION :",
+    "quotationsTitle": "5. DEVIS :",
+    "pricesTitle": "6. PRIX :",
+    "electionOfDomicileTitle": "7. ÉLECTION DE DOMICILE :",
+    "judicialProceedingsTitle": "8. PROCÉDURES JUDICIAIRES :",
+    "paymentTitle": "9. PAIEMENT :",
+    "returnAndCancellationTitle": "10. RETOUR ET ANNULATION D'UNE COMMANDE :",
+    "deliveryTitle": "11. LIVRAISON :",
+    "deliveryDelaysTitle": "12. RETARDS DE LIVRAISON DUS À L'ACHETEUR OU AU CLIENT FINAL :",
+    "shippingTitle": "13. EXPÉDITION, DOMMAGES OU PERTES EN TRANSIT :",
+    "defectsTitle": "14. DÉFAUTS :",
+    "claimsTitle": "15. RÉCLAMATIONS :",
+    "companyLiabilityTitle": "16. RESPONSABILITÉ DE LA SOCIÉTÉ :",
+    "ownershipOfGoodsTitle": "17. PROPRIÉTÉ DES BIENS VENDUS :",
+    "mortgageTitle": "18. HYPOTHÈQUE SUR BIENS MEUBLES ET IMMEUBLES :",
+    "buyerDefaultTitle": "19. DÉFAUT DE L'ACHETEUR :",
+    "newPartsWarrantyTitle": "20. GARANTIE LIMITÉE SUR LES NOUVELLES PIÈCES :",
+    "refurbishedPartsWarrantyTitle": "21. GARANTIE LIMITÉE SUR LES PIÈCES REMISES À NEUF :",
+    "feesNotCoveredTitle": "22. FRAIS NON COUVERTS PAR LA GARANTIE :",
+    "warrantyImplementationTitle": "23. MISE EN ŒUVRE DE LA GARANTIE :",
+    "invalidityTitle": "24. INVALIDITÉ :",
+    "installationRepairsTitle": "25. INSTALLATION / RÉPARATIONS :",
+    "nationalStandardsTitle": "26. NORMES NATIONALES :"
   }
 }

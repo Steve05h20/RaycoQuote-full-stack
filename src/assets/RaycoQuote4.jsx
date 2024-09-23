@@ -17,14 +17,14 @@ const RaycoQuote4 = ({ isPreparingExport }) => {
     }, []);
 
     const termsAndConditions = [
-        { title: "19.BUYER'S DEFAULT:", content: t('termsAndConditions.buyerDefault') },
-        { title: "20.NEW PARTS LIMITED WARRANTY:", content: t('termsAndConditions.newPartsWarranty') },
-        { title: "21.REFURBISHED PART LIMITED WARRANTY:", content: t('termsAndConditions.refurbishedPartsWarranty') },
-        { title: "22.FEES NOT COVERED BY THE WARRANTY:", content: t('termsAndConditions.feesNotCovered') },
-        { title: "23.WARRANTY'S IMPLEMENTATION:", content: t('termsAndConditions.warrantyImplementation') },
-        { title: "24.INVALIDITY:", content: t('termsAndConditions.invalidity') },
-        { title: "25.INSTALLATION / REPAIRS:", content: t('termsAndConditions.installationRepairs') },
-        { title: "26.NATIONAL STANDARDS:", content: t('termsAndConditions.nationalStandards') },
+        { title: t('termsAndConditions.buyerDefaultTitle'), content: t('termsAndConditions.buyerDefault') },
+        { title: t('termsAndConditions.newPartsWarrantyTitle'), content: t('termsAndConditions.newPartsWarranty') },
+        { title: t('termsAndConditions.refurbishedPartsWarrantyTitle'), content: t('termsAndConditions.refurbishedPartsWarranty') },
+        { title: t('termsAndConditions.feesNotCoveredTitle'), content: t('termsAndConditions.feesNotCovered') },
+        { title: t('termsAndConditions.warrantyImplementationTitle'), content: t('termsAndConditions.warrantyImplementation') },
+        { title: t('termsAndConditions.invalidityTitle'), content: t('termsAndConditions.invalidity') },
+        { title: t('termsAndConditions.installationRepairsTitle'), content: t('termsAndConditions.installationRepairs') },
+        { title: t('termsAndConditions.nationalStandardsTitle'), content: t('termsAndConditions.nationalStandards') },
     ];
 
     const InputOrText = ({ value, onChange, type, id, className }) => {
