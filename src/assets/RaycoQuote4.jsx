@@ -53,7 +53,7 @@ const RaycoQuote4 = ({ isPreparingExport }) => {
     };
 
     return (
-        <div className="bg-white w-[215.9mm] h-[279.4mm] mx-auto shadow-lg relative p-4 text-[7pt] leading-tight">
+        <div className="bg-white w-[215.9mm] min-h-[279.4mm] mx-auto shadow-lg relative p-4 text-[7pt] leading-tight">
             <div className="absolute top-2 right-2 text-[7pt]">{t('form.page', { page: 4 })}</div>
 
             <div className="space-y-2">
