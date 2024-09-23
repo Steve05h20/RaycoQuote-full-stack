@@ -1,5 +1,4 @@
 import tpms from '../option/TPMS.png';
-import maxiLoad from '../option/66GBALANCEK2 11UZP0018 33V9009.png';
 import installation from '../option/55INSTALLATION.png';
 
 const staticOptionsData = [
@@ -8,12 +7,6 @@ const staticOptionsData = [
         title: 'options.tpms.title',
         description: 'options.tpms.description',
         image: tpms
-    },
-    {
-        id: 2,
-        title: 'options.maxiload.title',
-        description: 'options.maxiload.description',
-        image: maxiLoad
     },
 ];
 

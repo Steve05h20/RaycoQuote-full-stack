@@ -1,10 +1,10 @@
 {
   "header": {
     "quoteForm": "FORMULAIRE DE DEVIS",
-    "companyName": "RAYCO ELECTRONIC SYSTEM LTÉE",
+    "companyName": "RAYCO ELECTRONIC SYSTEM LTD",
     "address": {
-      "full": "2440, Avenue Dalton\nQuébec (QC) G1P 3X1\nCANADA",
-      "street": "2440, Avenue Dalton",
+      "full": "2440, avenue Dalton\nQuébec, QC G1P 3X1\nCANADA",
+      "street": "2440, avenue Dalton",
       "city": "Québec",
       "province": "(QC) G1P 3X1",
       "country": "CANADA"
@@ -12,41 +12,41 @@
   },
   "form": {
     "page": "Page {{page}} / 4",
-    "quotation": "DEVIS #:",
-    "dateIssued": "DATE D'ÉMISSION:",
-    "paymentTerms": "CONDITIONS DE PAIEMENT:",
+    "quotation": "DEVIS N° :",
+    "dateIssued": "DATE D'ÉMISSION :",
+    "paymentTerms": "CONDITIONS DE PAIEMENT :",
     "paymentBeforeShipment": "Paiement avant expédition",
-    "shippingTerms": "CONDITIONS D'EXPÉDITION:",
+    "shippingTerms": "CONDITIONS D'EXPÉDITION :",
     "exWorks": "EXW (Départ usine)",
-    "expiration": "EXPIRATION:",
+    "expiration": "EXPIRATION :",
     "expirationDays": "10 jours après la date d'émission",
     "customer": {
       "title": "CLIENT",
-      "fullName": "NOM COMPLET:",
-      "address": "ADRESSE:",
-      "contactPerson": "PERSONNE À CONTACTER:",
-      "telephone": "TÉLÉPHONE:"
+      "fullName": "NOM COMPLET :",
+      "address": "ADRESSE :",
+      "contactPerson": "PERSONNE À CONTACTER :",
+      "telephone": "TÉLÉPHONE :"
     },
     "rayco": {
       "title": "RAYCO",
-      "officeAddress": "ADRESSE DU BUREAU:",
-      "contactPerson": "PERSONNE À CONTACTER:",
+      "officeAddress": "ADRESSE DU BUREAU :",
+      "contactPerson": "PERSONNE À CONTACTER :",
       "phone": "Téléphone :",
-      "email": "E-MAIL:"
+      "email": "COURRIEL :"
     },
     "shippingInfo": {
       "title": "INFORMATIONS D'EXPÉDITION",
-      "shippingAddress": "ADRESSE DE LIVRAISON:",
-      "contact": "CONTACT:"
+      "shippingAddress": "ADRESSE D'EXPÉDITION :",
+      "contact": "CONTACT :"
     },
-    "quoteDescription": "DESCRIPTION DU DEVIS:",
+    "quoteDescription": "DESCRIPTION DU DEVIS :",
     "currency": "DEVISE",
     "totalPrice": "PRIX TOTAL",
     "priceRange": "FOURCHETTE DE PRIX"
   },
   "options": {
     "title": "OPTIONS / EXTRAS OPTIONNELS",
-    "selectOption": "Sélectionner une option",
+    "selectOption": "Sélectionnez une option",
     "otherOptions": "Autres options / commentaires",
     "tpms": {
       "title": "T1 TPMS",
@@ -59,7 +59,7 @@
   },
   "installation": {
     "title": "INSTALLATION",
-    "selectInstallation": "Sélectionner une option d'installation",
+    "selectInstallation": "Sélectionnez une option d'installation",
     "additionalDetails": "Détails supplémentaires sur l'installation",
     "option": {
       "title": "55INSTALLATION",
@@ -68,40 +68,56 @@
   },
   "additionalOffer": {
     "title": "OFFRE SUPPLÉMENTAIRE",
-    "selectOffer": "Sélectionner une offre supplémentaire",
+    "selectOffer": "Sélectionnez une offre supplémentaire",
     "additionalDetails": "Détails supplémentaires sur l'offre"
   },
   "shippingTerms": {
     "title": "CONDITIONS D'EXPÉDITION",
-    "description": "EXW (Départ usine) Les arrangements et les coûts de transport sont à la charge du client. Si le client n'est pas en mesure d'organiser le transport, RaycoWylie ou RaycoSyscomak (supprimer selon le cas pour le bon formulaire) prendra les dispositions nécessaires et facturera en conséquence. La responsabilité restera celle du client comme si c'était EXW."
+    "description": "EXW (Départ usine) Les arrangements et les coûts de transport sont à la charge du client. Si le client est dans l'incapacité d'organiser le transport, RaycoWylie ou RaycoSyscomak (supprimer selon le cas) fera les arrangements nécessaires et facturera en conséquence. La responsabilité restera celle du client comme si c'était EXW."
   },
   "notes": {
     "title": "NOTES",
     "placeholder": "Notes supplémentaires"
   },
   "buttons": {
-    "download": "Télécharger le PDF combiné (Format Lettre)"
+    "download": "Télécharger le PDF combiné (Format Lettre)",
+    "clearSignature": "effacer la signature"
   },
-
   "termsAndConditions": {
     "title": "Termes et Conditions",
-    "raycoGroup": "Les termes et conditions ci-dessous sont établis dans le but de régir toutes les transactions entre Rayco Electronic System Ltd (\"La Société\") et ses clients (\"Le Client\" ou \"L'Acheteur\"). Le Groupe Rayco de Sociétés comprend la Société et ses filiales actuelles et futures. À cette date, les filiales sont The B&A Engineering Company Ltd, Rayco Wylie Weighload Electronic Systems, Inc, Rayco Wylie Engineering Singapore PTE Ltd et Degia Engineering Company.",
+    "raycoGroupTitle": "GROUPE DE SOCIÉTÉS RAYCO",
+    "raycoGroup": "Les termes et conditions ci-dessous sont établis dans le but de régir toutes les transactions entre Rayco Electronic System Ltd (\"La Société\") et ses clients (\"Le Client\" ou \"L'Acheteur\"). Le Groupe de Sociétés Rayco comprend la Société et ses filiales actuelles et futures. À ce jour, les filiales sont The B&A Engineering Company Ltd, Rayco Wylie Weighload Electronic Systems, Inc, Rayco Wylie Engineering Singapore PTE Ltd et Degla Engineering Company.",
     "salesTerms": "Il est explicitement convenu que les clauses suivantes font partie intégrante de toute commande, accord et/ou achat effectué par un client de la Société ou de l'une de ses filiales. L'Acheteur, par son bon de commande, reconnaît avoir lu ces clauses et confirme son acceptation.",
-    "acceptance": "L'acceptation d'un devis émis par la Société ou de tous biens fournis, conseils donnés ou services rendus inclut l'acceptation des termes et conditions suivants et aucune variation ou ajout à ceux-ci ne sera contraignant pour la Société, sauf accord exprès de la Société par écrit par un représentant dûment autorisé.",
-    "amendment": "Aucun amendement à un document de transaction ne peut être effectué sans le consentement écrit d'un dirigeant dûment autorisé de la Société et aucun accord verbal ne sera valide et contraignant pour la Société.",
-    "quotations": "Sauf retrait préalable, un devis émis par un représentant de la Société est ouvert à l'acceptation par écrit dans la période indiquée sur le devis ou lorsqu'aucune période n'est indiquée dans les dix (10) jours suivant sa date. La Société se réserve le droit de corriger toute erreur ou omission dans son devis.",
-    "prices": "Les prix indiqués sont basés sur le coût des marchandises, le transport et autres coûts à la date du devis (ou à la date à laquelle ces prix sont autrement convenus). Dans le cas où ces coûts augmenteraient de manière significative, la Société aura le droit d'augmenter les prix en conséquence et donnera un avis écrit de toute augmentation avant la livraison.",
+    "acceptance": "L'acceptation d'un devis émis par la Société ou de tout bien fourni, conseil donné ou service rendu inclut l'acceptation des termes et conditions suivants et aucune variation ou ajout à ceux-ci ne sera opposable à la Société sauf accord exprès écrit de la Société par un représentant dûment autorisé.",
+    "amendment": "Aucun amendement à tout document de transaction ne peut être apporté sans le consentement écrit d'un responsable dûment autorisé de la Société et aucun accord verbal ne sera valide et opposable à la Société.",
+    "quotations": "Sauf retrait préalable, un devis émis par un représentant de la Société est ouvert à l'acceptation par écrit dans le délai indiqué sur le devis ou, lorsqu'aucun délai n'est indiqué, dans les dix (10) jours suivant sa date. La Société se réserve le droit de corriger toute erreur ou omission dans son devis.",
+    "prices": "Les prix indiqués sont basés sur le coût des marchandises, du fret et d'autres coûts à la date du devis (ou à la date à laquelle ces prix sont autrement convenus). En cas d'augmentation significative de ces coûts, la Société aura le droit d'augmenter les prix en conséquence et donnera un avis écrit de toute augmentation avant la livraison.",
     "electionOfDomicile": "L'Acheteur élit domicile au lieu d'affaires de la Société, à l'adresse du bureau avec lequel il a contracté.",
-    "judicialProceedings": "Toutes les procédures judiciaires seront instituées dans le district judiciaire de l'endroit où se trouve le bureau de la Société avec lequel l'Acheteur a contracté. La seule loi applicable à tout litige relatif à toute transaction sera la loi en vigueur à l'endroit où se trouve le bureau de la Société avec lequel l'Acheteur a contracté.",
-    "payment": "(A) Les sommes dues de toute transaction sont payables avant l'expédition par transfert bancaire. Si l'Acheteur décide de payer par carte de crédit, des frais administratifs de 5% seront ajoutés au montant total de la facture. Un accord de paiement écrit peut être signé entre l'Acheteur et la Société.\n(B) Le non-respect des termes et conditions entraînera la résiliation immédiate de tout accord.\n(C) Nonobstant le paragraphe (A), la Société peut exiger un paiement anticipé de l'Acheteur au moment de la commande.",
-    "returnAndCancellation": "a) Aucune commande objet de ce contrat ou faisant suite à ce contrat ne peut être annulée et les marchandises livrées ne peuvent être refusées par l'Acheteur.\nb) Aucun retour de marchandises ne sera accepté par la Société, sauf pour un travail sous garantie de réparation/échange ou lors d'une réclamation pour remplacement sous garantie conformément à la Clause 20 ci-dessous. Toutes les marchandises retournées sont soumises à des frais de restockage dont la valeur sera confirmée par écrit avant que les marchandises ne soient acceptées comme retours. Toute valeur ajoutée sera basée sur les marchandises étant retournées dans les mêmes conditions que lorsqu'elles ont été expédiées.",
-    "delivery": "La livraison sera effectuée à la date ou autour de la date convenue entre la Société et l'Acheteur. Cependant, la Société ne sera pas responsable des retards dus à des circonstances raisonnablement indépendantes de sa volonté, ce qui signifie, mais sans s'y limiter, la guerre, les émeutes et autres troubles civils, les catastrophes naturelles, les inondations, les incendies, les accidents, les embargos et autres interventions économiques, gouvernementales ou interventions et décisions, les retards de transport ainsi que l'impossibilité, la difficulté extraordinaire ou la cherté anormale d'obtenir des matériaux, des équipements ou de la main-d'œuvre.",
-    "deliveryDelays": "OR FINAL CUSTOMER:\na)L'intérêt de 1% par mois sur les marchandises non expédiées sera facturé à l'Acheteur pour tout retard de livraison causé par lui-même ou par le client final à partir de la date d'expiration de trente (30) jours à compter de la date de livraison prévue.\nb)Nonobstant le paragraphe (A), la Société se réserve le droit de facturer à l'Acheteur le montant dû si la date de livraison est reportée par l'Acheteur.",
-    "shipping": "L'expédition est la responsabilité du Client. Les conditions d'expédition sont EXW (départ usine). Le Client devra organiser l'enlèvement des marchandises à l'emplacement de la Société. Les coûts d'expédition de toutes les pièces, y compris l'emballage et la manutention, ne sont pas inclus dans le devis. Tous les dommages ou pertes en transit sont la responsabilité du Client avec sa compagnie d'expédition.",
-    "defects": "Tout défaut de fabrication ou défaut dû à une mauvaise installation par la Société doit être signalé à la Société, à son siège social, dans les sept (7) jours suivant la livraison. L'énoncé doit être inspecté par la Société pour déterminer si la plainte de l'acheteur est bien fondée.",
+    "judicialProceedings": "Toutes les procédures judiciaires seront engagées dans le district judiciaire du lieu où se trouve le bureau de la Société avec lequel l'Acheteur a contracté. La seule loi applicable à un litige relatif à toute transaction sera la loi en vigueur à l'endroit où se trouve le bureau de la Société avec lequel l'Acheteur a contracté.",
+    "payment": "(A) Les sommes dues, de toute transaction, sont payables avant l'expédition par virement bancaire. Si l'Acheteur décide de payer par carte de crédit, des frais administratifs de 5% sont ajoutés au montant total de la facture. Un accord sur les conditions de paiement peut être signé entre l'Acheteur et la Société.\n(B) Le non-respect des termes et conditions entraînera la résiliation immédiate de tout accord.\n(C) Nonobstant le paragraphe (A), la Société peut exiger un acompte de l'Acheteur au moment de la commande.",
+    "returnAndCancellation": "a) Aucune commande faisant l'objet de ce contrat ou suivant ce contrat ne peut être annulée et les marchandises livrées ne peuvent être refusées par l'Acheteur.\nb) Aucun retour de marchandises ne sera accepté par la Société sauf pour des travaux dans le cadre de notre service de réparation/échange ou lors d'une demande de remplacement sous garantie conformément à la clause 20 ci-dessous. Toute marchandise retournée est soumise à des frais de restockage dont la valeur sera confirmée par écrit avant que les marchandises ne soient acceptées comme retours. Toute valeur ajoutée sera basée sur le fait que les marchandises sont retournées dans le même état que celui dans lequel elles ont été expédiées.",
+    "delivery": "La livraison sera effectuée à la date ou aux alentours de la date convenue entre la Société et l'Acheteur. Cependant, la Société ne sera pas responsable de tout retard dû à des circonstances raisonnablement indépendantes de sa volonté, ce qui signifie, mais sans s'y limiter : guerre, émeutes et autres troubles civils, incendie, catastrophes naturelles, inondations, grèves, accidents, embargos et autres sanctions économiques, interventions et décisions gouvernementales, retards de transport ainsi qu'impossibilité, difficulté extraordinaire ou coûts anormalement élevés pour obtenir des matériaux, équipements ou main-d'œuvre.",
+    "deliveryDelays": "RETARDS DE LIVRAISON DUS À L'ACHETEUR OU AU CLIENT FINAL :\na) Des intérêts de 1% par mois sur les marchandises non expédiées seront facturés à l'Acheteur pour tout retard de livraison causé par lui-même ou par le client final à compter de l'expiration de trente (30) jours à partir de la date de livraison prévue.\nb) Nonobstant le paragraphe (A), la Société se réserve le droit de facturer à l'Acheteur le montant dû si la date de livraison est reportée par l'Acheteur.",
+    "shipping": "L'expédition est sous la responsabilité du Client. Les conditions d'expédition sont EXW (Départ usine). Le Client doit s'arranger pour récupérer les marchandises au lieu de la Société. Les frais d'expédition des pièces, y compris l'emballage et la manutention, ne sont pas inclus dans la commande. Toutes les réclamations pour dommages ou pertes en transit sont sous la responsabilité du Client avec sa compagnie de transport.",
+    "defects": "Tout défaut de fabrication ou défaut dû à l'installation par la Société doit être signalé à la Société, à son siège social, dans les sept (7) jours suivant la livraison. L'équipement sera inspecté par la Société pour déterminer si la plainte de l'acheteur est fondée.",
     "claims": "Aucune réclamation de l'Acheteur pour tout travail effectué par lui sur les marchandises livrées ne sera acceptée par la Société si ledit travail n'a pas été préalablement autorisé par la Société.",
     "companyLiability": "La responsabilité de la Société ne dépassera en aucun cas le prix stipulé sur la facture et ne s'étendra pas à d'autres dommages, coûts ou dépenses encourus par l'Acheteur.",
-    "ownershipOfGoods": "La propriété des marchandises vendues ne sera transférée à l'Acheteur que lorsque le prix desdites marchandises ainsi que l'intérêt et autres dépenses, le cas échéant, auront été entièrement payés. L'Acheteur doit prendre soin raisonnable des marchandises livrées et notifier la Société sans délai de toute saisie de marchandises livrées et de toutes mesures légales ayant un effet similaire. De même, l'Acheteur ne doit pas disposer ou autrement transférer les marchandises livrées à un tiers sans en informer la Société. Si l'Acheteur ne se conforme pas à cette clause, la Société peut prendre toutes les mesures prévues ci-dessous, dans la clause 18 (Hypothèque) de ce contrat.",
-    "mortgage": "(A) Nonobstant les paragraphes 9 (Paiement), la Société peut, afin de garantir le paiement du prix convenu en vertu de ce contrat, et sans défaut de l'Acheteur, enregistrer une hypothèque mobilière ou obtenir une garantie similaire sur les marchandises vendues."
+    "ownershipOfGoods": "La propriété des marchandises vendues ne sera transférée à l'Acheteur que lorsque le prix desdites marchandises ainsi que les intérêts et autres frais, le cas échéant, auront été entièrement payés. L'Acheteur doit prendre soin raisonnablement des marchandises livrées et notifier sans délai à la Société toute saisie des marchandises livrées et toute mesure légale ayant un effet similaire. De même, l'Acheteur ne doit pas disposer ou transférer autrement les marchandises livrées à un tiers sans en informer la Société. Si l'Acheteur ne respecte pas cette clause, la Société peut prendre toutes les mesures prévues ci-dessous, à la clause 18 (Hypothèque) de ce contrat.",
+    "mortgage": "HYPOTHÈQUE SUR BIENS MEUBLES ET IMMEUBLES : (A) Nonobstant les paragraphes 9 (Paiement), la Société peut, afin de garantir le paiement du prix convenu dans ce contrat, et sans défaut de l'Acheteur, enregistrer une hypothèque mobilière ou obtenir une garantie similaire sur les marchandises vendues. (B) La Société peut, en outre, enregistrer toute hypothèque mobilière et/ou immobilière sur les actifs de l'Acheteur sans défaut de la part de l'Acheteur.",
+    "buyerDefault": "DÉFAUT DE L'ACHETEUR : (A) Si l'Acheteur refuse de recevoir la livraison des marchandises vendues ou est en défaut de paiement, en tout ou en partie, de toute somme due en vertu de ce contrat ou de tout autre contrat entre l'Acheteur et la Société, le montant total deviendra immédiatement exigible et la Société peut : - refuser de faire des livraisons supplémentaires - résilier ce contrat et reprendre possession des marchandises livrées sans rembourser les paiements déjà effectués par l'Acheteur et prendre toute autre mesure prévue par la loi sans préjudice de ses actions en dommages et intérêts. (B) Tout solde dû portera intérêt au taux de 2% par mois et 24% par an à compter de la date d'émission de la facture. (C) La Société conservera la propriété des marchandises vendues jusqu'au paiement intégral du prix de vente et des intérêts, le cas échéant. En cas de défaut de l'Acheteur, la Société peut prendre une ou toutes les mesures suivantes : 1) Exiger le paiement immédiat du solde dû ; 2) Reprendre possession des marchandises vendues et conserver, à titre de dommages et intérêts, intérêt liquide, les sommes reçues comme acomptes ; 3) Exercer la garantie prévue au paragraphe 18 (Hypothèque) ; 4) Prendre toute autre action requise par la loi. (D) Le fait que la Société n'exerce pas les droits prévus dans cette clause ne sera pas interprété comme une renonciation à l'exercice de ses droits et recours pour tout défaut ultérieur. (E) De même, le retard de la Société dans l'exercice des droits prévus dans cette clause ne sera pas interprété comme une renonciation à l'exercice de ses droits et recours pour le défaut.",
+    "newPartsWarranty": "GARANTIE LIMITÉE SUR LES NOUVELLES PIÈCES : Les pièces standard nouvellement achetées fabriquées par la Société seront couvertes par une garantie limitée pour une période de douze (12) mois à compter de la date de livraison, sous réserve des retards de livraison dus à l'Acheteur ou à son client. Si un défaut se développe en raison d'une conception, d'une fabrication ou de matériaux défectueux, cette garantie limitée couvrira les pièces, sauf si l'Acheteur n'a pas fait un usage normal des marchandises livrées. Cette garantie limitée est invalide lorsque, après examen par la Société ou par un tiers autorisé par la Société, il est démontré que le défaut a été causé par une installation incorrecte par l'Acheteur ou par une installation sur une machine ne correspondant pas au modèle du produit, ou toute forme de mauvaise utilisation ou d'abus volontaire ou involontaire. Cette garantie limitée s'applique uniquement sous réserve des dispositions suivantes : (A) La garantie s'applique uniquement aux pièces fabriquées, vendues ou approuvées par la Société ; (B) Aucune pièce autre que celles fabriquées, vendues ou approuvées par la Société ne peut être installée sur les marchandises vendues ; (C) Cette garantie limitée ne couvre pas les réparations, installations, modifications ou remplacements effectués par l'Acheteur liés à une pièce ou des pièces couvertes par ladite garantie limitée en l'absence d'autorisation préalable de la Société ; (D) Toute ouverture d'une unité de contrôle ou d'un dispositif électronique autre que ce qui est requis pour l'installation annulera la garantie limitée. - La responsabilité de la Société est limitée au remplacement de l'article(s) défectueux uniquement. - La Société se réserve le droit de rejeter toute réclamation injustifiée. Cette politique est également applicable aux systèmes complets vendus par la Société. (E) La garantie n'est pas applicable si l'achat n'est pas payé ou si le client ne respecte pas ses conditions de paiement approuvées.",
+    "refurbishedPartsWarranty": "GARANTIE LIMITÉE SUR LES PIÈCES REMISES À NEUF : Les pièces standard remises à neuf seront garanties pour une période de six (6) mois à compter de la date de livraison. Cette garantie s'appliquera uniquement aux pièces standard achetées auprès de la Société. - La responsabilité de la Société est limitée au remplacement de l'article(s) défectueux uniquement. - La Société se réserve le droit de rejeter toute réclamation injustifiée.",
+    "feesNotCovered": "FRAIS NON COUVERTS PAR LA GARANTIE : - Coûts de main-d'œuvre sur site ; - Frais de transport et de manutention ; - toutes les autres pièces connexes ; - Frais de déplacement, hôtel, stationnement, frais de téléphone, remorquage, etc. ; - Dommages à d'autres pièces ou perte de revenus causés par la rupture de pièce(s) défectueuse(s) du système de la Société ; - Dommages causés par un système autre que celui de la Société - Tout autre dommage hors de notre contrôle. (Ex. : catastrophe naturelle)",
+    "warrantyImplementation": "MISE EN ŒUVRE DE LA GARANTIE : Toute réclamation de garantie doit être faite par écrit ou par téléphone dans un délai de quinze (15) jours à compter de la date de découverte du défaut par l'Acheteur à la Société.",
+    "invalidity": "INVALIDITÉ : L'invalidité de l'une des clauses de ce contrat n'entraînera pas la nullité de l'ensemble du contrat, sauf s'il s'agit d'une clause essentielle.",
+    "installationRepairs": "INSTALLATION / RÉPARATIONS : a) Les travaux seront effectués pendant les heures normales de travail, sauf accord écrit contraire. Les travaux le week-end et les jours fériés entraîneront des frais supplémentaires. b) Le client fournira un accès libre et ininterrompu au site. c) Le client fournira tous les hommes, matériaux tels que pièces pneumatiques et hydrauliques, et équipements nécessaires, y compris l'équipement de soudage et les poids d'essai si nécessaire, pour permettre l'installation et l'étalonnage. L'Acheteur est responsable de s'assurer que les travaux de soudage sont effectués selon le code de pratique et conformément aux normes en vigueur pour le soudage de son équipement. La Société ne peut être tenue responsable des spécifications de soudage et/ou des instructions de travail qui pourraient affecter l'intégrité structurelle de l'équipement. d) L'Acheteur est responsable d'informer la Société, si l'Installation est reportée, au moins 24 heures avant la date prévue. À défaut, les frais de déplacement de l'ingénieur ou du personnel autorisé seront facturés à l'Acheteur. La grue ou l'équipement lourd doit être 100% disponible et fonctionnel pour l'ingénieur ou le personnel autorisé envoyé par la Société, à la date spécifiée dans l'accord entre l'Acheteur/Client et la Société, et tout au long du processus d'installation et/ou des travaux. e) La machine doit être opérationnelle pendant l'installation et/ou les travaux. Il reste de la seule responsabilité du client de fournir un opérateur sur site pour calibrer le système, si nécessaire. Le choix de l'opérateur et les coûts encourus restent de la seule responsabilité du client et sous sa responsabilité. f) Dans le cas où ces conditions (a, b, c, d, e) ne sont pas remplies, le temps d'attente du technicien de la Société sera facturé au client selon le barème de facturation en vigueur au moment de l'installation ou au moment des travaux de réparation et les frais de kilométrage pour le déplacement, l'hébergement et les frais de séjour peuvent également être facturés au client.",
+    "nationalStandards": "NORMES NATIONALES : (A) La Société n'accepte aucune responsabilité découlant des installations des marchandises ou des essais de type des marchandises après l'installation, à moins que l'installation ou les essais de type ne soient effectués par ou sous la supervision des propres ingénieurs ou du personnel autorisé de la Société. (B) La Société ne sera pas responsable de la perte ou des dommages subis par le Client, si le Client a fourni à la Société, concernant les marchandises livrées par la Société au Client, des informations techniques incomplètes ou inexactes ou n'a pas informé la Société de tout changement dans les spécifications du Client.",
+    "revisionDate": "Rév 05 | 2024-03-19",
+    "onBehalfOfCompany": "AU NOM DE RAYCO ELECTRONIC SYSTEM LTD",
+    "onBehalfOfCustomer": "AU NOM DU CLIENT",
+    "agreedToQuote": "J'accepte ce devis et ses termes et conditions.",
+    "signedBy": "Signé par",
+    "signature": "Signature",
+    "date": "Date"
   }
 }

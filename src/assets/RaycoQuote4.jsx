@@ -82,7 +82,7 @@ const RaycoQuote4 = ({ isPreparingExport }) => {
                             </div>
                             {!isPreparingExport && (
                                 <button onClick={() => clearSignature(companySignatureRef)} className="text-[6pt] text-blue-600 ml-1">
-                                    clear signature
+                                    {t('buttons.clearSignature')}
                                 </button>
                             )}
                         </div>
@@ -113,7 +113,7 @@ const RaycoQuote4 = ({ isPreparingExport }) => {
                             </div>
                             {!isPreparingExport && (
                                 <button onClick={() => clearSignature(customerSignatureRef)} className="text-[6pt] text-blue-600 ml-1">
-                                    clear signature
+                                    {t('buttons.clearSignature')}
                                 </button>
                             )}
                         </div>

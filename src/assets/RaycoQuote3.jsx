@@ -5,6 +5,7 @@ const RaycoQuote3 = () => {
     const { t } = useTranslation();
 
     const termsAndConditions = [
+        { title: t('termsAndConditions.raycoGroupTitle'), content: t('termsAndConditions.raycoGroup') },
         { title: "1.RAYCO GROUP OF COMPANIES:", content: t('termsAndConditions.raycoGroup') },
         { title: "2.SALES TERMS:", content: t('termsAndConditions.salesTerms') },
         { title: "3.ACCEPTANCE:", content: t('termsAndConditions.acceptance') },

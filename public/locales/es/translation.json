@@ -3,16 +3,16 @@
     "quoteForm": "FORMULARIO DE COTIZACIÓN",
     "companyName": "RAYCO ELECTRONIC SYSTEM LTD",
     "address": {
-      "full": "2440, Avenida Dalton\nCiudad de Quebec, QC G1P 3X1\nCANADÁ",
+      "full": "2440 Avenida Dalton\nQuebec City, QC G1P 3X1\nCANADÁ",
       "street": "2440, Avenida Dalton",
-      "city": "Ciudad de Quebec",
+      "city": "Quebec City",
       "province": "(QC) G1P 3X1",
       "country": "CANADÁ"
     }
   },
   "form": {
     "page": "Página {{page}} / 4",
-    "quotation": "COTIZACIÓN #:",
+    "quotation": "COTIZACIÓN N°:",
     "dateIssued": "FECHA DE EMISIÓN:",
     "paymentTerms": "CONDICIONES DE PAGO:",
     "paymentBeforeShipment": "Pago antes del envío",
@@ -46,11 +46,11 @@
   },
   "options": {
     "title": "OPCIONES / EXTRAS OPCIONALES",
-    "selectOption": "Seleccionar una opción",
+    "selectOption": "Seleccione una opción",
     "otherOptions": "Otras opciones / comentarios",
     "tpms": {
       "title": "T1 TPMS",
-      "description": "Báscula para camión, TI\nSensores de presión inalámbricos (2)\nOpción TPMS\nInstalación y calibración incluidas"
+      "description": "Báscula para camiones, TI\nSensores de presión inalámbricos (2)\nOpción TPMS\nInstalación y calibración incluidas"
     },
     "maxiload": {
       "title": "66GBALANCEKZ 11UZP0018 33V9009",
@@ -59,29 +59,65 @@
   },
   "installation": {
     "title": "INSTALACIÓN",
-    "selectInstallation": "Seleccionar una opción de instalación",
+    "selectInstallation": "Seleccione una opción de instalación",
     "additionalDetails": "Detalles adicionales sobre la instalación",
     "option": {
       "title": "55INSTALACIÓN",
-      "description": "Instalación + calibración\n+ capacitación\nViaje a"
+      "description": "Instalación + calibración\n+ formación\nViaje a"
     }
   },
   "additionalOffer": {
     "title": "OFERTA ADICIONAL",
-    "selectOffer": "Seleccionar una oferta adicional",
+    "selectOffer": "Seleccione una oferta adicional",
     "additionalDetails": "Detalles adicionales sobre la oferta"
   },
   "shippingTerms": {
     "title": "CONDICIONES DE ENVÍO",
-    "description": "EXW (En fábrica) Los arreglos y costos de transporte serán responsabilidad del cliente. Si el cliente no puede organizar el transporte, RaycoWylie o RaycoSyscomak (eliminar según corresponda para el formulario correcto) hará los arreglos necesarios y cobrará en consecuencia. La responsabilidad seguirá siendo del cliente como si fuera EXW."
+    "description": "EXW (En fábrica) Los arreglos y costos de transporte son responsabilidad del cliente. Si el cliente no puede organizar el transporte, RaycoWylie o RaycoSyscomak (eliminar según corresponda para el formulario correcto) hará los arreglos necesarios y cobrará en consecuencia. La responsabilidad seguirá siendo del cliente como si fuera EXW."
   },
   "notes": {
     "title": "NOTAS",
     "placeholder": "Notas adicionales"
   },
   "buttons": {
-    "download": "Descargar PDF combinado (Formato Carta)"
+    "download": "Descargar PDF combinado (Formato Carta)",
+    "clearSignature": "borrar firma"
+  },
+  "termsAndConditions": {
+    "title": "Términos y Condiciones",
+    "raycoGroupTitle": "GRUPO DE EMPRESAS RAYCO",
+    "raycoGroup": "Los términos y condiciones aquí establecidos tienen el propósito de regir todas las transacciones entre Rayco Electronic System Ltd (\"La Compañía\") y sus clientes (\"El Cliente\" o \"El Comprador\"). El Grupo de Empresas Rayco incluye a la Compañía y sus subsidiarias actuales y futuras. En esta fecha, las subsidiarias son The B&A Engineering Company Ltd, Rayco Wylie Weighload Electronic Systems, Inc, Rayco Wylie Engineering Singapore PTE Ltd y Degla Engineering Company.",
+    "salesTerms": "Se acuerda explícitamente que las siguientes cláusulas son parte integral de cualquier pedido, acuerdo y/o compra realizada por un cliente de la Compañía o cualquiera de sus subsidiarias. El Comprador, a través de su orden de compra, reconoce haber leído estas cláusulas y confirma su aceptación.",
+    "acceptance": "La aceptación de una cotización emitida por la Compañía o de cualquier mercancía suministrada, asesoramiento dado o servicio prestado incluye la aceptación de los siguientes términos y condiciones, y ninguna variación o adición a los mismos será vinculante para la Compañía a menos que sea expresamente acordada por la Compañía por escrito por un representante debidamente autorizado.",
+    "amendment": "No se puede hacer ninguna enmienda a ningún documento de transacción sin el consentimiento por escrito de un funcionario debidamente autorizado de la Compañía y ningún acuerdo verbal será válido y vinculante para la Compañía.",
+    "quotations": "A menos que se retire previamente, una cotización emitida por un representante de la Compañía está abierta a la aceptación por escrito dentro del período indicado en la cotización o, cuando no se indica ningún período, dentro de los diez (10) días posteriores a su fecha. La Compañía se reserva el derecho de corregir cualquier error u omisión en su cotización.",
+    "prices": "Los precios cotizados se basan en el costo de los bienes, el flete y otros costos en la fecha de la cotización (o en la fecha en que dichos precios se acuerden de otra manera). En caso de que estos costos aumenten significativamente, la Compañía tendrá el derecho de aumentar los precios en consecuencia y dará aviso por escrito de cualquier aumento antes de la entrega.",
+    "electionOfDomicile": "El Comprador elige domicilio en el lugar de negocios de la Compañía, en la dirección de la oficina con la que ha contratado.",
+    "judicialProceedings": "Todos los procedimientos judiciales se instituirán en el distrito judicial de la ubicación donde se encuentra la oficina de la Compañía con la que el Comprador ha contratado. La única ley aplicable a una disputa relacionada con cualquier transacción será la ley vigente en la ubicación donde se encuentra la oficina de la Compañía con la que el Comprador ha contratado.",
+    "payment": "(A) Las sumas adeudadas de cualquier transacción son pagaderas antes del envío mediante transferencia bancaria. Si el Comprador decide pagar con tarjeta de crédito, se agrega una tarifa administrativa del 5% al monto total de la factura. Se puede firmar un acuerdo sobre los términos de pago entre el Comprador y la Compañía.\n(B) El incumplimiento de los términos y condiciones resultará en la terminación inmediata de cualquier acuerdo.\n(C) No obstante el párrafo (A), la Compañía puede requerir un pago anticipado del Comprador al momento del pedido.",
+    "returnAndCancellation": "a) Ningún pedido sujeto a este contrato o siguiente a este contrato puede ser cancelado y los bienes entregados no pueden ser rechazados por el Comprador.\nb) No se aceptará ninguna devolución de mercancía por parte de la Compañía, excepto por trabajos bajo nuestro servicio de reparación/intercambio o cuando se reclame un reemplazo bajo garantía de acuerdo con la Cláusula 20 a continuación. Cualquier mercancía devuelta está sujeta a un cargo de reabastecimiento cuyo valor se confirmará por escrito antes de que las mercancías sean aceptadas como devoluciones. Cualquier valor agregado se basará en que las mercancías sean devueltas en el mismo estado en que fueron enviadas.",
+    "delivery": "La entrega se realizará en la fecha o alrededor de la fecha acordada entre la Compañía y el Comprador. Sin embargo, la Compañía no será responsable por ningún retraso debido a circunstancias razonablemente fuera de su control, lo que significa, pero no se limita a: guerra, disturbios y otros disturbios civiles, incendios, desastres naturales, inundaciones, huelgas, accidentes, embargos y otras sanciones económicas, intervenciones y decisiones gubernamentales, retrasos en el transporte, así como imposibilidad, dificultad extraordinaria o costos anormalmente altos para obtener materiales, equipos o mano de obra.",
+    "deliveryDelays": "RETRASOS EN LA ENTREGA DEBIDOS AL COMPRADOR O AL CLIENTE FINAL:\na) Se cobrará un interés del 1% mensual sobre los bienes no enviados al Comprador por cualquier retraso en la entrega causado por él mismo o por el cliente final a partir del vencimiento de treinta (30) días desde la fecha de entrega planificada.\nb) No obstante el párrafo (A), la Compañía se reserva el derecho de cobrar al Comprador el monto adeudado si la fecha de entrega es pospuesta por el Comprador.",
+    "shipping": "El envío es responsabilidad del Cliente. Los términos de envío son EXW (En fábrica). El Cliente deberá encargarse de recoger los bienes en la ubicación de la Compañía. Los costos de envío de las piezas, incluido el embalaje y la manipulación, no están incluidos en el pedido. Todas las reclamaciones por daños o pérdidas en tránsito son responsabilidad del Cliente con su compañía de envíos.",
+    "defects": "Cualquier defecto de fabricación o defecto debido a la instalación por parte de la Compañía debe ser reportado a la Compañía, en su sede, dentro de los siete (7) días posteriores a la entrega. El equipo será inspeccionado por la Compañía para determinar si la queja del comprador está bien fundamentada.",
+    "claims": "No se aceptará ninguna reclamación por parte del Comprador por cualquier trabajo realizado por él en los bienes entregados, si dicho trabajo no ha sido previamente autorizado por la Compañía.",
+    "companyLiability": "La responsabilidad de la Compañía no excederá en ningún caso el precio estipulado en la factura y no se extenderá a otros daños, costos o gastos incurridos por el Comprador.",
+    "ownershipOfGoods": "La propiedad de los bienes vendidos se transferirá al Comprador solo cuando el precio de dichos bienes, así como los intereses y otros gastos, si los hubiere, hayan sido pagados en su totalidad. El Comprador deberá tener un cuidado razonable de los bienes entregados y notificar a la Compañía sin demora de cualquier incautación de los bienes entregados y cualquier medida legal que tenga un efecto similar. Asimismo, el Comprador no deberá disponer o transferir de otra manera los bienes entregados a un tercero sin notificar a la Compañía. Si el Comprador no cumple con esta cláusula, la Compañía puede tomar todas las medidas previstas a continuación, en la cláusula 18 (Hipoteca) de este contrato.",
+    "mortgage": "HIPOTECA SOBRE BIENES MUEBLES E INMUEBLES: (A) No obstante los párrafos 9 (Pago), la Compañía puede, para garantizar el pago del precio acordado en este contrato, y sin incumplimiento por parte del Comprador, registrar una hipoteca mobiliaria u obtener una garantía similar sobre los bienes vendidos. (B) La Compañía puede, además, registrar cualquier hipoteca mobiliaria y/o inmobiliaria sobre los activos del Comprador sin incumplimiento por parte del Comprador.",
+    "buyerDefault": "INCUMPLIMIENTO DEL COMPRADOR: (A) Si el Comprador se niega a recibir la entrega de los bienes vendidos o está en mora en el pago, total o parcialmente, de cualquier cantidad adeudada bajo este contrato o bajo cualquier otro contrato entre el Comprador y la Compañía, el monto total se vencerá inmediatamente y la Compañía puede: - negarse a hacer entregas adicionales - rescindir este contrato y recuperar los bienes entregados sin remitir los pagos ya realizados por el Comprador y tomar cualquier otra medida prevista por la ley sin perjuicio de sus acciones por daños y perjuicios. (B) Cualquier saldo adeudado devengará intereses a una tasa del 2% mensual y 24% anual desde la fecha de emisión de la factura. (C) La Compañía retendrá la propiedad de los bienes vendidos hasta el pago total del precio de venta e intereses, si los hubiere. En caso de incumplimiento por parte del Comprador, la Compañía puede tomar una o todas las siguientes medidas: 1) Exigir el pago inmediato del saldo adeudado; 2) Recuperar los bienes vendidos y retener, como daños, interés líquido, las sumas recibidas como cuotas; 3) Ejercer la garantía prevista en el párrafo 18 (Hipoteca); 4) Tomar cualquier otra acción requerida por la ley. (D) El hecho de que la Compañía no ejerza los derechos previstos en esta cláusula no se interpretará como una renuncia al ejercicio de sus derechos y recursos para cualquier incumplimiento posterior. (E) Del mismo modo, el retraso de la Compañía en ejercer los derechos previstos en esta cláusula no se interpretará como una renuncia al ejercicio de sus derechos y recursos para el incumplimiento.",
+    "newPartsWarranty": "GARANTÍA LIMITADA DE PIEZAS NUEVAS: Las piezas estándar recién compradas fabricadas por la Compañía estarán cubiertas por una garantía limitada por un período de doce (12) meses a partir de la fecha de entrega, sujeto a retrasos en la entrega debidos al Comprador o su cliente. Si se desarrolla algún defecto debido a un diseño defectuoso, mano de obra o materiales, esta garantía limitada cubrirá las piezas a menos que el Comprador no haya hecho un uso normal de los bienes entregados. Esta garantía limitada no es válida cuando, después de un examen por parte de la Compañía o por un tercero autorizado por la Compañía, se demuestra que el defecto fue causado por una instalación incorrecta por parte del Comprador o por una instalación en una máquina que no coincide con el modelo del producto, o cualquier forma de mal uso o abuso intencional o no intencional. Esta garantía limitada se aplica solo sujeta a las siguientes disposiciones: (A) La garantía se aplica solo a piezas fabricadas, vendidas o aprobadas por la Compañía; (B) No se puede instalar ninguna pieza que no sea las fabricadas, vendidas o aprobadas por la Compañía en los bienes vendidos; (C) Esta garantía limitada no cubre reparaciones, instalaciones, modificaciones o reemplazos realizados por el Comprador relacionados con una pieza o piezas cubiertas por dicha garantía limitada en ausencia de autorización previa de la Compañía; (D) Cualquier apertura de una unidad de control o un dispositivo electrónico que no sea lo requerido para la instalación anulará la garantía limitada. - La responsabilidad de la Compañía se limita al reemplazo del artículo(s) defectuoso(s) únicamente. - La Compañía se reserva el derecho de rechazar cualquier reclamo injustificado. Esta política también es aplicable a sistemas completos vendidos por la Compañía. (E) La garantía no es aplicable si la compra no está pagada o si el cliente no respeta sus términos de pago aprobados.",
+    "refurbishedPartsWarranty": "GARANTÍA LIMITADA DE PIEZAS REACONDICIONADAS: Las piezas estándar reacondicionadas tendrán una garantía por un período de seis (6) meses a partir de la fecha de entrega. Esta garantía solo se aplicará a las piezas estándar compradas a la Compañía. - La responsabilidad de la Compañía se limita al reemplazo del artículo(s) defectuoso(s) únicamente. - La Compañía se reserva el derecho de rechazar cualquier reclamo injustificado.",
+    "feesNotCovered": "TARIFAS NO CUBIERTAS POR LA GARANTÍA: - Costos de mano de obra en el sitio; - Cargos de transporte y manipulación; - todas las otras piezas relacionadas; - Gastos de viaje, hotel, estacionamiento, costos telefónicos, remolque, etc.; - Daños a otras piezas o pérdida de ingresos causados por la rotura de pieza(s) defectuosa(s) del sistema de la Compañía; - Daños causados por un sistema distinto al de la Compañía - Cualquier otro daño fuera de nuestro control. (Ej.: desastre natural)",
+    "warrantyImplementation": "IMPLEMENTACIÓN DE LA GARANTÍA: Cualquier reclamo de garantía debe hacerse por escrito o por teléfono dentro de un período de quince (15) días a partir de la fecha del descubrimiento del defecto por parte del Comprador a la Compañía.",
+    "invalidity": "INVALIDEZ: La invalidez de una de las cláusulas de este contrato no conllevará la nulidad de todo el contrato a menos que sea una cláusula esencial.",
+    "installationRepairs": "INSTALACIÓN / REPARACIONES: a) El trabajo se llevará a cabo durante las horas normales de trabajo a menos que se acuerde lo contrario por escrito. El trabajo en fines de semana y días festivos incurrirá en cargos adicionales. b) El cliente proporcionará acceso libre e ininterrumpido al sitio. c) El cliente proporcionará todos los hombres, materiales necesarios como piezas neumáticas e hidráulicas, y equipos, incluidos equipos de soldadura y pesos de prueba cuando sea necesario, para permitir la instalación y calibración. El Comprador es responsable de asegurar que el trabajo de soldadura se realice de acuerdo con el código de práctica y de conformidad con las normas vigentes para la soldadura de su equipo. La Compañía no puede ser considerada responsable de las especificaciones de soldadura y/o instrucciones de trabajo que puedan afectar la integridad estructural del equipo. d) El Comprador es responsable de informar a la Compañía, si la Instalación se pospone, al menos 24 horas antes de la fecha programada. De lo contrario, los gastos de viaje del ingeniero o personal autorizado se cargarán al Comprador. La grúa o el equipo pesado debe estar 100% disponible y funcional para el ingeniero o personal autorizado enviado por la Compañía, en la fecha especificada en el acuerdo entre el Comprador/Cliente y la Compañía, y durante todo el proceso de instalación y/o trabajos. e) La máquina debe estar operativa durante la instalación y/o el trabajo. Sigue siendo responsabilidad exclusiva del cliente proporcionar un operador en el sitio para calibrar el sistema, si es necesario. La elección del operador y los costos incurridos siguen siendo responsabilidad exclusiva del cliente y bajo su responsabilidad. f) En caso de que estas condiciones (a, b, c, d, e) no se cumplan, el tiempo de espera del técnico de la Compañía se facturará al cliente de acuerdo con el programa de facturación vigente en el momento de la instalación o en el momento del trabajo de reparación y los cargos de kilometraje por viaje, alojamiento y gastos de subsistencia también pueden cargarse al cliente.",
+    "nationalStandards": "NORMAS NACIONALES: (A) La Compañía no acepta ninguna responsabilidad derivada de las instalaciones de los bienes o pruebas de tipo de los bienes después de la instalación a menos que la instalación o las pruebas de tipo sean realizadas por o bajo la supervisión de los propios ingenieros o personal autorizado de la Compañía. (B) La Compañía no será responsable de la pérdida o daño sufrido por el Cliente, si el Cliente proporcionó a la Compañía con respecto a los bienes entregados por la Compañía al Cliente información técnica incompleta o inexacta o no notificó a la Compañía de cualquier cambio en las especificaciones del Cliente.",
+    "revisionDate": "Rev 05 | 2024-03-19",
+    "onBehalfOfCompany": "EN NOMBRE DE RAYCO ELECTRONIC SYSTEM LTD",
+    "onBehalfOfCustomer": "EN NOMBRE DEL CLIENTE",
+    "agreedToQuote": "Estoy de acuerdo con esta cotización y sus términos y condiciones.",
+    "signedBy": "Firmado por",
+    "signature": "Firma",
+    "date": "Fecha"
   }
-
 }
-
