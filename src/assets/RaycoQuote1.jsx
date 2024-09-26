@@ -117,7 +117,14 @@ const RaycoQuote1 = () => {
           </div>
           <div>
             <label htmlFor="currency" className="text-red-600 font-bold text-[10pt] block mb-1.5">{t('form.currency')}</label>
-            <textarea id="currency" rows="4" className="w-full bg-blue-100 p-1.5 text-[9pt]"></textarea>
+            <select name="currency" id="currency" className='bg-blue-100 p-1.5 text-[9pt]'>
+              <option value="USD">USD</option>
+              <option value="CAD">CAD</option>
+              <option value="GBP">GBP</option>
+              <option value="EUR">EUR</option>
+              <option value="EGP">EGP</option>
+              <option value="SGD">SGD</option>
+            </select>
           </div>
         </div>
 
