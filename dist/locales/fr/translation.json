@@ -1,7 +1,7 @@
 {
   "header": {
-    "quoteForm": "FORMULAIRE DE DEVIS",
-    "companyName": "RAYCO ELECTRONIC SYSTEM LTD",
+    "quoteForm": "FORMULAIRE DE SOUMISSION",
+    "companyName": "RAYCO ELECTRONIC SYSTEM LTÉE",
     "address": {
       "full": "2440, avenue Dalton\nQuébec, QC G1P 3X1\nCANADA",
       "street": "2440, avenue Dalton",
@@ -85,7 +85,7 @@
   },
   "termsAndConditions": {
     "title": "Termes et Conditions",
-    "raycoGroup": "Les termes et conditions ci-dessous sont établis dans le but de régir toutes les transactions entre Rayco Electronic System Ltd (\"La Société\") et ses clients (\"Le Client\" ou \"L'Acheteur\"). Le Groupe de Sociétés Rayco comprend la Société et ses filiales actuelles et futures. À ce jour, les filiales sont The B&A Engineering Company Ltd, Rayco Wylie Weighload Electronic Systems, Inc, Rayco Wylie Engineering Singapore PTE Ltd et Degla Engineering Company.",
+    "raycoGroup": "Les termes et conditions ci-dessous sont établis dans le but de régir toutes les transactions entre Rayco Electronic System Ltée (\"La Société\") et ses clients (\"Le Client\" ou \"L'Acheteur\"). Le Groupe de Sociétés Rayco comprend la Société et ses filiales actuelles et futures. À ce jour, les filiales sont The B&A Engineering Company Ltd, Rayco Wylie Weighload Electronic Systems, Inc, Rayco Wylie Engineering Singapore PTE Ltd et Degla Engineering Company.",
     "salesTerms": "Il est explicitement convenu que les clauses suivantes font partie intégrante de toute commande, accord et/ou achat effectué par un client de la Société ou de l'une de ses filiales. L'Acheteur, par son bon de commande, reconnaît avoir lu ces clauses et confirme son acceptation.",
     "acceptance": "L'acceptation d'un devis émis par la Société ou de tout bien fourni, conseil donné ou service rendu inclut l'acceptation des termes et conditions suivants et aucune variation ou ajout à ceux-ci ne sera opposable à la Société sauf accord exprès écrit de la Société par un représentant dûment autorisé.",
     "amendment": "Aucun amendement à tout document de transaction ne peut être apporté sans le consentement écrit d'un responsable dûment autorisé de la Société et aucun accord verbal ne sera valide et opposable à la Société.",
@@ -112,7 +112,7 @@
     "installationRepairs": "INSTALLATION / RÉPARATIONS : a) Les travaux seront effectués pendant les heures normales de travail, sauf accord écrit contraire. Les travaux le week-end et les jours fériés entraîneront des frais supplémentaires. b) Le client fournira un accès libre et ininterrompu au site. c) Le client fournira tous les hommes, matériaux tels que pièces pneumatiques et hydrauliques, et équipements nécessaires, y compris l'équipement de soudage et les poids d'essai si nécessaire, pour permettre l'installation et l'étalonnage. L'Acheteur est responsable de s'assurer que les travaux de soudage sont effectués selon le code de pratique et conformément aux normes en vigueur pour le soudage de son équipement. La Société ne peut être tenue responsable des spécifications de soudage et/ou des instructions de travail qui pourraient affecter l'intégrité structurelle de l'équipement. d) L'Acheteur est responsable d'informer la Société, si l'Installation est reportée, au moins 24 heures avant la date prévue. À défaut, les frais de déplacement de l'ingénieur ou du personnel autorisé seront facturés à l'Acheteur. La grue ou l'équipement lourd doit être 100% disponible et fonctionnel pour l'ingénieur ou le personnel autorisé envoyé par la Société, à la date spécifiée dans l'accord entre l'Acheteur/Client et la Société, et tout au long du processus d'installation et/ou des travaux. e) La machine doit être opérationnelle pendant l'installation et/ou les travaux. Il reste de la seule responsabilité du client de fournir un opérateur sur site pour calibrer le système, si nécessaire. Le choix de l'opérateur et les coûts encourus restent de la seule responsabilité du client et sous sa responsabilité. f) Dans le cas où ces conditions (a, b, c, d, e) ne sont pas remplies, le temps d'attente du technicien de la Société sera facturé au client selon le barème de facturation en vigueur au moment de l'installation ou au moment des travaux de réparation et les frais de kilométrage pour le déplacement, l'hébergement et les frais de séjour peuvent également être facturés au client.",
     "nationalStandards": "NORMES NATIONALES : (A) La Société n'accepte aucune responsabilité découlant des installations des marchandises ou des essais de type des marchandises après l'installation, à moins que l'installation ou les essais de type ne soient effectués par ou sous la supervision des propres ingénieurs ou du personnel autorisé de la Société. (B) La Société ne sera pas responsable de la perte ou des dommages subis par le Client, si le Client a fourni à la Société, concernant les marchandises livrées par la Société au Client, des informations techniques incomplètes ou inexactes ou n'a pas informé la Société de tout changement dans les spécifications du Client.",
     "revisionDate": "Rév 05 | 2024-03-19",
-    "onBehalfOfCompany": "AU NOM DE RAYCO ELECTRONIC SYSTEM LTD",
+    "onBehalfOfCompany": "AU NOM DE RAYCO ELECTRONIC SYSTEM Ltée",
     "onBehalfOfCustomer": "AU NOM DU CLIENT",
     "agreedToQuote": "J'accepte ce devis et ses termes et conditions.",
     "signedBy": "Signé par",
