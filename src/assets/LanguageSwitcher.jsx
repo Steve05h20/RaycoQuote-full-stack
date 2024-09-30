@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import PriceCalculatorWidget from '../components/PriceCalculatorDialog';
 
 const LanguageSwitcher = () => {
     const { i18n } = useTranslation();
@@ -30,6 +31,7 @@ const LanguageSwitcher = () => {
                 ES
             </button>
             <Link className='px-2 py-1 rounded bg-gray-200 hover:bg-blue-500 hover:text-white' to={"/admin"}>admin</Link>
+            <PriceCalculatorWidget/>
         </div>
     );
 };
