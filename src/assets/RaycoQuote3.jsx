@@ -21,7 +21,7 @@ const RaycoQuote3 = () => {
         { title: t('termsAndConditions.defectsTitle'), content: t('termsAndConditions.defects') },
         { title: t('termsAndConditions.claimsTitle'), content: t('termsAndConditions.claims') },
         { title: t('termsAndConditions.companyLiabilityTitle'), content: t('termsAndConditions.companyLiability') },
-        { title: t('termsAndConditions.ownershipOfGoodsTitle'), content: t('termsAndConditions.ownershipOfGods') },
+        { title: t('termsAndConditions.ownershipOfGoodsTitle'), content: t('termsAndConditions.ownershipOfGoods') },
         { title: t('termsAndConditions.mortgageTitle'), content: t('termsAndConditions.mortgage') + t('termsAndConditions.mortgageContinued') },
     ];
 
