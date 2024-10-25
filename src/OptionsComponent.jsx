@@ -24,7 +24,7 @@ function PasswordProtection({ children }) {
   };
 
   if (!isAuthenticated) {
-    return (
+    return (<>
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md">
           <h2 className="text-2xl font-bold mb-4 text-center">Accès Protégé</h2>
@@ -40,6 +40,8 @@ function PasswordProtection({ children }) {
           </button>
         </form>
       </div>
+      <Link className='bg-zinc-700 text-white mx-5 my-10 px-5 py-2' to={"/"}>Retour au formulaire</Link>
+      </>
     );
   }
 
