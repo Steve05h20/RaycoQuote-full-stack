@@ -38,8 +38,8 @@ function PasswordProtection({ children }) {
           <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
             Accéder
           </button>  
-          <Link className='bg-zinc-700 text-white mx-auto my-16 px-5 py-2' to={"/"}>Retour au formulaire</Link>
         </form>
+          <Link className='bg-zinc-700 text-white my-24 px-5 py-2' to={"/"}>Retour au formulaire</Link>
       </div>
    
       </>
