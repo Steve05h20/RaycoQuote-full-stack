@@ -83,7 +83,7 @@ function ImprovedOptionsInstallationsComponent2() {
 
   const fetchItems = async () => {
     try {
-      const response = await fetch(`/api/${selectedType}`);
+      const response = await fetch(`/api/items?type=${selectedType}`);
       if (!response.ok) {
         throw new Error(`Erreur HTTP! statut: ${response.status}`);
       }
@@ -104,7 +104,10 @@ function ImprovedOptionsInstallationsComponent2() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = editingId ? `/api/${selectedType}/${editingId}` : `/api/${selectedType}`;
+      const url = editingId 
+        ? `/api/items?type=${selectedType}&id=${editingId}` 
+        : `/api/items?type=${selectedType}`;
+      
       const method = editingId ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -149,7 +152,7 @@ function ImprovedOptionsInstallationsComponent2() {
     if (!window.confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) return;
     
     try {
-      const response = await fetch(`/api/${selectedType}/${id}`, { 
+      const response = await fetch(`/api/items?type=${selectedType}&id=${id}`, {
         method: 'DELETE'
       });
       
