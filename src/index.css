@@ -1,6 +1,6 @@
 label {
     position: relative;
-    z-index: 10; /* S'assurer que le label est au-dessus des inputs */
+     /*z-index: 10; /* S'assurer que le label est au-dessus des inputs */
     display: block;
     margin-bottom: 5px; /* Espace entre le label et l'input */
 }
