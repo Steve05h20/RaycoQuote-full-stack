@@ -54,7 +54,7 @@ function PasswordProtection({ children }) {
 PasswordProtection.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
+////
 function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
   const defaultValues = {
     title: '',
@@ -70,7 +70,7 @@ function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
     defaultValues: initialData.id ? initialData : defaultValues
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (initialData.id) {
       reset(initialData);
     } else {
@@ -84,113 +84,161 @@ function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mb-8 bg-white p-6 rounded-lg shadow-md space-y-6">
-      {/* Section Français */}
-      <div className="border-b pb-6">
-        <h2 className="text-xl font-semibold mb-4 text-blue-600">Français</h2>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Titre (FR) *</label>
-            <input
-              {...register('title', { required: true })}
-              className="w-full p-2 border rounded-md"
-              placeholder="Titre en français"
-            />
+    <form onSubmit={handleSubmit(onSubmit)} className="mb-8 bg-white rounded-xl shadow-lg overflow-hidden">
+      {/* Header */}
+      <div className="bg-gray-50 px-6 py-4 border-b">
+        <h2 className="text-xl font-semibold text-gray-800">
+          {initialData.id ? 'Modifier l\'élément' : 'Ajouter un nouvel élément'}
+        </h2>
+      </div>
+
+      <div className="p-6">
+        {/* Languages Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          {/* French Column */}
+          <div className="bg-white rounded-lg p-4 border border-blue-100">
+            <div className="flex items-center mb-4">
+              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                <span className="text-blue-600 font-semibold">FR</span>
+              </div>
+              <h3 className="text-lg font-semibold text-blue-600">Français</h3>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Titre *</label>
+                <input
+                  {...register('title', { required: true })}
+                  className="w-full p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  placeholder="Titre en français"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <textarea
+                  {...register('description')}
+                  rows={4}
+                  className="w-full p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  placeholder="Description en français"
+                />
+              </div>
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description (FR)</label>
-            <textarea
-              {...register('description')}
-              rows={3}
-              className="w-full p-2 border rounded-md"
-              placeholder="Description en français"
-            />
+
+          {/* English Column */}
+          <div className="bg-white rounded-lg p-4 border border-green-100">
+            <div className="flex items-center mb-4">
+              <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                <span className="text-green-600 font-semibold">EN</span>
+              </div>
+              <h3 className="text-lg font-semibold text-green-600">English</h3>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                <input
+                  {...register('title_en')}
+                  className="w-full p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                  placeholder="Title in English"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <textarea
+                  {...register('description_en')}
+                  rows={4}
+                  className="w-full p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                  placeholder="Description in English"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Spanish Column */}
+          <div className="bg-white rounded-lg p-4 border border-yellow-100">
+            <div className="flex items-center mb-4">
+              <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
+                <span className="text-yellow-600 font-semibold">ES</span>
+              </div>
+              <h3 className="text-lg font-semibold text-yellow-600">Español</h3>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Título</label>
+                <input
+                  {...register('title_es')}
+                  className="w-full p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all"
+                  placeholder="Título en español"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+                <textarea
+                  {...register('description_es')}
+                  rows={4}
+                  className="w-full p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all"
+                  placeholder="Descripción en español"
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Section Anglais */}
-      <div className="border-b pb-6">
-        <h2 className="text-xl font-semibold mb-4 text-green-600">English</h2>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Title (EN)</label>
-            <input
-              {...register('title_en')}
-              className="w-full p-2 border rounded-md"
-              placeholder="Title in English"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description (EN)</label>
-            <textarea
-              {...register('description_en')}
-              rows={3}
-              className="w-full p-2 border rounded-md"
-              placeholder="Description in English"
-            />
-          </div>
+        {/* Image URL Field */}
+        <div className="bg-white rounded-lg p-4 border border-gray-200">
+          <label className="block text-sm font-medium text-gray-700 mb-1">URL de l'image</label>
+          <input
+            {...register('image')}
+            className="w-full p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-all"
+            placeholder="URL de l'image"
+          />
         </div>
-      </div>
 
-      {/* Section Espagnol */}
-      <div className="border-b pb-6">
-        <h2 className="text-xl font-semibold mb-4 text-yellow-600">Español</h2>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Título (ES)</label>
-            <input
-              {...register('title_es')}
-              className="w-full p-2 border rounded-md"
-              placeholder="Título en español"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Descripción (ES)</label>
-            <textarea
-              {...register('description_es')}
-              rows={3}
-              className="w-full p-2 border rounded-md"
-              placeholder="Descripción en español"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Section Image */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">URL de l'image</label>
-        <input
-          {...register('image')}
-          className="w-full p-2 border rounded-md"
-          placeholder="URL de l'image"
-        />
-      </div>
-
-      <div className="flex justify-end space-x-2 pt-4">
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className={`px-4 py-2 rounded-md text-white ${
-            isSubmitting ? 'bg-gray-400' : 'bg-blue-500 hover:bg-blue-600'
-          } transition duration-300`}
-        >
-          {isSubmitting ? 'Traitement...' : initialData.id ? 'Mettre à jour' : 'Ajouter'}
-        </button>
-        {initialData.id && (
+        {/* Action Buttons */}
+        <div className="flex justify-end space-x-3 mt-6">
+          {initialData.id && (
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-200"
+            >
+              Annuler
+            </button>
+          )}
           <button
-            type="button"
-            onClick={handleCancel}
-            className="bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400 transition duration-300"
+            type="submit"
+            disabled={isSubmitting}
+            className={`px-6 py-2 rounded-lg text-white font-medium ${
+              isSubmitting 
+                ? 'bg-gray-400 cursor-not-allowed' 
+                : 'bg-blue-500 hover:bg-blue-600 active:bg-blue-700'
+            } transition-all duration-200 shadow-sm hover:shadow-md`}
           >
-            Annuler
+            {isSubmitting ? (
+              <span className="flex items-center">
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Traitement...
+              </span>
+            ) : (
+              initialData.id ? 'Mettre à jour' : 'Ajouter'
+            )}
           </button>
-        )}
+        </div>
       </div>
     </form>
   );
 }
 
+ItemForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  initialData: PropTypes.object,
+  onCancel: PropTypes.func.isRequired,
+  isSubmitting: PropTypes.bool
+};
+
+//////////
 function ImprovedOptionsInstallationsComponent2() {
   const { i18n } = useTranslation();
   const [items, setItems] = useState([]);
