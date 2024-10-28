@@ -1,10 +1,14 @@
 import { sql } from '@vercel/postgres';
 
-// Création de la structure de table mise à jour
-export const initializeDatabase = async () => {
+// Cette fonction crée ou recrée la table items
+async function initializeTable() {
   try {
+    // Drop table if exists pour un nouveau départ
+    await sql`DROP TABLE IF EXISTS items`;
+    
+    // Créer la nouvelle table
     await sql`
-      CREATE TABLE IF NOT EXISTS items (
+      CREATE TABLE items (
         id SERIAL PRIMARY KEY,
         title VARCHAR(255) NOT NULL,
         title_en VARCHAR(255),
@@ -13,154 +17,165 @@ export const initializeDatabase = async () => {
         description_en TEXT,
         description_es TEXT,
         image VARCHAR(255),
-        type VARCHAR(50) NOT NULL
+        type VARCHAR(50) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `;
-    return { success: true, message: 'Table created successfully' };
+    return true;
   } catch (error) {
-    console.error('Database initialization error:', error);
-    return { success: false, error: 'Error creating table' };
+    console.error('Erreur lors de l\'initialisation de la table:', error);
+    return false;
   }
-};
+}
 
 export default async function handler(req, res) {
   const { method } = req;
-  const { type } = req.query; // 'options' ou 'installations'
+  const { type, id } = req.query;
 
-  console.log('Méthode reçue:', method);
+  // Log pour debug
+  console.log('Method:', method);
   console.log('Type:', type);
-  console.log('Corps de la requête:', req.body);
-  console.log('Query params:', req.query);
+  console.log('ID:', id);
+  console.log('Body:', req.body);
 
-  if (!['options', 'installations'].includes(type)) {
-    return res.status(400).json({ error: 'Type invalide. Utilisez "options" ou "installations"' });
+  // Validation du type
+  if (!type || !['options', 'installations'].includes(type)) {
+    return res.status(400).json({
+      error: 'Type invalide. Utilisez "options" ou "installations"'
+    });
   }
 
-  switch (method) {
-    case 'GET':
-      try {
+  try {
+    switch (method) {
+      case 'GET':
         const { rows } = await sql`
           SELECT * FROM items 
           WHERE type = ${type}
-          ORDER BY id ASC
+          ORDER BY created_at DESC
         `;
-        console.log(`${type} récupérés:`, rows);
-        res.status(200).json(rows);
-      } catch (error) {
-        console.error(`Erreur lors de la récupération des ${type}:`, error);
-        res.status(500).json({ 
-          error: `Erreur lors de la récupération des ${type}`, 
-          details: error.message 
-        });
-      }
-      break;
+        return res.status(200).json(rows);
 
-    case 'POST':
-      try {
-        const { 
-          title, title_en, title_es,
-          description, description_en, description_es,
-          image 
-        } = req.body;
+      case 'POST':
+        {
+          const {
+            title,
+            title_en,
+            title_es,
+            description,
+            description_en,
+            description_es,
+            image
+          } = req.body;
 
-        console.log('Tentative d\'insertion:', req.body);
-        
-        const { rows } = await sql`
-          INSERT INTO items (
-            title, title_en, title_es,
-            description, description_en, description_es,
-            image, type
-          )
-          VALUES (
-            ${title}, ${title_en}, ${title_es},
-            ${description}, ${description_en}, ${description_es},
-            ${image}, ${type}
-          )
-          RETURNING *
-        `;
-        
-        console.log('Item inséré:', rows[0]);
-        res.status(201).json(rows[0]);
-      } catch (error) {
-        console.error(`Erreur lors de la création de l'item ${type}:`, error);
-        res.status(500).json({ 
-          error: `Erreur lors de la création de l'item ${type}`, 
-          details: error.message 
-        });
-      }
-      break;
+          // Validation du titre
+          if (!title) {
+            return res.status(400).json({
+              error: 'Le titre est requis'
+            });
+          }
 
-    case 'PUT':
-      try {
-        const { id } = req.query;
-        const { 
-          title, title_en, title_es,
-          description, description_en, description_es,
-          image 
-        } = req.body;
+          const result = await sql`
+            INSERT INTO items (
+              title, title_en, title_es,
+              description, description_en, description_es,
+              image, type
+            ) VALUES (
+              ${title}, ${title_en || null}, ${title_es || null},
+              ${description || null}, ${description_en || null}, ${description_es || null},
+              ${image || null}, ${type}
+            )
+            RETURNING *
+          `;
 
-        console.log('Tentative de mise à jour:', { id, ...req.body });
-        
-        const { rows } = await sql`
-          UPDATE items
-          SET 
-            title = ${title},
-            title_en = ${title_en},
-            title_es = ${title_es},
-            description = ${description},
-            description_en = ${description_en},
-            description_es = ${description_es},
-            image = ${image}
-          WHERE id = ${id} AND type = ${type}
-          RETURNING *
-        `;
-
-        if (rows.length === 0) {
-          console.log(`${type} non trouvé pour la mise à jour`);
-          res.status(404).json({ error: `${type} non trouvé` });
-        } else {
-          console.log(`${type} mis à jour:`, rows[0]);
-          res.status(200).json(rows[0]);
+          return res.status(201).json(result.rows[0]);
         }
-      } catch (error) {
-        console.error(`Erreur lors de la mise à jour de l'item ${type}:`, error);
-        res.status(500).json({ 
-          error: `Erreur lors de la mise à jour de l'item ${type}`, 
-          details: error.message 
-        });
-      }
-      break;
 
-    case 'DELETE':
-      try {
-        const { id } = req.query;
-        console.log(`Tentative de suppression de l'item ${type} avec l'ID:`, id);
-        
-        const { rowCount } = await sql`
-          DELETE FROM items 
-          WHERE id = ${id} AND type = ${type}
-        `;
-        
-        console.log('Nombre de lignes supprimées:', rowCount);
-        
-        if (rowCount === 0) {
-          console.log(`${type} non trouvé pour la suppression`);
-          res.status(404).json({ error: `${type} non trouvé` });
-        } else {
-          console.log(`${type} supprimé avec succès`);
-          res.status(200).json({ message: `${type} supprimé avec succès` });
+      case 'PUT':
+        {
+          if (!id) {
+            return res.status(400).json({
+              error: 'ID manquant pour la mise à jour'
+            });
+          }
+
+          const {
+            title,
+            title_en,
+            title_es,
+            description,
+            description_en,
+            description_es,
+            image
+          } = req.body;
+
+          const result = await sql`
+            UPDATE items
+            SET
+              title = ${title},
+              title_en = ${title_en || null},
+              title_es = ${title_es || null},
+              description = ${description || null},
+              description_en = ${description_en || null},
+              description_es = ${description_es || null},
+              image = ${image || null}
+            WHERE id = ${id} AND type = ${type}
+            RETURNING *
+          `;
+
+          if (result.rows.length === 0) {
+            return res.status(404).json({
+              error: 'Item non trouvé'
+            });
+          }
+
+          return res.status(200).json(result.rows[0]);
         }
-      } catch (error) {
-        console.error(`Erreur lors de la suppression de l'item ${type}:`, error);
-        res.status(500).json({ 
-          error: `Erreur lors de la suppression de l'item ${type}`, 
-          details: error.message 
-        });
-      }
-      break;
 
-    default:
-      res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
-      res.status(405).end(`Méthode ${method} non autorisée`);
+      case 'DELETE':
+        {
+          if (!id) {
+            return res.status(400).json({
+              error: 'ID manquant pour la suppression'
+            });
+          }
+
+          const result = await sql`
+            DELETE FROM items
+            WHERE id = ${id} AND type = ${type}
+            RETURNING *
+          `;
+
+          if (result.rows.length === 0) {
+            return res.status(404).json({
+              error: 'Item non trouvé'
+            });
+          }
+
+          return res.status(200).json({
+            message: 'Item supprimé avec succès',
+            id: id
+          });
+        }
+
+      default:
+        res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
+        return res.status(405).json({
+          error: `Méthode ${method} non autorisée`
+        });
+    }
+  } catch (error) {
+    console.error('API Error:', error);
+    if (error.message.includes('relation "items" does not exist')) {
+      // Si la table n'existe pas, on l'initialise
+      const initialized = await initializeTable();
+      if (initialized) {
+        // On réessaie la requête une fois
+        return handler(req, res);
+      }
+    }
+    return res.status(500).json({
+      error: 'Erreur lors du traitement de la requête',
+      details: error.message
+    });
   }
 }
