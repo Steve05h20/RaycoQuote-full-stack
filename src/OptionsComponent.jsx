@@ -144,11 +144,10 @@ function ImprovedOptionsInstallationsComponent() {
           <h1 className="text-3xl font-bold text-gray-800">
             Gestion des {selectedType === 'options' ? 'Options' : 'Installations'}
           </h1>
-          <Link  onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-300" to={"/"}>Retour au formulaire</Link>
+          <button  onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-300" >Se déconnecter </button>
         </div>
 
         <div className="mb-6 flex justify-center">
-          <Link className='bg-zinc-700 text-white mx-5 my-10 px-5 py-2' to={"/"}>Retour au formulaire</Link>
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
