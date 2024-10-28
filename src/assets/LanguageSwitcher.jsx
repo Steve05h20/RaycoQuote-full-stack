@@ -31,6 +31,8 @@ const LanguageSwitcher = () => {
                 ES
             </button>
             <Link className='px-2 py-1 rounded bg-gray-200 hover:bg-blue-500 hover:text-white' to={"/admin"}>admin</Link>
+            <Link className='px-2 py-1 rounded bg-gray-200 hover:bg-blue-500 hover:text-white' to={"/admin2"}>admin2</Link>
+
             <PriceCalculatorWidget/>
         </div>
     );
