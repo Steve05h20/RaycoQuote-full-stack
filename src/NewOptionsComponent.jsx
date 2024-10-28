@@ -84,7 +84,7 @@ function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mb-8 bg-white rounded-xl shadow-lg overflow-hidden">
+    <form onSubmit={handleSubmit(onSubmit)} className="mb-8 bg-white w-[1200px] mx-auto rounded-xl shadow-lg overflow-hidden">
       {/* Header */}
       <div className="bg-gray-50 px-6 py-4 border-b">
         <h2 className="text-xl font-semibold text-gray-800">
