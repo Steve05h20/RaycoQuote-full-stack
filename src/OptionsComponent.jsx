@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
-import PropTypes from 'prop-types';
-import { PlusCircle, X, Edit2, Trash2, Lock, LogOut, Image as ImageIcon, Globe, Loader } from 'lucide-react';
 
-// Password Protection Component
 function PasswordProtection({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
-  const correctPassword = 'mkt2.0';
+  const correctPassword = 'mkt2.0'; // Remplacez par votre mot de passe choisi
 
   useEffect(() => {
     const auth = localStorage.getItem('isAuthenticated');
-    if (auth === 'true') setIsAuthenticated(true);
+    if (auth === 'true') {
+      setIsAuthenticated(true);
+    }
   }, []);
 
   const handleSubmit = (e) => {
@@ -27,207 +24,38 @@ function PasswordProtection({ children }) {
   };
 
   if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
-        <div className="w-full max-w-md">
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
-            <div className="flex items-center justify-center mb-6">
-              <Lock className="w-12 h-12 text-blue-500" />
-            </div>
-            <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">Accès Protégé</h2>
-            <div className="space-y-4">
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Entrez le mot de passe"
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-              />
-              <button 
-                type="submit" 
-                className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-all duration-200 font-medium"
-              >
-                Accéder
-              </button>
-            </div>
-          </form>
-          <Link 
-            className="mt-6 block text-center text-gray-600 hover:text-gray-800 transition-colors"
-            to="/"
-          >
-            Retour au formulaire
-          </Link>
-        </div>
+    return (<>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold mb-4 text-center">Accès Protégé</h2>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Entrez le mot de passe"
+            className="w-full p-2 mb-4 border rounded"
+          />
+          <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+            Accéder
+          </button>  
+        </form>
+          <Link className='bg-zinc-700 text-white my-24 px-5 py-2' to={"/"}>Retour au formulaire</Link>
       </div>
+   
+      </>
     );
   }
 
   return children;
 }
 
-// Item Form Component
-function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
-  const defaultValues = {
-    title: '',
-    title_en: '',
-    title_es: '',
-    description: '',
-    description_en: '',
-    description_es: '',
-    image: ''
-  };
-
-  const { register, handleSubmit, reset } = useForm({
-    defaultValues: initialData.id ? initialData : defaultValues
-  });
-
-  useEffect(() => {
-    if (initialData.id) {
-      reset(initialData);
-    } else {
-      reset(defaultValues);
-    }
-  }, [initialData, reset]);
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-2xl shadow-lg mb-8">
-      <div className="p-6 border-b border-gray-100">
-        <h2 className="text-xl font-semibold text-gray-800 flex items-center">
-          <PlusCircle className="w-6 h-6 mr-2 text-blue-500" />
-          {initialData.id ? 'Modifier l\'élément' : 'Ajouter un nouvel élément'}
-        </h2>
-      </div>
-
-      <div className="p-6 space-y-6">
-        {/* Image URL Field */}
-        <div className="bg-gray-50 p-4 rounded-xl">
-          <div className="flex items-center mb-2">
-            <ImageIcon className="w-5 h-5 mr-2 text-gray-500" />
-            <label className="text-sm font-medium text-gray-700">URL de l'image</label>
-          </div>
-          <input
-            {...register('image')}
-            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-            placeholder="https://example.com/image.jpg"
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* French Section */}
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                <span className="text-blue-600 font-semibold">FR</span>
-              </div>
-              <h3 className="text-lg font-medium text-gray-800">Français</h3>
-            </div>
-            <div>
-              <input
-                {...register('title')}
-                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                placeholder="Titre en français"
-              />
-            </div>
-            <div>
-              <textarea
-                {...register('description')}
-                rows={4}
-                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                placeholder="Description en français"
-              />
-            </div>
-          </div>
-
-          {/* English Section */}
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
-                <span className="text-green-600 font-semibold">EN</span>
-              </div>
-              <h3 className="text-lg font-medium text-gray-800">English</h3>
-            </div>
-            <div>
-              <input
-                {...register('title_en')}
-                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                placeholder="Title in English"
-              />
-            </div>
-            <div>
-              <textarea
-                {...register('description_en')}
-                rows={4}
-                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                placeholder="Description in English"
-              />
-            </div>
-          </div>
-
-          {/* Spanish Section */}
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center mr-2">
-                <span className="text-yellow-600 font-semibold">ES</span>
-              </div>
-              <h3 className="text-lg font-medium text-gray-800">Español</h3>
-            </div>
-            <div>
-              <input
-                {...register('title_es')}
-                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all"
-                placeholder="Título en español"
-              />
-            </div>
-            <div>
-              <textarea
-                {...register('description_es')}
-                rows={4}
-                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all"
-                placeholder="Descripción en español"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="p-6 bg-gray-50 rounded-b-2xl flex justify-end space-x-3">
-        {initialData.id && (
-          <button
-            type="button"
-            onClick={onCancel}
-            className="px-4 py-2 text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200"
-          >
-            Annuler
-          </button>
-        )}
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200 flex items-center"
-        >
-          {isSubmitting ? (
-            <>
-              <Loader className="w-4 h-4 mr-2 animate-spin" />
-              Traitement...
-            </>
-          ) : (
-            initialData.id ? 'Mettre à jour' : 'Ajouter'
-          )}
-        </button>
-      </div>
-    </form>
-  );
-}
-
-// Main Component
-function ModernOptionsInstallationsComponent() {
-  const { i18n } = useTranslation();
+function ImprovedOptionsInstallationsComponent() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedType, setSelectedType] = useState('options');
+  const [formData, setFormData] = useState({ title: '', description: '', image: '' });
   const [editingId, setEditingId] = useState(null);
-  const [submitStatus, setSubmitStatus] = useState({ loading: false, error: null });
+  const [selectedType, setSelectedType] = useState('options');
 
   useEffect(() => {
     fetchItems();
@@ -235,252 +63,185 @@ function ModernOptionsInstallationsComponent() {
 
   const fetchItems = async () => {
     try {
-      setLoading(true);
-      const response = await fetch(`/api/items?type=${selectedType}`);
-      if (!response.ok) throw new Error(`Erreur HTTP! statut: ${response.status}`);
+      const response = await fetch(`/api/${selectedType}`);
+      if (!response.ok) throw new Error(`Erreur lors de la récupération des ${selectedType}`);
       const data = await response.json();
       setItems(data);
+      setLoading(false);
     } catch (err) {
       setError(err.message);
-    } finally {
       setLoading(false);
     }
   };
 
-  const handleFormSubmit = async (data) => {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      setSubmitStatus({ loading: true, error: null });
-      const url = editingId 
-        ? `/api/items?type=${selectedType}&id=${editingId}`
-        : `/api/items?type=${selectedType}`;
-      
+      const url = editingId ? `/api/${selectedType}?id=${editingId}` : `/api/${selectedType}`;
+      const method = editingId ? 'PUT' : 'POST';
+
       const response = await fetch(url, {
-        method: editingId ? 'PUT' : 'POST',
+        method: method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(formData)
       });
 
-      if (!response.ok) throw new Error(`Erreur HTTP! statut: ${response.status}`);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || `Erreur lors de l'enregistrement de l'${selectedType}`);
+      }
+
       const savedItem = await response.json();
-      
-      setItems(prevItems => 
-        editingId
-          ? prevItems.map(item => item.id === editingId ? savedItem : item)
-          : [...prevItems, savedItem]
-      );
-      
+
+      if (editingId) {
+        setItems(items.map(item => item.id === editingId ? savedItem : item));
+      } else {
+        setItems([...items, savedItem]);
+      }
+
+      setFormData({ title: '', description: '', image: '' });
       setEditingId(null);
     } catch (err) {
-      setSubmitStatus({ loading: false, error: err.message });
-    } finally {
-      setSubmitStatus({ loading: false, error: null });
+      setError(err.message);
     }
+  };
+
+  const handleEdit = (item) => {
+    setFormData(item);
+    setEditingId(item.id);
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) return;
-    
     try {
-      setSubmitStatus({ loading: true, error: null });
-      const response = await fetch(`/api/items?type=${selectedType}&id=${id}`, {
-        method: 'DELETE'
-      });
-      
-      if (!response.ok) throw new Error(`Erreur HTTP! statut: ${response.status}`);
-      setItems(prevItems => prevItems.filter(item => item.id !== id));
+      const response = await fetch(`/api/${selectedType}?id=${id}`, { method: 'DELETE' });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || `Erreur lors de la suppression de l'${selectedType}`);
+      }
+      setItems(items.filter(item => item.id !== id));
     } catch (err) {
-      setSubmitStatus({ loading: false, error: err.message });
-    } finally {
-      setSubmitStatus({ loading: false, error: null });
+      setError(err.message);
     }
   };
 
-  const getLocalizedContent = (item, field) => {
-    const lang = i18n.language;
-    return item[`${field}_${lang}`] || item[field];
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
+    window.location.reload();
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="flex items-center space-x-2">
-          <Loader className="w-6 h-6 text-blue-500 animate-spin" />
-          <span className="text-gray-600">Chargement...</span>
-        </div>
-      </div>
-    );
-  }
+  if (loading) return <div className="text-center py-4">Chargement...</div>;
+  if (error) return <div className="text-center py-4 text-red-500">Erreur : {error}</div>;
 
   return (
     <PasswordProtection>
-      <div className="min-h-screen bg-gray-50 px-4 py-8">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
-              <div className="flex items-center">
-                <Globe className="w-8 h-8 text-blue-500 mr-3" />
-                <h1 className="text-2xl font-bold text-gray-800">
-                  Gestion des {selectedType === 'options' ? 'Options' : 'Installations'}
-                </h1>
-              </div>
-              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
-                <select
-                  value={selectedType}
-                  onChange={(e) => setSelectedType(e.target.value)}
-                  className="p-2 border border-gray-200 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                >
-                  <option value="options">Options</option>
-                  <option value="installations">Installations</option>
-                </select>
-                <button
-                  onClick={() => {
-                    localStorage.removeItem('isAuthenticated');
-                    window.location.reload();
-                  }}
-                  className="flex items-center justify-center px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all duration-200"
-                >
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Se déconnecter
-                </button>
-              </div>
-            </div>
+      <div className="container mx-auto p-4 bg-gray-100 min-h-screen">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-gray-800">
+            Gestion des {selectedType === 'options' ? 'Options' : 'Installations'}
+          </h1>
+          <button  onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-300" >Se déconnecter </button>
+        </div>
+
+        <div className="mb-6 flex justify-center">
+          <select
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
+            className="p-2 border rounded-md shadow-sm bg-white text-gray-700"
+          >
+            <option value="options">Options</option>
+            <option value="installations">Installations</option>
+          </select>
+        </div>
+
+        <form onSubmit={handleSubmit} className="mb-8 bg-white p-6 rounded-lg shadow-md">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleInputChange}
+              placeholder="Titre"
+              required
+              className="p-2 border rounded-md"
+            />
+            <input
+              type="text"
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              placeholder="Description"
+              className="p-2 border rounded-md"
+            />
+            <input
+              type="text"
+              name="image"
+              value={formData.image}
+              onChange={handleInputChange}
+              placeholder="URL de l'image"
+              className="p-2 border rounded-md"
+            />
           </div>
-
-          {/* Form */}
-          <ItemForm
-            onSubmit={handleFormSubmit}
-            initialData={editingId ? items.find(item => item.id === editingId) : {}}
-            onCancel={() => setEditingId(null)}
-            isSubmitting={submitStatus.loading}
-          />
-
-      {/* Items Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {items.map(item => (
-              <div key={item.id} className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div className="flex flex-col md:flex-row">
-                  {/* Image Section */}
-                  <div className="w-full md:w-1/3 bg-gray-50 p-6 flex items-center justify-center">
-                    {item.image ? (
-                      <img 
-                        src={item.image} 
-                        alt={getLocalizedContent(item, 'title')}
-                        className="w-32 h-32 object-cover rounded-xl shadow-md" 
-                      />
-                    ) : (
-                      <div className="w-32 h-32 bg-gray-100 rounded-xl flex items-center justify-center">
-                        <ImageIcon className="w-12 h-12 text-gray-400" />
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Content Section */}
-                  <div className="w-full md:w-2/3 p-6 flex flex-col justify-between">
-                    {/* Language Tabs */}
-                    <div className="space-y-4">
-                      <div className="flex space-x-2 mb-4">
-                        {['FR', 'EN', 'ES'].map((lang) => (
-                          <div 
-                            key={lang}
-                            className={`px-3 py-1 text-xs font-medium rounded-full ${
-                              lang === 'FR' 
-                                ? 'bg-blue-100 text-blue-600'
-                                : lang === 'EN'
-                                  ? 'bg-green-100 text-green-600'
-                                  : 'bg-yellow-100 text-yellow-600'
-                            }`}
-                          >
-                            {lang}
-                          </div>
-                        ))}
-                      </div>
-
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-800 mb-2">
-                          {getLocalizedContent(item, 'title')}
-                        </h3>
-                        <p className="text-gray-600 line-clamp-3">
-                          {getLocalizedContent(item, 'description')}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex justify-end mt-4 space-x-2">
-                      <button
-                        onClick={() => setEditingId(item.id)}
-                        className="flex items-center px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200"
-                      >
-                        <Edit2 className="w-4 h-4 mr-1" />
-                        Modifier
-                      </button>
-                      <button
-                        onClick={() => handleDelete(item.id)}
-                        className="flex items-center px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all duration-200"
-                      >
-                        <Trash2 className="w-4 h-4 mr-1" />
-                        Supprimer
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="mt-4 flex justify-end">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+            >
+              {editingId ? 'Mettre à jour' : 'Ajouter'}
+            </button>
+            {editingId && (
+              <button
+                onClick={() => { setEditingId(null); setFormData({ title: '', description: '', image: '' }); }}
+                className="ml-2 bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400 transition duration-300"
+              >
+                Annuler
+              </button>
+            )}
           </div>
+        </form>
 
-          {/* Empty State */}
-          {items.length === 0 && !loading && (
-            <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
-              <div className="flex justify-center mb-4">
-                <ImageIcon className="w-16 h-16 text-gray-400" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {items.map(item => (
+            <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden flex">
+              <div className="w-1/3 bg-gray-200 flex items-center justify-center p-4">
+                {item.image ? (
+                  <img src={item.image} alt={item.title} className="w-24 h-24 object-cover object-left" />
+                ) : (
+                  <div className="w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center text-gray-500">
+                    <span className="text-3xl">?</span>
+                  </div>
+                )}
               </div>
-              <h3 className="text-xl font-medium text-gray-800 mb-2">
-                Aucun {selectedType === 'options' ? 'option' : 'installation'} disponible
-              </h3>
-              <p className="text-gray-600">
-                Commencez par ajouter un nouvel élément en utilisant le formulaire ci-dessus.
-              </p>
-            </div>
-          )}
-
-          {/* Error Toast */}
-          {error && (
-            <div className="fixed bottom-4 right-4 bg-white rounded-xl shadow-lg border-l-4 border-red-500 p-4">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <X className="h-5 w-5 text-red-500" />
+              <div className="w-2/3 p-4 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-lg font-bold text-gray-800 mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-600">{item.description}</p>
                 </div>
-                <div className="ml-3">
-                  <p className="text-sm text-red-600">{error}</p>
-                </div>
-                <div className="ml-auto pl-3">
+                <div className="mt-4 flex justify-end space-x-2">
                   <button
-                    onClick={() => setError(null)}
-                    className="text-gray-400 hover:text-gray-500 focus:outline-none"
+                    onClick={() => handleEdit(item)}
+                    className="bg-blue-500 text-white text-xs px-2 py-1 rounded hover:bg-blue-600 transition duration-300"
                   >
-                    <X className="h-5 w-5" />
+                    Modifier
+                  </button>
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className="bg-red-500 text-white text-xs px-2 py-1 rounded hover:bg-red-600 transition duration-300"
+                  >
+                    Supprimer
                   </button>
                 </div>
               </div>
             </div>
-          )}
-
-          {/* Loading Overlay */}
-          {submitStatus.loading && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-              <div className="bg-white rounded-2xl shadow-xl p-6">
-                <div className="flex items-center space-x-3">
-                  <Loader className="w-6 h-6 text-blue-500 animate-spin" />
-                  <p className="text-gray-700">Traitement en cours...</p>
-                </div>
-              </div>
-            </div>
-          )}
+          ))}
         </div>
       </div>
     </PasswordProtection>
   );
 }
 
-export { ModernOptionsInstallationsComponent as default, PasswordProtection };
+export default ImprovedOptionsInstallationsComponent;
