@@ -254,7 +254,12 @@ const RaycoQuote2 = () => {
     };
 
     const handleAdditionalOfferSelect = (option) => {
-        setSelectedAdditionalOption(option);
+        // setSelectedAdditionalOption(option);
+        // setIsAdditionalOfferDropdownOpen(false);
+        if (selectedAdditionalOption.length < 3 && !selectedOptions.includes(option.id)) {
+            setSelectedAdditionalOption(false);
+            ([...selectedOptions, option.id]);
+        }
         setIsAdditionalOfferDropdownOpen(false);
     };
 
