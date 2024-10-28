@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
-// Composant de protection par mot de passe
+// Composant de protection par mot de passe reste inchangé
 function PasswordProtection({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
@@ -11,9 +12,7 @@ function PasswordProtection({ children }) {
 
   useEffect(() => {
     const auth = localStorage.getItem('isAuthenticated');
-    if (auth === 'true') {
-      setIsAuthenticated(true);
-    }
+    if (auth === 'true') setIsAuthenticated(true);
   }, []);
 
   const handleSubmit = (e) => {
@@ -40,9 +39,11 @@ function PasswordProtection({ children }) {
           />
           <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
             Accéder
-          </button>  
+          </button>
         </form>
-        <Link className='bg-zinc-700 text-white my-24 px-5 py-2' to={"/"}>Retour au formulaire</Link>
+        <Link className="bg-zinc-700 text-white my-24 px-5 py-2" to="/">
+          Retour au formulaire
+        </Link>
       </div>
     );
   }
@@ -51,8 +52,124 @@ function PasswordProtection({ children }) {
 }
 
 PasswordProtection.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
+
+function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: initialData
+  });
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="mb-8 bg-white p-6 rounded-lg shadow-md space-y-6">
+      {/* Section Français */}
+      <div className="border-b pb-6">
+        <h2 className="text-xl font-semibold mb-4 text-blue-600">Français</h2>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Titre (FR) *</label>
+            <input
+              {...register('title', { required: true })}
+              className="w-full p-2 border rounded-md"
+              placeholder="Titre en français"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Description (FR)</label>
+            <textarea
+              {...register('description')}
+              rows={3}
+              className="w-full p-2 border rounded-md"
+              placeholder="Description en français"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Section Anglais */}
+      <div className="border-b pb-6">
+        <h2 className="text-xl font-semibold mb-4 text-green-600">English</h2>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Title (EN)</label>
+            <input
+              {...register('title_en')}
+              className="w-full p-2 border rounded-md"
+              placeholder="Title in English"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Description (EN)</label>
+            <textarea
+              {...register('description_en')}
+              rows={3}
+              className="w-full p-2 border rounded-md"
+              placeholder="Description in English"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Section Espagnol */}
+      <div className="border-b pb-6">
+        <h2 className="text-xl font-semibold mb-4 text-yellow-600">Español</h2>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Título (ES)</label>
+            <input
+              {...register('title_es')}
+              className="w-full p-2 border rounded-md"
+              placeholder="Título en español"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Descripción (ES)</label>
+            <textarea
+              {...register('description_es')}
+              rows={3}
+              className="w-full p-2 border rounded-md"
+              placeholder="Descripción en español"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Section Image */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">URL de l'image</label>
+        <input
+          {...register('image')}
+          className="w-full p-2 border rounded-md"
+          placeholder="URL de l'image"
+        />
+      </div>
+
+      <div className="flex justify-end space-x-2 pt-4">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className={`px-4 py-2 rounded-md text-white ${
+            isSubmitting ? 'bg-gray-400' : 'bg-blue-500 hover:bg-blue-600'
+          } transition duration-300`}
+        >
+          {isSubmitting ? 'Traitement...' : initialData.id ? 'Mettre à jour' : 'Ajouter'}
+        </button>
+        {initialData.id && (
+          <button
+            type="button"
+            onClick={() => {
+              reset();
+              onCancel();
+            }}
+            className="bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400 transition duration-300"
+          >
+            Annuler
+          </button>
+        )}
+      </div>
+    </form>
+  );
+}
 
 function ImprovedOptionsInstallationsComponent2() {
   const { i18n } = useTranslation();
@@ -63,18 +180,6 @@ function ImprovedOptionsInstallationsComponent2() {
   const [editingId, setEditingId] = useState(null);
   const [submitStatus, setSubmitStatus] = useState({ loading: false, error: null });
 
-  const initialFormState = {
-    title: '',
-    title_en: '',
-    title_es: '',
-    description: '',
-    description_en: '',
-    description_es: '',
-    image: ''
-  };
-
-  const [formData, setFormData] = useState(initialFormState);
-
   useEffect(() => {
     fetchItems();
   }, [selectedType]);
@@ -83,9 +188,7 @@ function ImprovedOptionsInstallationsComponent2() {
     try {
       setLoading(true);
       const response = await fetch(`/api/items?type=${selectedType}`);
-      if (!response.ok) {
-        throw new Error(`Erreur HTTP! statut: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`Erreur HTTP! statut: ${response.status}`);
       const data = await response.json();
       setItems(data);
     } catch (err) {
@@ -95,64 +198,36 @@ function ImprovedOptionsInstallationsComponent2() {
     }
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
+  const handleFormSubmit = async (data) => {
     try {
-      if (!formData.title.trim()) {
-        throw new Error('Le titre en français est requis');
-      }
-
       setSubmitStatus({ loading: true, error: null });
       
       const url = editingId 
-        ? `/api/items?type=${selectedType}&id=${editingId}` 
+        ? `/api/items?type=${selectedType}&id=${editingId}`
         : `/api/items?type=${selectedType}`;
       
       const response = await fetch(url, {
         method: editingId ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(data)
       });
 
-      if (!response.ok) {
-        throw new Error(`Erreur HTTP! statut: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`Erreur HTTP! statut: ${response.status}`);
 
       const savedItem = await response.json();
       
-      if (editingId) {
-        setItems(prevItems => prevItems.map(item => item.id === editingId ? savedItem : item));
-      } else {
-        setItems(prevItems => [...prevItems, savedItem]);
-      }
-
-      setFormData(initialFormState);
-      setEditingId(null);
+      setItems(prevItems => 
+        editingId
+          ? prevItems.map(item => item.id === editingId ? savedItem : item)
+          : [...prevItems, savedItem]
+      );
       
+      setEditingId(null);
     } catch (err) {
       setSubmitStatus({ loading: false, error: err.message });
     } finally {
       setSubmitStatus({ loading: false, error: null });
     }
-  };
-
-  const handleEdit = (item) => {
-    setFormData({
-      title: item.title || '',
-      title_en: item.title_en || '',
-      title_es: item.title_es || '',
-      description: item.description || '',
-      description_en: item.description_en || '',
-      description_es: item.description_es || '',
-      image: item.image || ''
-    });
-    setEditingId(item.id);
   };
 
   const handleDelete = async (id) => {
@@ -164,10 +239,8 @@ function ImprovedOptionsInstallationsComponent2() {
         method: 'DELETE'
       });
       
-      if (!response.ok) {
-        throw new Error(`Erreur HTTP! statut: ${response.status}`);
-      }
-
+      if (!response.ok) throw new Error(`Erreur HTTP! statut: ${response.status}`);
+      
       setItems(prevItems => prevItems.filter(item => item.id !== id));
     } catch (err) {
       setSubmitStatus({ loading: false, error: err.message });
@@ -178,21 +251,16 @@ function ImprovedOptionsInstallationsComponent2() {
 
   const getLocalizedContent = (item, field) => {
     const lang = i18n.language;
-    switch (lang) {
-      case 'en':
-        return item[`${field}_en`] || item[field];
-      case 'es':
-        return item[`${field}_es`] || item[field];
-      default:
-        return item[field];
-    }
+    return item[`${field}_${lang}`] || item[field];
   };
 
-  if (loading) return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="text-center py-4">Chargement...</div>
-    </div>
-  );
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="text-center py-4">Chargement...</div>
+      </div>
+    );
+  }
 
   return (
     <PasswordProtection>
@@ -222,166 +290,12 @@ function ImprovedOptionsInstallationsComponent2() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="mb-8 bg-white p-6 rounded-lg shadow-md space-y-6">
-          {/* Section Français */}
-          <div className="border-b pb-6">
-            <h2 className="text-xl font-semibold mb-4 text-blue-600">Français</h2>
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
-                  Titre (FR) *
-                </label>
-                <input
-                  id="title"
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full p-2 border rounded-md"
-                  placeholder="Titre en français"
-                />
-              </div>
-              <div>
-                <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
-                  Description (FR)
-                </label>
-                <textarea
-                  id="description"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                  rows={3}
-                  className="w-full p-2 border rounded-md"
-                  placeholder="Description en français"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Section Anglais */}
-          <div className="border-b pb-6">
-            <h2 className="text-xl font-semibold mb-4 text-green-600">English</h2>
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="title_en" className="block text-sm font-medium text-gray-700 mb-1">
-                  Title (EN)
-                </label>
-                <input
-                  id="title_en"
-                  type="text"
-                  name="title_en"
-                  value={formData.title_en}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border rounded-md"
-                  placeholder="Title in English"
-                />
-              </div>
-              <div>
-                <label htmlFor="description_en" className="block text-sm font-medium text-gray-700 mb-1">
-                  Description (EN)
-                </label>
-                <textarea
-                  id="description_en"
-                  name="description_en"
-                  value={formData.description_en}
-                  onChange={handleInputChange}
-                  rows={3}
-                  className="w-full p-2 border rounded-md"
-                  placeholder="Description in English"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Section Espagnol */}
-          <div className="border-b pb-6">
-            <h2 className="text-xl font-semibold mb-4 text-yellow-600">Español</h2>
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="title_es" className="block text-sm font-medium text-gray-700 mb-1">
-                  Título (ES)
-                </label>
-                <input
-                  id="title_es"
-                  type="text"
-                  name="title_es"
-                  value={formData.title_es}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border rounded-md"
-                  placeholder="Título en español"
-                />
-              </div>
-              <div>
-                <label htmlFor="description_es" className="block text-sm font-medium text-gray-700 mb-1">
-                  Descripción (ES)
-                </label>
-                <textarea
-                  id="description_es"
-                  name="description_es"
-                  value={formData.description_es}
-                  onChange={handleInputChange}
-                  rows={3}
-                  className="w-full p-2 border rounded-md"
-                  placeholder="Descripción en español"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Section Image */}
-          <div>
-            <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">
-              URL de l'image
-            </label>
-            <input
-              id="image"
-              type="text"
-              name="image"
-              value={formData.image}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded-md"
-              placeholder="URL de l'image"
-            />
-          </div>
-
-          {submitStatus.error && (
-            <div className="p-3 bg-red-100 border-l-4 border-red-500 text-red-700">
-              {submitStatus.error}
-            </div>
-          )}
-
-          <div className="flex justify-end space-x-2 pt-4">
-            <button
-              type="submit"
-              disabled={submitStatus.loading}
-              className={`
-                px-4 py-2 rounded-md text-white
-                ${submitStatus.loading 
-                  ? 'bg-gray-400 cursor-not-allowed' 
-                  : 'bg-blue-500 hover:bg-blue-600'}
-                transition duration-300
-              `}
-            >
-              {submitStatus.loading 
-                ? 'Traitement...' 
-                : (editingId ? 'Mettre à jour' : 'Ajouter')
-              }
-            </button>
-            {editingId && (
-              <button
-                type="button"
-                onClick={() => {
-                  setEditingId(null);
-                  setFormData(initialFormState);
-                }}
-                className="bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400 transition duration-300"
-              >
-                Annuler
-              </button>
-            )}
-          </div>
-        </form>
+        <ItemForm
+          onSubmit={handleFormSubmit}
+          initialData={editingId ? items.find(item => item.id === editingId) : {}}
+          onCancel={() => setEditingId(null)}
+          isSubmitting={submitStatus.loading}
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map(item => (
@@ -397,8 +311,8 @@ function ImprovedOptionsInstallationsComponent2() {
                 </div>
                 {item.image && (
                   <div className="mb-4">
-                    <img 
-                      src={item.image} 
+                    <img
+                      src={item.image}
                       alt={getLocalizedContent(item, 'title')}
                       className="w-full h-48 object-cover rounded"
                     />
@@ -406,7 +320,7 @@ function ImprovedOptionsInstallationsComponent2() {
                 )}
                 <div className="flex justify-end space-x-2">
                   <button
-                    onClick={() => handleEdit(item)}
+                    onClick={() => setEditingId(item.id)}
                     className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition duration-300"
                     disabled={submitStatus.loading}
                   >
@@ -419,12 +333,12 @@ function ImprovedOptionsInstallationsComponent2() {
                   >
                     Supprimer
                   </button>
-                </div>  </div>
+                </div>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Message si aucun élément */}
         {items.length === 0 && !loading && (
           <div className="text-center py-8 bg-white rounded-lg shadow-md">
             <p className="text-gray-500">
@@ -433,34 +347,18 @@ function ImprovedOptionsInstallationsComponent2() {
           </div>
         )}
 
-        {/* Message d'erreur global */}
         {error && (
           <div className="fixed bottom-4 right-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded shadow-lg">
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="ml-3">
-                <p className="text-sm">{error}</p>
-              </div>
-              <div className="pl-3 ml-auto">
-                <button
-                  onClick={() => setError(null)}
-                  className="inline-flex text-red-400 hover:text-red-500"
-                >
-                  <span className="sr-only">Fermer</span>
-                  <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </button>
-              </div>
-            </div>
+            <p>{error}</p>
+            <button
+              onClick={() => setError(null)}
+              className="absolute top-2 right-2 text-red-500 hover:text-red-700"
+            >
+              ×
+            </button>
           </div>
         )}
 
-        {/* Spinner de chargement pour les actions */}
         {submitStatus.loading && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div className="bg-white p-4 rounded-lg shadow-xl">
