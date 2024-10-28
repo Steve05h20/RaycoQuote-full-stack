@@ -65,8 +65,7 @@ function PasswordProtection({ children }) {
   return children;
 }
 
-// Item Form Component
-function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
+const ItemForm = ({ onSubmit, initialData = {}, onCancel, isSubmitting }) => {
   const defaultValues = {
     title: '',
     title_en: '',
@@ -81,7 +80,7 @@ function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
     defaultValues: initialData.id ? initialData : defaultValues
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (initialData.id) {
       reset(initialData);
     } else {
@@ -90,7 +89,7 @@ function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
   }, [initialData, reset]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-2xl shadow-lg mb-8">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full bg-white rounded-2xl shadow-lg mb-8">
       <div className="p-6 border-b border-gray-100">
         <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
           <PlusCircle className="w-6 h-6 mr-2 text-blue-500" />
@@ -98,7 +97,7 @@ function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
         </h2>
       </div>
 
-      <div className="p-8 space-y-12">
+      <div className="p-8 space-y-8">
         {/* Image URL Field */}
         <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
           <div className="flex items-center mb-4">
@@ -112,10 +111,10 @@ function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
           />
         </div>
 
-        {/* Language Sections */}
-        <div className="grid grid-cols-1 gap-12">
+        {/* Language Sections - Three Columns */}
+        <div className="grid grid-cols-3 gap-6">
           {/* French Section */}
-          <div className="bg-white p-6 rounded-xl border-2 border-blue-100">
+          <div className="bg-white p-6 rounded-xl border-2 border-blue-100 h-full">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-3">
                 <span className="text-blue-600 font-bold text-lg">FR</span>
@@ -148,7 +147,7 @@ function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
           </div>
 
           {/* English Section */}
-          <div className="bg-white p-6 rounded-xl border-2 border-green-100">
+          <div className="bg-white p-6 rounded-xl border-2 border-green-100 h-full">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-3">
                 <span className="text-green-600 font-bold text-lg">EN</span>
@@ -181,7 +180,7 @@ function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
           </div>
 
           {/* Spanish Section */}
-          <div className="bg-white p-6 rounded-xl border-2 border-yellow-100">
+          <div className="bg-white p-6 rounded-xl border-2 border-yellow-100 h-full">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
                 <span className="text-yellow-600 font-bold text-lg">ES</span>
@@ -242,7 +241,7 @@ function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
       </div>
     </form>
   );
-}
+};
 
 // Main Component
 function ModernOptionsInstallationsComponent() {
