@@ -56,14 +56,32 @@ PasswordProtection.propTypes = {
 };
 
 function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
+  const defaultValues = {
+    title: '',
+    title_en: '',
+    title_es: '',
+    description: '',
+    description_en: '',
+    description_es: '',
+    image: ''
+  };
+
   const { register, handleSubmit, reset } = useForm({
-    defaultValues: initialData
+    defaultValues: initialData.id ? initialData : defaultValues
   });
 
-  // Ajout de useEffect pour réinitialiser le formulaire quand initialData change
   useEffect(() => {
-    reset(initialData);
+    if (initialData.id) {
+      reset(initialData);
+    } else {
+      reset(defaultValues);
+    }
   }, [initialData, reset]);
+
+  const handleCancel = () => {
+    reset(defaultValues);
+    onCancel();
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mb-8 bg-white p-6 rounded-lg shadow-md space-y-6">
@@ -162,10 +180,7 @@ function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
         {initialData.id && (
           <button
             type="button"
-            onClick={() => {
-              reset({}); // Reset avec un objet vide
-              onCancel();
-            }}
+            onClick={handleCancel}
             className="bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400 transition duration-300"
           >
             Annuler
