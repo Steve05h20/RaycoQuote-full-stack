@@ -29,24 +29,22 @@ function PasswordProtection({ children }) {
 
   if (!isAuthenticated) {
     return (
-      <>
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-          <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-4 text-center">Accès Protégé</h2>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Entrez le mot de passe"
-              className="w-full p-2 mb-4 border rounded"
-            />
-            <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-              Accéder
-            </button>  
-          </form>
-          <Link className='bg-zinc-700 text-white my-24 px-5 py-2' to={"/"}>Retour au formulaire</Link>
-        </div>
-      </>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold mb-4 text-center">Accès Protégé</h2>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Entrez le mot de passe"
+            className="w-full p-2 mb-4 border rounded"
+          />
+          <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+            Accéder
+          </button>  
+        </form>
+        <Link className='bg-zinc-700 text-white my-24 px-5 py-2' to={"/"}>Retour au formulaire</Link>
+      </div>
     );
   }
 
@@ -64,7 +62,9 @@ function ImprovedOptionsInstallationsComponent2() {
   const [error, setError] = useState(null);
   const [selectedType, setSelectedType] = useState('options');
   const [editingId, setEditingId] = useState(null);
-  
+  const [currentTab, setCurrentTab] = useState("fr");
+  const [submitStatus, setSubmitStatus] = useState({ loading: false, error: null });
+
   const initialFormState = {
     title: '',
     title_en: '',
@@ -83,15 +83,18 @@ function ImprovedOptionsInstallationsComponent2() {
 
   const fetchItems = async () => {
     try {
+      setLoading(true);
+      setError(null);
       const response = await fetch(`/api/items?type=${selectedType}`);
       if (!response.ok) {
-        throw new Error(`Erreur HTTP! statut: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(errorData.error || `Erreur HTTP! statut: ${response.status}`);
       }
       const data = await response.json();
       setItems(data);
-      setLoading(false);
     } catch (err) {
-      setError(err.message || 'Une erreur est survenue');
+      setError(err.message || 'Une erreur est survenue lors du chargement des données');
+    } finally {
       setLoading(false);
     }
   };
@@ -101,37 +104,62 @@ function ImprovedOptionsInstallationsComponent2() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const validateForm = () => {
+    if (!formData.title || formData.title.trim() === '') {
+      throw new Error('Le titre en français est requis');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     try {
+      // Validation du formulaire
+      validateForm();
+
+      setSubmitStatus({ loading: true, error: null });
+      
       const url = editingId 
         ? `/api/items?type=${selectedType}&id=${editingId}` 
         : `/api/items?type=${selectedType}`;
       
-      const method = editingId ? 'PUT' : 'POST';
-
       const response = await fetch(url, {
-        method,
+        method: editingId ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          title: formData.title.trim(),
+          title_en: formData.title_en?.trim() || null,
+          title_es: formData.title_es?.trim() || null,
+          description: formData.description?.trim() || null,
+          description_en: formData.description_en?.trim() || null,
+          description_es: formData.description_es?.trim() || null,
+          image: formData.image?.trim() || null
+        })
       });
 
       if (!response.ok) {
-        throw new Error(`Erreur HTTP! statut: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(errorData.error || `Erreur HTTP! statut: ${response.status}`);
       }
 
       const savedItem = await response.json();
 
-      if (editingId) {
-        setItems(items.map(item => item.id === editingId ? savedItem : item));
-      } else {
-        setItems([...items, savedItem]);
-      }
+      setItems(prevItems => 
+        editingId 
+          ? prevItems.map(item => item.id === editingId ? savedItem : item)
+          : [...prevItems, savedItem]
+      );
 
+      // Réinitialisation du formulaire
       setFormData(initialFormState);
       setEditingId(null);
+      setCurrentTab("fr");
+      
     } catch (err) {
-      setError(err.message || 'Une erreur est survenue');
+      setSubmitStatus({ loading: false, error: err.message });
+    } finally {
+      setSubmitStatus({ loading: false, error: null });
     }
   };
 
@@ -146,23 +174,30 @@ function ImprovedOptionsInstallationsComponent2() {
       image: item.image || ''
     });
     setEditingId(item.id);
+    setCurrentTab("fr");
   };
 
   const handleDelete = async (id) => {
     if (!window.confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) return;
     
     try {
+      setSubmitStatus({ loading: true, error: null });
+      
       const response = await fetch(`/api/items?type=${selectedType}&id=${id}`, {
         method: 'DELETE'
       });
       
       if (!response.ok) {
-        throw new Error(`Erreur HTTP! statut: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(errorData.error || `Erreur HTTP! statut: ${response.status}`);
       }
 
       setItems(items.filter(item => item.id !== id));
+      
     } catch (err) {
-      setError(err.message || 'Une erreur est survenue');
+      setSubmitStatus({ loading: false, error: err.message });
+    } finally {
+      setSubmitStatus({ loading: false, error: null });
     }
   };
 
@@ -178,8 +213,11 @@ function ImprovedOptionsInstallationsComponent2() {
     }
   };
 
-  if (loading) return <div className="text-center py-4">Chargement...</div>;
-  if (error) return <div className="text-center py-4 text-red-500">Erreur : {error}</div>;
+  if (loading) return (
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="text-center py-4">Chargement...</div>
+    </div>
+  );
 
   return (
     <PasswordProtection>
@@ -209,8 +247,14 @@ function ImprovedOptionsInstallationsComponent2() {
           </div>
         </div>
 
+        {error && (
+          <div className="mb-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700">
+            {error}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="mb-8 bg-white p-6 rounded-lg shadow-md">
-          <Tabs defaultValue="fr" className="w-full mb-6">
+          <Tabs value={currentTab} onValueChange={setCurrentTab} className="w-full mb-6">
             <TabsList className="mb-4">
               <TabsTrigger value="fr">Français</TabsTrigger>
               <TabsTrigger value="en">English</TabsTrigger>
@@ -293,12 +337,26 @@ function ImprovedOptionsInstallationsComponent2() {
             />
           </div>
 
+          {submitStatus.error && (
+            <div className="mt-4 p-3 bg-red-100 border-l-4 border-red-500 text-red-700">
+              {submitStatus.error}
+            </div>
+          )}
+
           <div className="mt-6 flex justify-end space-x-2">
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+              disabled={submitStatus.loading}
+              className={`px-4 py-2 rounded-md text-white transition duration-300 ${
+                submitStatus.loading 
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-blue-500 hover:bg-blue-600'
+              }`}
             >
-              {editingId ? 'Mettre à jour' : 'Ajouter'}
+              {submitStatus.loading 
+                ? 'Traitement...' 
+                : (editingId ? 'Mettre à jour' : 'Ajouter')
+              }
             </button>
             {editingId && (
               <button
@@ -306,6 +364,7 @@ function ImprovedOptionsInstallationsComponent2() {
                 onClick={() => {
                   setEditingId(null);
                   setFormData(initialFormState);
+                  setCurrentTab("fr");
                 }}
                 className="bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400 transition duration-300"
               >
@@ -340,12 +399,14 @@ function ImprovedOptionsInstallationsComponent2() {
                   <button
                     onClick={() => handleEdit(item)}
                     className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition duration-300"
+                    disabled={submitStatus.loading}
                   >
                     Modifier
                   </button>
                   <button
                     onClick={() => handleDelete(item.id)}
                     className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition duration-300"
+                    disabled={submitStatus.loading}
                   >
                     Supprimer
                   </button>
