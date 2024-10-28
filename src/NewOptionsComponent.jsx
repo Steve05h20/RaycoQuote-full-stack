@@ -60,6 +60,11 @@ function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
     defaultValues: initialData
   });
 
+  // Ajout de useEffect pour réinitialiser le formulaire quand initialData change
+  useEffect(() => {
+    reset(initialData);
+  }, [initialData, reset]);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mb-8 bg-white p-6 rounded-lg shadow-md space-y-6">
       {/* Section Français */}
@@ -158,7 +163,7 @@ function ItemForm({ onSubmit, initialData = {}, onCancel, isSubmitting }) {
           <button
             type="button"
             onClick={() => {
-              reset();
+              reset({}); // Reset avec un objet vide
               onCancel();
             }}
             className="bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400 transition duration-300"
