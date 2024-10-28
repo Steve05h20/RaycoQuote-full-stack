@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import PropTypes from 'prop-types';
 
 // Composant de protection par mot de passe
@@ -62,7 +61,6 @@ function ImprovedOptionsInstallationsComponent2() {
   const [error, setError] = useState(null);
   const [selectedType, setSelectedType] = useState('options');
   const [editingId, setEditingId] = useState(null);
-  const [currentTab, setCurrentTab] = useState("fr");
   const [submitStatus, setSubmitStatus] = useState({ loading: false, error: null });
 
   const initialFormState = {
@@ -84,11 +82,9 @@ function ImprovedOptionsInstallationsComponent2() {
   const fetchItems = async () => {
     try {
       setLoading(true);
-      setError(null);
       const response = await fetch(`/api/items?type=${selectedType}`);
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `Erreur HTTP! statut: ${response.status}`);
+        throw new Error(`Erreur HTTP! statut: ${response.status}`);
       }
       const data = await response.json();
       setItems(data);
@@ -104,18 +100,13 @@ function ImprovedOptionsInstallationsComponent2() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const validateForm = () => {
-    if (!formData.title || formData.title.trim() === '') {
-      throw new Error('Le titre en français est requis');
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
-      // Validation du formulaire
-      validateForm();
+      if (!formData.title.trim()) {
+        throw new Error('Le titre en français est requis');
+      }
 
       setSubmitStatus({ loading: true, error: null });
       
@@ -126,35 +117,23 @@ function ImprovedOptionsInstallationsComponent2() {
       const response = await fetch(url, {
         method: editingId ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          title: formData.title.trim(),
-          title_en: formData.title_en?.trim() || null,
-          title_es: formData.title_es?.trim() || null,
-          description: formData.description?.trim() || null,
-          description_en: formData.description_en?.trim() || null,
-          description_es: formData.description_es?.trim() || null,
-          image: formData.image?.trim() || null
-        })
+        body: JSON.stringify(formData)
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `Erreur HTTP! statut: ${response.status}`);
+        throw new Error(`Erreur HTTP! statut: ${response.status}`);
       }
 
       const savedItem = await response.json();
+      
+      if (editingId) {
+        setItems(prevItems => prevItems.map(item => item.id === editingId ? savedItem : item));
+      } else {
+        setItems(prevItems => [...prevItems, savedItem]);
+      }
 
-      setItems(prevItems => 
-        editingId 
-          ? prevItems.map(item => item.id === editingId ? savedItem : item)
-          : [...prevItems, savedItem]
-      );
-
-      // Réinitialisation du formulaire
       setFormData(initialFormState);
       setEditingId(null);
-      setCurrentTab("fr");
       
     } catch (err) {
       setSubmitStatus({ loading: false, error: err.message });
@@ -174,7 +153,6 @@ function ImprovedOptionsInstallationsComponent2() {
       image: item.image || ''
     });
     setEditingId(item.id);
-    setCurrentTab("fr");
   };
 
   const handleDelete = async (id) => {
@@ -182,18 +160,15 @@ function ImprovedOptionsInstallationsComponent2() {
     
     try {
       setSubmitStatus({ loading: true, error: null });
-      
       const response = await fetch(`/api/items?type=${selectedType}&id=${id}`, {
         method: 'DELETE'
       });
       
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `Erreur HTTP! statut: ${response.status}`);
+        throw new Error(`Erreur HTTP! statut: ${response.status}`);
       }
 
-      setItems(items.filter(item => item.id !== id));
-      
+      setItems(prevItems => prevItems.filter(item => item.id !== id));
     } catch (err) {
       setSubmitStatus({ loading: false, error: err.message });
     } finally {
@@ -247,111 +222,146 @@ function ImprovedOptionsInstallationsComponent2() {
           </div>
         </div>
 
-        {error && (
-          <div className="mb-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="mb-8 bg-white p-6 rounded-lg shadow-md">
-          <Tabs value={currentTab} onValueChange={setCurrentTab} className="w-full mb-6">
-            <TabsList className="mb-4">
-              <TabsTrigger value="fr">Français</TabsTrigger>
-              <TabsTrigger value="en">English</TabsTrigger>
-              <TabsTrigger value="es">Español</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="fr">
-              <div className="grid grid-cols-1 gap-4">
+        <form onSubmit={handleSubmit} className="mb-8 bg-white p-6 rounded-lg shadow-md space-y-6">
+          {/* Section Français */}
+          <div className="border-b pb-6">
+            <h2 className="text-xl font-semibold mb-4 text-blue-600">Français</h2>
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+                  Titre (FR) *
+                </label>
                 <input
+                  id="title"
                   type="text"
                   name="title"
                   value={formData.title}
                   onChange={handleInputChange}
-                  placeholder="Titre (FR)"
                   required
-                  className="p-2 border rounded-md"
+                  className="w-full p-2 border rounded-md"
+                  placeholder="Titre en français"
                 />
+              </div>
+              <div>
+                <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+                  Description (FR)
+                </label>
                 <textarea
+                  id="description"
                   name="description"
                   value={formData.description}
                   onChange={handleInputChange}
-                  placeholder="Description (FR)"
-                  className="p-2 border rounded-md"
                   rows={3}
+                  className="w-full p-2 border rounded-md"
+                  placeholder="Description en français"
                 />
               </div>
-            </TabsContent>
+            </div>
+          </div>
 
-            <TabsContent value="en">
-              <div className="grid grid-cols-1 gap-4">
+          {/* Section Anglais */}
+          <div className="border-b pb-6">
+            <h2 className="text-xl font-semibold mb-4 text-green-600">English</h2>
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="title_en" className="block text-sm font-medium text-gray-700 mb-1">
+                  Title (EN)
+                </label>
                 <input
+                  id="title_en"
                   type="text"
                   name="title_en"
                   value={formData.title_en}
                   onChange={handleInputChange}
-                  placeholder="Title (EN)"
-                  className="p-2 border rounded-md"
+                  className="w-full p-2 border rounded-md"
+                  placeholder="Title in English"
                 />
+              </div>
+              <div>
+                <label htmlFor="description_en" className="block text-sm font-medium text-gray-700 mb-1">
+                  Description (EN)
+                </label>
                 <textarea
+                  id="description_en"
                   name="description_en"
                   value={formData.description_en}
                   onChange={handleInputChange}
-                  placeholder="Description (EN)"
-                  className="p-2 border rounded-md"
                   rows={3}
+                  className="w-full p-2 border rounded-md"
+                  placeholder="Description in English"
                 />
               </div>
-            </TabsContent>
+            </div>
+          </div>
 
-            <TabsContent value="es">
-              <div className="grid grid-cols-1 gap-4">
+          {/* Section Espagnol */}
+          <div className="border-b pb-6">
+            <h2 className="text-xl font-semibold mb-4 text-yellow-600">Español</h2>
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="title_es" className="block text-sm font-medium text-gray-700 mb-1">
+                  Título (ES)
+                </label>
                 <input
+                  id="title_es"
                   type="text"
                   name="title_es"
                   value={formData.title_es}
                   onChange={handleInputChange}
-                  placeholder="Título (ES)"
-                  className="p-2 border rounded-md"
+                  className="w-full p-2 border rounded-md"
+                  placeholder="Título en español"
                 />
+              </div>
+              <div>
+                <label htmlFor="description_es" className="block text-sm font-medium text-gray-700 mb-1">
+                  Descripción (ES)
+                </label>
                 <textarea
+                  id="description_es"
                   name="description_es"
                   value={formData.description_es}
                   onChange={handleInputChange}
-                  placeholder="Descripción (ES)"
-                  className="p-2 border rounded-md"
                   rows={3}
+                  className="w-full p-2 border rounded-md"
+                  placeholder="Descripción en español"
                 />
               </div>
-            </TabsContent>
-          </Tabs>
+            </div>
+          </div>
 
-          <div className="mt-4">
+          {/* Section Image */}
+          <div>
+            <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">
+              URL de l'image
+            </label>
             <input
+              id="image"
               type="text"
               name="image"
               value={formData.image}
               onChange={handleInputChange}
-              placeholder="URL de l'image"
               className="w-full p-2 border rounded-md"
+              placeholder="URL de l'image"
             />
           </div>
 
           {submitStatus.error && (
-            <div className="mt-4 p-3 bg-red-100 border-l-4 border-red-500 text-red-700">
+            <div className="p-3 bg-red-100 border-l-4 border-red-500 text-red-700">
               {submitStatus.error}
             </div>
           )}
 
-          <div className="mt-6 flex justify-end space-x-2">
+          <div className="flex justify-end space-x-2 pt-4">
             <button
               type="submit"
               disabled={submitStatus.loading}
-              className={`px-4 py-2 rounded-md text-white transition duration-300 ${
-                submitStatus.loading 
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-blue-500 hover:bg-blue-600'
-              }`}
+              className={`
+                px-4 py-2 rounded-md text-white
+                ${submitStatus.loading 
+                  ? 'bg-gray-400 cursor-not-allowed' 
+                  : 'bg-blue-500 hover:bg-blue-600'}
+                transition duration-300
+              `}
             >
               {submitStatus.loading 
                 ? 'Traitement...' 
@@ -364,7 +374,6 @@ function ImprovedOptionsInstallationsComponent2() {
                 onClick={() => {
                   setEditingId(null);
                   setFormData(initialFormState);
-                  setCurrentTab("fr");
                 }}
                 className="bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400 transition duration-300"
               >
@@ -410,11 +419,56 @@ function ImprovedOptionsInstallationsComponent2() {
                   >
                     Supprimer
                   </button>
-                </div>
-              </div>
+                </div>  </div>
             </div>
           ))}
         </div>
+
+        {/* Message si aucun élément */}
+        {items.length === 0 && !loading && (
+          <div className="text-center py-8 bg-white rounded-lg shadow-md">
+            <p className="text-gray-500">
+              Aucun {selectedType === 'options' ? 'option' : 'installation'} n'a été ajouté.
+            </p>
+          </div>
+        )}
+
+        {/* Message d'erreur global */}
+        {error && (
+          <div className="fixed bottom-4 right-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded shadow-lg">
+            <div className="flex">
+              <div className="flex-shrink-0">
+                <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <p className="text-sm">{error}</p>
+              </div>
+              <div className="pl-3 ml-auto">
+                <button
+                  onClick={() => setError(null)}
+                  className="inline-flex text-red-400 hover:text-red-500"
+                >
+                  <span className="sr-only">Fermer</span>
+                  <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Spinner de chargement pour les actions */}
+        {submitStatus.loading && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white p-4 rounded-lg shadow-xl">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
+              <p className="mt-2 text-gray-600">Traitement en cours...</p>
+            </div>
+          </div>
+        )}
       </div>
     </PasswordProtection>
   );
