@@ -865,7 +865,11 @@ const ItemCard = ({ item, onEdit, onDelete }) => {
             )}
           </div>
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-gray-800">{item.title}</h3>
+            <div className='grid grid-cols-3 gap-8'>
+            <h3 className="text-xl font-bold text-blue-600">{item.title}</h3>
+            <h3 className="text-xl font-bold text-green-600">{item.title_en}</h3>
+            <h3 className="text-xl font-bold text-yellow-600">{item.title_es}</h3>
+          </div>
             <div className="flex space-x-2 mt-2">
               {['FR', 'EN', 'ES'].map((lang) => (
                 <span 
