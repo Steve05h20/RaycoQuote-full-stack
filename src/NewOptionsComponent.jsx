@@ -419,7 +419,7 @@ function ModernOptionsInstallationsComponent() {
                     </div>
 
                     {/* Content for each language */}
-                    <div className="grid grid-cols-1 gap-8">
+                    <div className="grid grid-cols-3 gap-4">
                       {/* French Content */}
                       <div>
                         <h3 className="text-lg font-semibold text-blue-600 mb-2">Français</h3>
