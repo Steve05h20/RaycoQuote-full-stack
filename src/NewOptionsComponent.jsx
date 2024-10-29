@@ -111,104 +111,101 @@ const ItemForm = ({ onSubmit, initialData = {}, onCancel, isSubmitting }) => {
           />
         </div>
 
-        {/* Language Sections - Three Columns */}
-        <div className="grid grid-cols-3 gap-6">
-          {/* French Section */}
-          <div className="bg-white p-6 rounded-xl border-2 border-blue-100 h-full">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                <span className="text-blue-600 font-bold text-lg">FR</span>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-800">Français</h3>
+        {/* French Section */}
+        <div className="bg-white p-6 rounded-xl border-2 border-blue-100">
+          <div className="flex items-center mb-6">
+            <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+              <span className="text-blue-600 font-bold text-lg">FR</span>
             </div>
-            <div className="space-y-6">
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Titre <span className="text-red-500">*</span>
-                </label>
-                <input
-                  {...register('title', { required: true })}
-                  className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-lg"
-                  placeholder="Titre en français"
-                />
-              </div>
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Description
-                </label>
-                <textarea
-                  {...register('description')}
-                  rows={6}
-                  className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-lg"
-                  placeholder="Description détaillée en français"
-                />
-              </div>
+            <h3 className="text-2xl font-bold text-gray-800">Français</h3>
+          </div>
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <label className="block text-lg font-medium text-gray-700 mb-3">
+                Titre <span className="text-red-500">*</span>
+              </label>
+              <input
+                {...register('title', { required: true })}
+                className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-lg"
+                placeholder="Titre en français"
+              />
+            </div>
+            <div>
+              <label className="block text-lg font-medium text-gray-700 mb-3">
+                Description
+              </label>
+              <textarea
+                {...register('description')}
+                rows={4}
+                className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-lg"
+                placeholder="Description détaillée en français"
+              />
             </div>
           </div>
+        </div>
 
-          {/* English Section */}
-          <div className="bg-white p-6 rounded-xl border-2 border-green-100 h-full">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                <span className="text-green-600 font-bold text-lg">EN</span>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-800">English</h3>
+        {/* English Section */}
+        <div className="bg-white p-6 rounded-xl border-2 border-green-100">
+          <div className="flex items-center mb-6">
+            <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-3">
+              <span className="text-green-600 font-bold text-lg">EN</span>
             </div>
-            <div className="space-y-6">
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Title
-                </label>
-                <input
-                  {...register('title_en')}
-                  className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-lg"
-                  placeholder="Title in English"
-                />
-              </div>
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Description
-                </label>
-                <textarea
-                  {...register('description_en')}
-                  rows={6}
-                  className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-lg"
-                  placeholder="Detailed description in English"
-                />
-              </div>
+            <h3 className="text-2xl font-bold text-gray-800">English</h3>
+          </div>
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <label className="block text-lg font-medium text-gray-700 mb-3">
+                Title
+              </label>
+              <input
+                {...register('title_en')}
+                className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-lg"
+                placeholder="Title in English"
+              />
+            </div>
+            <div>
+              <label className="block text-lg font-medium text-gray-700 mb-3">
+                Description
+              </label>
+              <textarea
+                {...register('description_en')}
+                rows={4}
+                className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-lg"
+                placeholder="Detailed description in English"
+              />
             </div>
           </div>
+        </div>
 
-          {/* Spanish Section */}
-          <div className="bg-white p-6 rounded-xl border-2 border-yellow-100 h-full">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
-                <span className="text-yellow-600 font-bold text-lg">ES</span>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-800">Español</h3>
+        {/* Spanish Section */}
+        <div className="bg-white p-6 rounded-xl border-2 border-yellow-100">
+          <div className="flex items-center mb-6">
+            <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
+              <span className="text-yellow-600 font-bold text-lg">ES</span>
             </div>
-            <div className="space-y-6">
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Título
-                </label>
-                <input
-                  {...register('title_es')}
-                  className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-lg"
-                  placeholder="Título en español"
-                />
-              </div>
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Descripción
-                </label>
-                <textarea
-                  {...register('description_es')}
-                  rows={6}
-                  className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-lg"
-                  placeholder="Descripción detallada en español"
-                />
-              </div>
+            <h3 className="text-2xl font-bold text-gray-800">Español</h3>
+          </div>
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <label className="block text-lg font-medium text-gray-700 mb-3">
+                Título
+              </label>
+              <input
+                {...register('title_es')}
+                className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-lg"
+                placeholder="Título en español"
+              />
+            </div>
+            <div>
+              <label className="block text-lg font-medium text-gray-700 mb-3">
+                Descripción
+              </label>
+              <textarea
+                {...register('description_es')}
+                rows={4}
+                className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-lg"
+                placeholder="Descripción detallada en español"
+              />
             </div>
           </div>
         </div>
@@ -242,6 +239,8 @@ const ItemForm = ({ onSubmit, initialData = {}, onCancel, isSubmitting }) => {
     </form>
   );
 };
+
+
 
 // Main Component
 function ModernOptionsInstallationsComponent() {
