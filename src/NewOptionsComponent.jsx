@@ -856,7 +856,7 @@ const ItemCard = ({ item, onEdit, onDelete }) => {
               <img 
                 src={item.image} 
                 alt={item.title}
-                className="w-full h-full object-cover" 
+                className="w-full h-full object-left object-cover" 
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center">
