@@ -390,7 +390,7 @@ function ModernOptionsInstallationsComponent() {
                       <img 
                         src={item.image} 
                         alt={getLocalizedContent(item, 'title')}
-                        className="w-full h-48 md:h-64 object-cover rounded-xl shadow-md" 
+                        className="h-48 w-full object-cover object-left md:h-64  rounded-xl shadow-md" 
                       />
                     ) : (
                       <div className="w-full h-48 md:h-64 bg-gray-100 rounded-xl flex items-center justify-center">
