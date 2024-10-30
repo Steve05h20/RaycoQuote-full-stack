@@ -17,7 +17,6 @@ const Routes = createHashRouter([
         errorElement: <h1>error</h1>,
         children:[
             {path:"/", element:<CombinedRaycoQuote />},
-            {path:"/admin", element:<OptionsComponent />},
             {path:"/admin2", element:<ModernOptionsInstallationsComponent />},
         ]
     }
